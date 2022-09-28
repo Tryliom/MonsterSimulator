@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="models\controller\Controller.cpp" />
+    <ClCompile Include="models\utilities\StringUtility.cpp" />
+    <ClCompile Include="models\utilities\Utility.cpp" />
+    <ClCompile Include="models\view\Screen.cpp" />
     <ClCompile Include="MonsterSimulator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="models\controller\Controller.h" />
+    <ClInclude Include="models\utilities\StringUtility.h" />
+    <ClInclude Include="models\utilities\Utility.h" />
+    <ClInclude Include="models\view\Screen.h" />
+    <ClInclude Include="models\view\View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
