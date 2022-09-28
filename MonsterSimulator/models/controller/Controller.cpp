@@ -10,6 +10,38 @@ void Controller::GoBack()
 	this->_views.pop();
 }
 
+void Controller::update()
+{
+	// Update the view
+	if (this->_view != nullptr)
+	{
+		this->_view->Update(this, this->_screen);
+	}
+}
+
+void Controller::onKeyPressed(char key)
+{
+	// If the view is not null, call the view's onKeyPressed method
+	if (this->_view != nullptr)
+	{
+		this->_view->OnKeyPressed(this, key);
+	}
+
+	// If the key is Escape, exit the program or go back to the last view
+	if (key == KEY_ESC)
+	{
+		if (_views.empty())
+		{
+			// Close the program
+			this->_view = nullptr;
+			Utility::sleep(300);
+			exit(0);
+		}
+
+		GoBack();
+	}
+}
+
 void Controller::refresh()
 {
 	_screen.Reset();

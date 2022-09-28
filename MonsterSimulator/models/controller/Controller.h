@@ -34,12 +34,12 @@ protected:
 	/**
 	 * \brief Used to draw things on the screen before rendering
 	 */
-	virtual void update() = 0;
+	virtual void update();
 	/**
 	 * \brief Called when a key is pressed
 	 * \param key The key pressed
 	 */
-	virtual void onKeyPressed(char key) = 0;
+	virtual void onKeyPressed(char key);
 private:
 	/**
 	 * \brief Refresh screen rendering
