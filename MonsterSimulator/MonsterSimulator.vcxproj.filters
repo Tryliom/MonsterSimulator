@@ -33,6 +33,12 @@
     <ClCompile Include="lib\view\Image.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="models\monster\Monster.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="models\monster\Race.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ConsoleViewController.h">
@@ -56,6 +62,12 @@
     <ClInclude Include="lib\view\Image.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="models\monster\Monster.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="models\monster\Race.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\tribal.txt">
@@ -70,6 +82,8 @@
     <Text Include="assets\images\races\phantom.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
-    <Text Include="assets\images\races\dragon.txt" />
+    <Text Include="assets\images\races\dragon.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

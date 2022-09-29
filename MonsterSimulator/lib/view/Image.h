@@ -32,6 +32,7 @@ namespace ConsoleViewController
 		int _height{ 0 };
 
 	public:
+		Image() = default;
 		explicit Image(const std::string& path);
 
 		std::vector<std::string> GetImage() const { return this->_image; }
