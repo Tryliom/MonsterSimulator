@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="models\views\CreateMonsterView.cpp" />
     <ClCompile Include="lib\view\Image.cpp" />
     <ClCompile Include="lib\controller\Controller.cpp" />
     <ClCompile Include="lib\utilities\Utility.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="models\monster\Race.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="models\views\CreateMonsterView.h" />
     <ClInclude Include="lib\view\Image.h" />
     <ClInclude Include="lib\controller\Controller.h" />
     <ClInclude Include="lib\ConsoleViewController.h" />
