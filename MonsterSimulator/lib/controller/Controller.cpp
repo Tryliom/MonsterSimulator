@@ -4,109 +4,113 @@
 #include <conio.h>
 #include <thread>
 
-void Controller::GoBack()
+namespace ConsoleViewController
 {
-	this->_view = this->_views.top();
-	this->_views.pop();
-}
-
-void Controller::update()
-{
-	// Update the view
-	if (this->_view != nullptr)
+	void Controller::GoBack()
 	{
-		this->_view->Update(this, this->_screen);
-	}
-}
-
-void Controller::onKeyPressed(char key)
-{
-	// If the view is not null, call the view's onKeyPressed method
-	if (this->_view != nullptr)
-	{
-		this->_view->OnKeyPressed(this, key);
+		this->_view = this->_views.top();
+		this->_views.pop();
 	}
 
-	// If the key is Escape, exit the program or go back to the last view
-	if (key == KEY_ESC)
+	void Controller::update()
 	{
-		if (_views.empty())
+		// Update the view
+		if (this->_view != nullptr)
 		{
-			// Close the program
-			this->_view = nullptr;
-			Utility::sleep(300);
-			exit(0);
+			this->_view->Update(this, this->_screen);
+		}
+	}
+
+	void Controller::onKeyPressed(char key)
+	{
+		// If the view is not null, call the view's onKeyPressed method
+		if (this->_view != nullptr)
+		{
+			this->_view->OnKeyPressed(this, key);
 		}
 
-		GoBack();
-	}
-}
-
-void Controller::refresh()
-{
-	_screen.Reset();
-	this->update();
-	_screen.Render();
-}
-
-void Controller::startRenderingThread()
-{
-	std::thread renderThread([this]()
+		// If the key is Escape, exit the program or go back to the last view
+		if (key == KEY_ESC)
 		{
-			auto nextFrame = std::chrono::steady_clock::now();
-
-			while (true)
+			if (_views.empty())
 			{
-				nextFrame += std::chrono::milliseconds(1000 / FPS);
+				// Close the program
+				this->_view = nullptr;
+				Utility::sleep(300);
+				exit(0);
+			}
 
-				this->refresh();
-				Tick++;
+			GoBack();
+		}
+	}
 
-				if (LIMIT_FPS)
+	void Controller::refresh()
+	{
+		_screen.Reset();
+		this->update();
+		_screen.Render();
+	}
+
+	void Controller::startRenderingThread()
+	{
+		std::thread renderThread([this]()
+			{
+				auto nextFrame = std::chrono::steady_clock::now();
+
+				while (true)
 				{
-					std::this_thread::sleep_until(nextFrame);
+					nextFrame += std::chrono::milliseconds(1000 / FPS);
+
+					this->refresh();
+					Tick++;
+
+					if (LIMIT_FPS)
+					{
+						std::this_thread::sleep_until(nextFrame);
+					}
 				}
 			}
-		}
-	);
-	renderThread.detach();
+		);
+		renderThread.detach();
 
-	std::thread fpsThread([this]()
-		{
-			while (true)
+		std::thread fpsThread([this]()
 			{
-				Utility::sleep(1000);
-				this->CurrentFPS = Tick;
-				Tick = 0;
+				while (true)
+				{
+					Utility::sleep(1000);
+					this->CurrentFPS = Tick;
+					Tick = 0;
+				}
+			}
+		);
+		fpsThread.detach();
+	}
+
+	void Controller::Start()
+	{
+		startRenderingThread();
+
+		// Get every key pressed
+		while (const char key = static_cast<char>(_getch()))
+		{
+			if (_canPressKey) {
+				_canPressKey = false;
+				this->onKeyPressed(key);
+				_canPressKey = true;
 			}
 		}
-	);
-	fpsThread.detach();
-}
+	}
 
-void Controller::Start()
-{
-	startRenderingThread();
-
-	// Get every key pressed
-	while (const char key = static_cast<char>(_getch())) 
+	void Controller::ChangeView(View* view)
 	{
-		if (_canPressKey) {
-			_canPressKey = false;
-			this->onKeyPressed(key);
-			_canPressKey = true;
+		if (this->_view != nullptr)
+		{
+			// Push the current view to the stack
+			this->_views.push(this->_view);
 		}
+
+		// Set the new view as the current view
+		this->_view = view;
 	}
 }
 
-void Controller::ChangeView(View* view)
-{
-	if (this->_view != nullptr)
-	{
-		// Push the current view to the stack
-		this->_views.push(this->_view);
-	}
-
-	// Set the new view as the current view
-	this->_view = view;
-}

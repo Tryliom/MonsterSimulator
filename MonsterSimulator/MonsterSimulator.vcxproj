@@ -133,10 +133,6 @@
     <ClCompile Include="lib\utilities\Utility.cpp" />
     <ClCompile Include="lib\view\Screen.cpp" />
     <ClCompile Include="models\controllers\MainController.cpp" />
-    <ClCompile Include="models\controller\Controller.cpp" />
-    <ClCompile Include="models\utilities\StringUtility.cpp" />
-    <ClCompile Include="models\utilities\Utility.cpp" />
-    <ClCompile Include="models\view\Screen.cpp" />
     <ClCompile Include="MonsterSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,11 +143,12 @@
     <ClInclude Include="lib\view\Screen.h" />
     <ClInclude Include="lib\view\View.h" />
     <ClInclude Include="models\controllers\MainController.h" />
-    <ClInclude Include="models\controller\Controller.h" />
-    <ClInclude Include="models\utilities\StringUtility.h" />
-    <ClInclude Include="models\utilities\Utility.h" />
-    <ClInclude Include="models\view\Screen.h" />
-    <ClInclude Include="models\view\View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\images\races\elf.txt" />
+    <Text Include="assets\images\races\minotour.txt" />
+    <Text Include="assets\images\races\phantom.txt" />
+    <Text Include="assets\images\races\tribal.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

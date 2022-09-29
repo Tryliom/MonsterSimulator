@@ -1,4 +1,6 @@
 #pragma once
+#include "screen.h"
+#include "../controller/Controller.h"
 
 namespace ConsoleViewController
 {
@@ -12,7 +14,7 @@ namespace ConsoleViewController
 		 * \param controller The controller to get the data from
 		 * \param screen The screen to draw on
 		 */
-		virtual void Update(Controller* controller, ConsoleViewController::Screen& screen) = 0;
+		virtual void Update(Controller* controller, Screen& screen) = 0;
 		/**
 		 * \brief Call when the user press a key
 		 * \param controller The controller to get the data from

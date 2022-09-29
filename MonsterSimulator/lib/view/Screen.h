@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "Image.h"
+
 namespace ConsoleViewController
 {
 	enum class Foreground
@@ -61,6 +63,17 @@ namespace ConsoleViewController
 		bool YCentered{ false };
 	};
 
+	struct ImageDraw
+	{
+		Image image;
+		int X{ 0 };
+		int Y{ 0 };
+		bool XCentered{ false };
+		bool YCentered{ false };
+		Background Background{ Background::NONE };
+		Foreground Foreground{ Foreground::NONE };
+	};
+
 	class Screen
 	{
 	private:
@@ -103,6 +116,11 @@ namespace ConsoleViewController
 		 * \param field The field to draw
 		 */
 		void Draw(const Field& field);
+		/**
+		 * \brief Draw an image on the screen
+		 * \param imageDraw The image to draw
+		 */
+		void Draw(const ImageDraw& imageDraw);
 	};
 }
 
