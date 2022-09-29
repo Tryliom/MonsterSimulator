@@ -4,7 +4,7 @@ Race::Race(const RaceType type, const std::string& name, const bool reverseSprit
 {
 	_type = type;
 	_name = name;
-	_sprite = ConsoleViewController::Image("../assets/images/races/" + _name + ".txt");
+	_sprite = Console::Image("../assets/images/races/" + _name + ".txt");
 
 	if (reverseSprite)
 	{

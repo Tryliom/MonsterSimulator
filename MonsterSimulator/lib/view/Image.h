@@ -22,7 +22,7 @@ const std::map<std::string, std::string> REVERSE_CHARS = {
 	{"S", "2"}
 };
 
-namespace ConsoleViewController
+namespace Console
 {
 	class Image
 	{

@@ -5,7 +5,7 @@
 
 #include "Image.h"
 
-namespace ConsoleViewController
+namespace Console
 {
 	enum class Foreground
 	{

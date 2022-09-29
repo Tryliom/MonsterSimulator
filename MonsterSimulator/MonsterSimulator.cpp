@@ -1,6 +1,7 @@
-#include <iostream>
+#include "models/controllers/MainController.h"
 
 int main()
 {
-    std::cout << "My little Monster Simulator :)";
+	MainController controller;
+	controller.Start();
 }

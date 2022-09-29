@@ -4,7 +4,7 @@
 
 #include <stack>
 
-namespace ConsoleViewController
+namespace Console
 {
 #pragma region constants
 

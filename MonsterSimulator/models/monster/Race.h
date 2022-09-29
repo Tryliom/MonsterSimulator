@@ -16,14 +16,14 @@ class Race
 private:
 	std::string _name;
 	RaceType _type{RaceType::NONE};
-	ConsoleViewController::Image _sprite;
+	Console::Image _sprite;
 
 public:
 	Race(RaceType type, const std::string& name, bool reverseSprite = false);
 
 	std::string GetName() const { return _name; }
 	RaceType GetRaceType() const { return _type; }
-	ConsoleViewController::Image GetSprite() { return _sprite; }
+	Console::Image GetSprite() { return _sprite; }
 };
 
 class Dragon : public Race

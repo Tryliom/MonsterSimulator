@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <thread>
 
-namespace ConsoleViewController
+namespace Console
 {
 	void Controller::GoBack()
 	{

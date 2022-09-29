@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace ConsoleViewController
+namespace Console
 {
 	Image::Image(const std::string& path)
 	{

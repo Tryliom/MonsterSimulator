@@ -2,7 +2,7 @@
 #include "screen.h"
 #include "../controller/Controller.h"
 
-namespace ConsoleViewController
+namespace Console
 {
 	class Controller;
 

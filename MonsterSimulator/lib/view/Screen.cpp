@@ -5,7 +5,7 @@
 #include <thread>
 #include <windows.h>
 
-namespace ConsoleViewController
+namespace Console
 {
 	// If true, a border will be drawn around the screen
 	bool constexpr BORDER = true;

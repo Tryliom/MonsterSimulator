@@ -132,6 +132,7 @@
     <ClCompile Include="lib\controller\Controller.cpp" />
     <ClCompile Include="lib\utilities\Utility.cpp" />
     <ClCompile Include="lib\view\Screen.cpp" />
+    <ClCompile Include="models\views\MenuView.cpp" />
     <ClCompile Include="models\controllers\MainController.cpp" />
     <ClCompile Include="models\monster\Monster.cpp" />
     <ClCompile Include="MonsterSimulator.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="lib\utilities\Utility.h" />
     <ClInclude Include="lib\view\Screen.h" />
     <ClInclude Include="lib\view\View.h" />
+    <ClInclude Include="models\views\MenuView.h" />
     <ClInclude Include="models\controllers\MainController.h" />
     <ClInclude Include="models\monster\Monster.h" />
     <ClInclude Include="models\monster\Race.h" />
