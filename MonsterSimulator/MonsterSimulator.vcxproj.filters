@@ -67,6 +67,9 @@
     <Text Include="assets\images\races\minotour.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
-    <Text Include="assets\images\races\phantom.txt" />
+    <Text Include="assets\images\races\phantom.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="assets\images\races\dragon.txt" />
   </ItemGroup>
 </Project>

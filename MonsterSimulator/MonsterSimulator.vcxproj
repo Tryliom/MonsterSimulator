@@ -145,6 +145,7 @@
     <ClInclude Include="models\controllers\MainController.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="assets\images\races\dragon.txt" />
     <Text Include="assets\images\races\elf.txt" />
     <Text Include="assets\images\races\minotour.txt" />
     <Text Include="assets\images\races\phantom.txt" />
