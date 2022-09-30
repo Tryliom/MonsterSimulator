@@ -7,13 +7,6 @@
 
 namespace Console
 {
-	// If true, a border will be drawn around the screen
-	bool constexpr BORDER = true;
-	// The character used to draw the columns for the border
-	std::string const BORDER_COLUMN = "|";
-	// The character used to draw the rows for the border
-	std::string const BORDER_ROW = "=";
-
 	void setCursorVisibility(const bool visibility)
 	{
 		const HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -162,7 +155,7 @@ namespace Console
 		}
 	}
 
-	void Screen::Draw(const Button& button)
+	void Screen::Draw(const Temp& button)
 	{
 		auto background = Background::NONE;
 		auto foreground = Foreground::NONE;

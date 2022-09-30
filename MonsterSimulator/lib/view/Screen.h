@@ -7,6 +7,13 @@
 
 namespace Console
 {
+	// If true, a border will be drawn around the screen
+	bool constexpr BORDER = true;
+	// The character used to draw the columns for the border
+	std::string const BORDER_COLUMN = "|";
+	// The character used to draw the rows for the border
+	std::string const BORDER_ROW = "=";
+
 	enum class Foreground
 	{
 		NONE,
@@ -43,7 +50,7 @@ namespace Console
 		Foreground Foreground{ Foreground::NONE };
 	};
 
-	struct Button
+	struct Temp
 	{
 		std::string Str{};
 		int X{ 0 };
@@ -110,7 +117,7 @@ namespace Console
 		 * \brief Draw a button on the screen
 		 * \param button The button to draw
 		 */
-		void Draw(const Button& button);
+		void Draw(const Temp& button);
 		/**
 		 * \brief Draw a field on the screen
 		 * \param field The field to draw
