@@ -1,4 +1,5 @@
 #include "CreateMonsterView.h"
+#include "../utilities/StringUtility.h"
 
 CreateMonsterView::CreateMonsterView(const MainController* mainController, const bool left) : View(0, 6)
 {
@@ -19,23 +20,22 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
 
 	// Draw each field in order to create a monster
-	int sizeRaces = (screen.GetWidth() / 2) / RACES.size();
-	int xRace = screen.GetWidth() / 4;
+	int xRace = screen.GetWidth() / 2;
 	int i = 0;
 	int y = 5;
 
-	if (sizeRaces < 10)
-	{
-		sizeRaces = 10;
-	}
+	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y});
 
 	for (const Race* race: RACES)
 	{
 		auto background = Console::Background::NONE;
 		auto foreground = Console::Foreground::NONE;
+		auto name = StringUtility::Capitalize(race->GetName());
 
 		if (i == _raceSelected)
 		{
+			name.insert(0, "<");
+			name += ">";
 			if (GetCurrentButton() == 0)
 			{
 				background = Console::Background::CYAN;
@@ -48,32 +48,35 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 			}
 		}
 
-		screen.Draw(Console::Text{ .Str = race->GetName(), .X = xRace, .Y = y, .XCentered = false, .Background = background, .Foreground = foreground });
+		screen.Draw(Console::Text{ .Str = name, .X = xRace, .Y = y, .Background = background, .Foreground = foreground });
 		i++;
-		xRace += sizeRaces;
+		xRace += name.length() + 4;
 	}
+
 	y += 2;
 	// Draw Hp field
 	screen.Draw(Console::Text{ .Str = "Hp:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = std::to_string(_hp), .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 1 });
+	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_hp) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 1, .ShowCursor = false});
 	y += 2;
 	// Draw Attack field
 	screen.Draw(Console::Text{ .Str = "Attack:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = std::to_string(_attack), .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 2 });
+	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_attack) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 2, .ShowCursor = false });
 	y += 2;
 	// Draw Armor field
 	screen.Draw(Console::Text{ .Str = "Armor:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = std::to_string(_armor), .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 3 });
+	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_armor) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 3, .ShowCursor = false });
 	y += 2;
 	// Draw Speed field
 	screen.Draw(Console::Text{ .Str = "Speed:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = std::to_string(_speed), .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 4 });
+	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_speed) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 4, .ShowCursor = false });
 	y += 3;
 	// Draw the confirm button
 	screen.Draw(Console::Button{ .Str = "Confirm", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 5, .XCentered = true });
+	// Draw the error message
+	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = y + 5, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Left & right: select/change numbers | Confirm: Enter", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Exit: Esc | Left & right: select/change numbers | Up & down: move | Confirm: Enter", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
 }
 
 void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char key)
@@ -177,11 +180,11 @@ void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char
 
 			if (_left)
 			{
-				mainController->SetRightMonster(monster);
+				mainController->SetLeftMonster(monster);
 			}
 			else
 			{
-				mainController->SetLeftMonster(monster);
+				mainController->SetRightMonster(monster);
 			}
 
 			mainController->GoBack();

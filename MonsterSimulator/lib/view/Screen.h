@@ -61,6 +61,7 @@ namespace Console
 		bool Selected{ false };
 		bool XCentered{ false };
 		bool YCentered{ false };
+		bool ShowCursor{ true };
 	};
 
 	struct ImageDraw

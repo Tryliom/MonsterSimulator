@@ -1,7 +1,8 @@
 #include "MenuView.h"
-
 #include "CreateMonsterView.h"
 #include "../controllers/MainController.h"
+#include "../utilities/StringUtility.h"
+
 
 void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 {
@@ -13,11 +14,11 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 
 	if (leftMonster != nullptr)
 	{
-		leftField = leftMonster->GetRace().GetName();
+		leftField = StringUtility::Capitalize(leftMonster->GetRace().GetName());
 	}
 	if (rightMonster != nullptr)
 	{
-		rightField = rightMonster->GetRace().GetName();
+		rightField = StringUtility::Capitalize(rightMonster->GetRace().GetName());
 	}
 
 	// Draw the title of the view
@@ -27,7 +28,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	screen.Draw(Console::Button{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = GetCurrentButton() == 1, .XCentered = true });
 	screen.Draw(Console::Button{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = GetCurrentButton() == 2, .XCentered = true });
 
-	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 12, .XCentered = true, .Background = Console::Background::RED });
+	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
 	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });

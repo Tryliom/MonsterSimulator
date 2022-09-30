@@ -38,7 +38,7 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Create class for monsters | 1h | 53min |
 | Create a main controller | 5min | 5min |
 | Create a view for the main menu | 30min | 22min |
-| Create a view in order to create a monster | 1h | 2h16 |
+| Create a view in order to create a monster | 1h | 3h03 |
 | Create a view used to display the fight | 10min | - |
 | Implement the actual fight with some animations | 2h | - |
 | Clean and comments all project | 2h | - |

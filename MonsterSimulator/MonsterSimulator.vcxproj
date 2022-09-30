@@ -139,6 +139,7 @@
     <ClCompile Include="models\monster\Monster.cpp" />
     <ClCompile Include="MonsterSimulator.cpp" />
     <ClCompile Include="models\monster\Race.cpp" />
+    <ClCompile Include="models\utilities\StringUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\CreateMonsterView.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="models\controllers\MainController.h" />
     <ClInclude Include="models\monster\Monster.h" />
     <ClInclude Include="models\monster\Race.h" />
+    <ClInclude Include="models\utilities\StringUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />

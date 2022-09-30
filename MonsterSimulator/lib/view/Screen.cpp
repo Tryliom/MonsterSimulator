@@ -204,10 +204,13 @@ namespace Console
 		// Draw the field
 		if (field.Selected)
 		{
-			Draw(Text{ .Str = field.Str, .X = field.X, .Y = field.Y, .XCentered = field.XCentered, .Background = Background::WHITE, .Foreground = Foreground::BLACK });
+			Draw(Text{ .Str = field.Str, .X = field.X, .Y = field.Y, .XCentered = field.XCentered, .Background = Background::CYAN, .Foreground = Foreground::BLACK });
 			// If selected, draw the cursor at the end of the field
-			_cursorX = field.X + field.Str.length();
-			_cursorY = field.Y;
+			if (field.ShowCursor)
+			{
+				_cursorX = field.X + static_cast<int>(field.Str.length());
+				_cursorY = field.Y;
+			}
 		}
 		else
 		{
