@@ -28,9 +28,9 @@ namespace Console
 
 			for (char& c : line)
 			{
-				if (REVERSE_CHARS.find(std::string(1, c)) != REVERSE_CHARS.end())
+				if (REVERSE_CHARS.contains(c))
 				{
-					c = REVERSE_CHARS.at(std::string(1, c))[0];
+					c = REVERSE_CHARS[c];
 				}
 			}
 		}

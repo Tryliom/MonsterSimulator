@@ -17,6 +17,8 @@ public:
 
 	Monster* GetLeftMonster() const { return _leftMonster; }
 	Monster* GetRightMonster() const { return _rightMonster; }
+	void SetLeftMonster(Monster* monster) { _leftMonster = monster; }
+	void SetRightMonster(Monster* monster) { _rightMonster = monster; }
 	bool CanStart() const { return _leftMonster != nullptr && _rightMonster != nullptr; }
 };
 

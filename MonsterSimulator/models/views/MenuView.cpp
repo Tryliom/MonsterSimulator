@@ -1,4 +1,6 @@
 #include "MenuView.h"
+
+#include "CreateMonsterView.h"
 #include "../controllers/MainController.h"
 
 void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
@@ -53,17 +55,19 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 	}
 	else if (key == Console::KEY_ENTER)
 	{
+		const auto mainController = dynamic_cast<MainController*>(controller);
+
 		if (GetCurrentButton() == 0)
 		{
-			//dynamic_cast<MainController*>(controller)->ChangeView(new CreateMonsterView(true));
+			mainController->ChangeView(new CreateMonsterView(mainController, true));
 		}
 		else if (GetCurrentButton() == 1)
 		{
-			//dynamic_cast<MainController*>(controller)->ChangeView(new CreateMonsterView(false));
+			mainController->ChangeView(new CreateMonsterView(mainController, false));
 		}
 		else if (GetCurrentButton() == 2)
 		{
-			if (const auto mainController = dynamic_cast<MainController*>(controller); mainController->CanStart())
+			if (mainController->CanStart())
 			{
 				//mainController->ChangeView(new FightView());
 			}
