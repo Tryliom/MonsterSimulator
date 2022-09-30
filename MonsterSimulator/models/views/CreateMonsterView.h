@@ -19,7 +19,7 @@ private:
 	int _attack{0};
 	int _armor{0};
 	int _speed{0};
-	Monster* _monster{ nullptr };
+	int _raceSelected{0};
 
 public:
 	explicit CreateMonsterView(bool left);

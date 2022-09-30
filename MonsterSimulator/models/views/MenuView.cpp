@@ -3,7 +3,7 @@
 
 void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 {
-	MainController* mainController = dynamic_cast<MainController*>(controller);
+	const MainController* mainController = dynamic_cast<MainController*>(controller);
 	const auto leftMonster = mainController->GetLeftMonster();
 	const auto rightMonster = mainController->GetRightMonster();
 	std::string leftField = "Create a monster";
@@ -21,9 +21,9 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
 	// Draw the menu buttons
-	screen.Draw(Console::Button{ .Str = leftField, .X = screen.GetWidth() / 4, .Y = 5, .Selected = _currentButton == 0, .XCentered = true });
-	screen.Draw(Console::Button{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = _currentButton == 1, .XCentered = true });
-	screen.Draw(Console::Button{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = _currentButton == 2, .XCentered = true });
+	screen.Draw(Console::Button{ .Str = leftField, .X = screen.GetWidth() / 4, .Y = 5, .Selected = GetCurrentButton() == 0, .XCentered = true });
+	screen.Draw(Console::Button{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = GetCurrentButton() == 1, .XCentered = true });
+	screen.Draw(Console::Button{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = GetCurrentButton() == 2, .XCentered = true });
 
 	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 12, .XCentered = true, .Background = Console::Background::RED });
 
@@ -37,31 +37,31 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 
 	if (key == Console::KEY_LEFT)
 	{
-		_currentButton--;
+		DecrementCurrentButton();
 	}
 	else if (key == Console::KEY_RIGHT)
 	{
-		_currentButton++;
+		IncrementCurrentButton();
 	}
 	else if (key == Console::KEY_DOWN)
 	{
-		_currentButton = _maxButtons - 1;
+		SetCurrentButton(GetMaxButton() - 1);
 	}
 	else if (key == Console::KEY_UP)
 	{
-		_currentButton = 0;
+		SetCurrentButton(0);
 	}
 	else if (key == Console::KEY_ENTER)
 	{
-		if (_currentButton == 0)
+		if (GetCurrentButton() == 0)
 		{
 			//dynamic_cast<MainController*>(controller)->ChangeView(new CreateMonsterView(true));
 		}
-		else if (_currentButton == 1)
+		else if (GetCurrentButton() == 1)
 		{
 			//dynamic_cast<MainController*>(controller)->ChangeView(new CreateMonsterView(false));
 		}
-		else if (_currentButton == 2)
+		else if (GetCurrentButton() == 2)
 		{
 			if (const auto mainController = dynamic_cast<MainController*>(controller); mainController->CanStart())
 			{
@@ -74,12 +74,5 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 		}
 	}
 
-	if (_currentButton >= _maxButtons)
-	{
-		_currentButton = _maxButtons - 1;
-	}
-	if (_currentButton < 0)
-	{
-		_currentButton = 0;
-	}
+	View::OnKeyPressed(controller, key);
 }

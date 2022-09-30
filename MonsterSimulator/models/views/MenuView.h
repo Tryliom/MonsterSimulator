@@ -4,11 +4,10 @@
 class MenuView : public Console::View
 {
 private:
-	int _currentButton = 0;
-	int _maxButtons = 3;
 	std::string _errorMessage;
 
 public:
+	MenuView() : View(0, 3) {}
 	void Update(Console::Controller* controller, Console::Screen& screen) override;
 	void OnKeyPressed(Console::Controller* controller, char key) override;
 };
