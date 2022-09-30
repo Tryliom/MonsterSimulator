@@ -1,6 +1,7 @@
 #include "MainController.h"
 #include "../views/MenuView.h"
 
+
 void MainController::update()
 {
 	Controller::update();
