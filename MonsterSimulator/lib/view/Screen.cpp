@@ -237,4 +237,17 @@ namespace Console
 			this->Draw(Text{ .Str = row, .X = x, .Y = y, .Background = background, .Foreground = foreground });
 		}
 	}
+
+	void Screen::SetWindowSize(const int width, const int height)
+	{
+		const HWND console = GetConsoleWindow();
+		RECT r;
+		GetWindowRect(console, &r);
+		MoveWindow(console, 0, 0, width, height, TRUE);
+	}
+
+	void Screen::SetTitle(const std::string& title)
+	{
+		SetConsoleTitleA(title.c_str());
+	}
 }

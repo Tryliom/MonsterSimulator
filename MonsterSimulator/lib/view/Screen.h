@@ -121,6 +121,17 @@ namespace Console
 		 * \param imageDraw The image to draw
 		 */
 		void Draw(const ImageDraw& imageDraw);
+		/**
+		 * \brief Set windows size
+		 * \param width The width of the window as pixel
+		 * \param height The height of the window as pixel
+		 */
+		static void SetWindowSize(int width, int height);
+		/**
+		 * \brief Rename the window
+		 * \param title The new title of the window
+		 */
+		static void SetTitle(const std::string& title);
 	};
 }
 
