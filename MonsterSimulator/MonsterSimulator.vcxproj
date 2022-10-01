@@ -144,6 +144,7 @@
     <ClCompile Include="MonsterSimulator.cpp" />
     <ClCompile Include="models\monster\Race.cpp" />
     <ClCompile Include="models\utilities\StringUtility.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\view\interactive\objects\IntField.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="models\monster\Monster.h" />
     <ClInclude Include="models\monster\Race.h" />
     <ClInclude Include="models\utilities\StringUtility.h" />
+    <ClInclude Include="lib\view\interactive\objects\Selector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
