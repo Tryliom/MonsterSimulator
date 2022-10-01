@@ -1,12 +1,13 @@
 #include "BasicField.h"
 
 Console::BasicField::BasicField(const int x, const int y, const std::function<std::string()>& getValue,
-                                const std::function<void(std::string)>& setValue, const std::function<bool(char key)>& condition, const bool xCentered) : InteractiveObject(x, y, xCentered)
+                                const std::function<void(std::string)>& setValue, const std::function<bool(char key)>& condition, const bool xCentered, bool showCursor) : InteractiveObject(x, y, xCentered)
 {
 	_getValue = getValue;
 	_setValue = setValue;
 	_condition = condition;
 	_str = _getValue();
+	_showCursor = showCursor;
 }
 
 void Console::BasicField::Draw(Screen screen, const bool selected)
@@ -38,6 +39,11 @@ void Console::BasicField::OnKeyPress(const char key)
 	{
 		onBackspace();
 	}
+}
+
+std::string Console::BasicField::GetStr() const
+{
+	return _str;
 }
 
 void Console::BasicField::onConditionValidation(const char key)

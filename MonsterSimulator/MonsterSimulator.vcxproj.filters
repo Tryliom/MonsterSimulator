@@ -16,6 +16,7 @@
     <ClCompile Include="models\utilities\StringUtility.cpp" />
     <ClCompile Include="lib\view\interactive\objects\BasicButton.cpp" />
     <ClCompile Include="lib\view\interactive\objects\BasicField.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\IntField.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="lib\Constants.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicButton.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
+    <ClInclude Include="lib\view\interactive\objects\IntField.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />

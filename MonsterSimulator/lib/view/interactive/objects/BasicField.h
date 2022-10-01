@@ -14,11 +14,12 @@ namespace Console
 		std::function<void(std::string)> _setValue;
 		std::function<bool(char key)> _condition;
 
+		virtual std::string GetStr() const;
 		virtual void onConditionValidation(const char key);
 		virtual void onBackspace();
 	public:
 		BasicField(int x, int y, const std::function<std::string()>& getValue, const std::function<void(std::string)>& setValue, 
-					const std::function<bool(char key)>& condition = [](char key) { return true; }, bool xCentered = false);
+					const std::function<bool(char key)>& condition = [](char key) { return true; }, bool xCentered = false, bool showCursor = true);
 
 		inline static std::function<bool(char key)> IsDigit = [](const char key) { return key >= '0' && key <= '9'; };
 		inline static std::function<bool(char key)> IsLetter = [](const char key) { return (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z'); };

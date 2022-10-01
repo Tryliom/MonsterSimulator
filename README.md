@@ -53,12 +53,12 @@ Some Interactive objects have function to set and get values used.
 | Milestone | Done |
 | --------- | ---- |
 | Create the basic button | X |
-| Implement a onKeyPressed on each interactive objects | - |
-| Create the BasicField that take a custom condition and some events | - |
-| Create different type of fields (string, int) | - |
+| Implement a onKeyPressed on each interactive objects | X |
+| Create the BasicField that take a custom condition and some events | X |
+| Create different type of fields (int) | X |
 | Create a selector like for the races | - |
 | Create an image button (button with an image) | - |
-| Add an option if you can increment int field with left/right arrow | - |
+| Add an option if you can increment int field with left/right arrow | X |
 | Add a list of Interactive Objects in every view | - |
 | Add IO in the constructor of each view | - |
 | Trigger event on each IO if they are selected | - |

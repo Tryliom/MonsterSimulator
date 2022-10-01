@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\view\interactive\objects\IntField.cpp" />
     <ClCompile Include="lib\view\interactive\objects\BasicField.cpp" />
     <ClCompile Include="lib\view\interactive\objects\BasicButton.cpp" />
     <ClCompile Include="lib\view\View.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="models\utilities\StringUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\view\interactive\objects\IntField.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicButton.h" />
     <ClInclude Include="lib\Constants.h" />
