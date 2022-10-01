@@ -24,7 +24,7 @@ CreateMonsterView::CreateMonsterView(const MainController* mainController, const
 	}
 
 	setComponents({
-		new Console::Selector(GetPartialScreen(1), ReturnPosition(5), races, 
+		new Console::Selector(GetMiddleScreen(), ReturnPosition(5), races,
 		[this](const int index) {this->_raceSelected = index; }),
 		new Console::IntField(GetMiddleScreen(), ReturnPosition(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
 		new Console::IntField(GetMiddleScreen(), ReturnPosition(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
@@ -41,7 +41,10 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
 	
-	int y = 7;
+	int y = 5;
+	// Draw Race field
+	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y });
+	y += 2;
 	// Draw Hp field
 	screen.Draw(Console::Text{ .Str = "Hp:", .X = screen.GetWidth() / 4, .Y = y });
 	y += 2;
