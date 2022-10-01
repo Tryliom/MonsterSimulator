@@ -24,38 +24,6 @@ namespace Console
 		Foreground Foreground{ Foreground::NONE };
 	};
 
-	struct Button
-	{
-		std::string Str{};
-		int X{ 0 };
-		int Y{ 0 };
-		bool Selected{ false };
-		bool XCentered{ false };
-		bool YCentered{ false };
-	};
-
-	struct Field
-	{
-		std::string Str{};
-		int X{ 0 };
-		int Y{ 0 };
-		bool Selected{ false };
-		bool XCentered{ false };
-		bool YCentered{ false };
-		bool ShowCursor{ true };
-	};
-
-	struct ImageDraw
-	{
-		Image image;
-		int X{ 0 };
-		int Y{ 0 };
-		bool XCentered{ false };
-		bool YCentered{ false };
-		Background Background{ Background::NONE };
-		Foreground Foreground{ Foreground::NONE };
-	};
-
 	class Screen
 	{
 	private:
@@ -88,21 +56,6 @@ namespace Console
 		 * \param text The text to draw
 		 */
 		void Draw(Text text);
-		/**
-		 * \brief Draw a button on the screen
-		 * \param button The button to draw
-		 */
-		void Draw(const Button& button);
-		/**
-		 * \brief Draw a field on the screen
-		 * \param field The field to draw
-		 */
-		void Draw(const Field& field);
-		/**
-		 * \brief Draw an image on the screen
-		 * \param imageDraw The image to draw
-		 */
-		void Draw(const ImageDraw& imageDraw);
 		/**
 		 * \brief Set windows size
 		 * \param width The width of the window as pixel

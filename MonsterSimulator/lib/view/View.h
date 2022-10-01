@@ -6,6 +6,7 @@
 namespace Console
 {
 	class Controller;
+	class InteractiveObject;
 
 	class View
 	{
@@ -14,6 +15,7 @@ namespace Console
 		std::vector<InteractiveObject*> _components;
 	protected:
 		void setComponents(const std::vector<InteractiveObject*>& components) { _components = components; }
+		void AddComponent(InteractiveObject* component) { _components.push_back(component); }
 	public:
 		View(int defaultButton = 0);
 		/**
@@ -34,6 +36,10 @@ namespace Console
 		void IncrementCurrentButton() { _currentButton++; }
 		void DecrementCurrentButton() { _currentButton--; }
 		int GetCurrentButton() const { return _currentButton; }
+
+		static std::function<int(Screen)> GetMiddleScreen() { return [=](const Screen& screen) { return screen.GetWidth() / 2; }; }
+		static std::function<int(Screen)> GetPartialScreen(const int part) { return [=](const Screen& screen) { return screen.GetWidth() * part / 4; }; }
+		static std::function<int(Screen)> ReturnPosition(const int position) { return [=](const Screen& screen) { return position; }; }
 	};
 }
 

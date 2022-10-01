@@ -12,6 +12,11 @@ namespace Console
 		this->_views.pop();
 	}
 
+	void Controller::ClearStack()
+	{
+		_views = std::stack<View*>();
+	}
+
 	void Controller::update()
 	{
 		// Update the view

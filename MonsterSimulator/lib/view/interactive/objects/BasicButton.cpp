@@ -2,8 +2,8 @@
 
 namespace Console
 {
-	BasicButton::BasicButton(const std::string& str, const int x, const int y, const std::function<void()>& onClick, const bool xCentered, const bool yCentered) :
-		InteractiveObject(x, y, xCentered)
+	BasicButton::BasicButton(const std::string& str, const std::function<int(Screen)> getX, const std::function<int(Screen)> getY, const std::function<void(Controller* controller)>& onClick, const bool xCentered, const bool yCentered) :
+		InteractiveObject(getX, getY, xCentered)
 	{
 		_str = str;
 		_yCentered = yCentered;
@@ -14,6 +14,8 @@ namespace Console
 	{
 		auto background = _background;
 		auto foreground = _foreground;
+		int y = _getY(screen);
+		int x = _getX(screen);
 
 		if (selected)
 		{
@@ -21,7 +23,6 @@ namespace Console
 			foreground = _selectedForeground;
 		}
 
-		int y = _y;
 		if (_yCentered)
 		{
 			y -= 1;
@@ -36,16 +37,16 @@ namespace Console
 
 		std::string text = _columnBorder + _str + _columnBorder;
 
-		screen.Draw(Text{ .Str = border, .X = _x, .Y = y, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
-		screen.Draw(Text{ .Str = text, .X = _x, .Y = y + 1, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
-		screen.Draw(Text{ .Str = border, .X = _x, .Y = y + 2, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+		screen.Draw(Text{ .Str = border, .X = x, .Y = y, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+		screen.Draw(Text{ .Str = text, .X = x, .Y = y + 1, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+		screen.Draw(Text{ .Str = border, .X = x, .Y = y + 2, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
 	}
 
-	void BasicButton::OnKeyPress(const char key)
+	void BasicButton::OnKeyPress(Controller* controller, const char key)
 	{
 		if (key == Key::Enter)
 		{
-			_onClick();
+			_onClick(controller);
 		}
 	}
 }

@@ -14,5 +14,5 @@ void MainController::onKeyPressed(const char key)
 
 MainController::MainController()
 {
-	ChangeView(new MenuView());
+	ChangeView(new MenuView(this));
 }

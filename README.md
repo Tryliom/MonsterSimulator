@@ -61,4 +61,4 @@ Some Interactive objects have function to set and get values used.
 | Add an option if you can increment int field with left/right arrow | X |
 | Add a list of Interactive Objects in every view | X |
 | Add IO in the constructor of each view | X |
-| Trigger event on each IO only if they are selected | - |
+| Trigger event on each IO only if they are selected | X |

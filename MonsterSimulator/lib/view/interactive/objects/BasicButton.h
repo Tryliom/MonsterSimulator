@@ -10,15 +10,15 @@ namespace Console
 	protected:
 		std::string _str{};
 		bool _yCentered{ false };
-		std::function<void()> _onClick{};
+		std::function<void(Controller* controller)> _onClick{};
 		std::string _rowBorder{ "|" };
 		std::string _columnBorder{ "-" };
 
 	public:
-		BasicButton(const std::string& str, int x, int y, const std::function<void()>& onClick, bool xCentered = false, bool yCentered = false);
+		BasicButton(const std::string& str, std::function<int(Screen)> getX, std::function<int(Screen)> getY, const std::function<void(Controller* controller)>& onClick, bool xCentered = false, bool yCentered = false);
 		
 		void Draw(Screen screen, bool selected) override;
-		void OnKeyPress(char key) override;
+		void OnKeyPress(Controller* controller, char key) override;
 	};
 }
 

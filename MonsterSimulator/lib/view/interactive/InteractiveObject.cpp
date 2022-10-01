@@ -1,10 +1,10 @@
 #include "InteractiveObject.h"
 
 namespace Console {
-	InteractiveObject::InteractiveObject(const int x, const int y, const bool xCentered)
+	InteractiveObject::InteractiveObject(const std::function<int(Screen)> getX, const std::function<int(Screen)> getY, const bool xCentered)
 	{
-		_x = x;
-		_y = y;
+		_getX = getX;
+		_getY = getY;
 		_xCentered = xCentered;
 	}
 }

@@ -18,7 +18,7 @@ namespace Console
 		virtual void onConditionValidation(const char key);
 		virtual void onBackspace();
 	public:
-		BasicField(int x, int y, const std::function<std::string()>& getValue, const std::function<void(std::string)>& setValue, 
+		BasicField(std::function<int(Screen)> getX, std::function<int(Screen)> getY, const std::function<std::string()>& getValue, const std::function<void(std::string)>& setValue,
 					const std::function<bool(char key)>& condition = [](char key) { return true; }, bool xCentered = false, bool showCursor = true);
 
 		inline static std::function<bool(char key)> IsDigit = [](const char key) { return key >= '0' && key <= '9'; };
@@ -28,7 +28,7 @@ namespace Console
 		inline static std::function<bool(char key)> DefaultCondition = [](const char key) { return true; };
 
 		void Draw(Screen screen, bool selected) override;
-		void OnKeyPress(char key) override;
+		void OnKeyPress(Controller* controller, char key) override;
 	};
 }
 

@@ -24,6 +24,7 @@ private:
 	int _raceSelected{0};
 	std::string _errorMessage{};
 
+	void createMonster(Console::Controller* controller);
 public:
 	explicit CreateMonsterView(const MainController* mainController, bool left);
 

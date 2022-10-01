@@ -1,14 +1,17 @@
 #pragma once
+#include <functional>
+
 #include "../Screen.h"
 #include "../../Constants.h"
+#include "../../controller/Controller.h"
 
 namespace Console
 {
 	class InteractiveObject
 	{
 	protected:
-		int _x{ 0 };
-		int _y{ 0 };
+		std::function<int(Screen)> _getX;
+		std::function<int(Screen)> _getY;
 		bool _xCentered{ false };
 		Background _background{ Background::NONE };
 		Foreground _foreground{ Foreground::NONE };
@@ -16,10 +19,10 @@ namespace Console
 		Foreground _selectedForeground{ Foreground::BLACK };
 
 	public:
-		InteractiveObject(int x, int y, bool xCentered = false);
+		InteractiveObject(std::function<int(Screen)> getX, std::function<int(Screen)> getY, bool xCentered = false);
 
 		virtual void Draw(Screen screen, bool selected) = 0;
-		virtual void OnKeyPress(const char key) = 0;
+		virtual void OnKeyPress(Controller* controller, const char key) = 0;
 	};
 
 

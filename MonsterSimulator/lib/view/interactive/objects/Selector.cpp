@@ -2,9 +2,9 @@
 
 namespace Console
 {
-	Selector::Selector(const int x, const int y, const std::vector<std::string>& options,
+	Selector::Selector(const std::function<int(Screen)> getX, const std::function<int(Screen)> getY, const std::vector<std::string>& options,
 	                   const std::function<void(int)>& setValue, const bool xCentered) :
-		InteractiveObject(x, y, xCentered)
+		InteractiveObject(getX, getY, xCentered)
 	{
 		_options = options;
 		_setValue = setValue;
@@ -21,23 +21,29 @@ namespace Console
 			foreground = _selectedForeground;
 		}
 
-		int x = _x;
+		int x = _getX(screen);
+		int y = _getY(screen);
 		for (int i = 0; i < static_cast<int>(_options.size()); i++)
 		{
 			if (i == _selected)
 			{
-				screen.Draw(Text{ .Str = "<" + _options[i] + ">", .X = x, .Y = _y, .XCentered = false, .Background = background, .Foreground = foreground});
+				if (!selected)
+				{
+					background = Background::WHITE;
+					foreground = Foreground::BLACK;
+				}
+				screen.Draw(Text{ .Str = "<" + _options[i] + ">", .X = x, .Y = y, .XCentered = false, .Background = background, .Foreground = foreground});
 			}
 			else
 			{
-				screen.Draw(Text{ .Str = _options[i], .X = x, .Y = _y, .XCentered = false, .Background = _background, .Foreground = _foreground });
+				screen.Draw(Text{ .Str = _options[i], .X = x, .Y = y, .XCentered = false, .Background = _background, .Foreground = _foreground });
 			}
 			
 			x += static_cast<int>(_options[i].length()) + 4;
 		}
 	}
 
-	void Selector::OnKeyPress(const char key)
+	void Selector::OnKeyPress(Controller* controller, const char key)
 	{
 		if (key == Key::Left)
 		{

@@ -56,6 +56,10 @@ namespace Console
 		 * \brief Go back to previous view
 		 */
 		void GoBack();
+		/**
+		 * \brief Clear the stack views
+		 */
+		void ClearStack();
 	};
 }
 

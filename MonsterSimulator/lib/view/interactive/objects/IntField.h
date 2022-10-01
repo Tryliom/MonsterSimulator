@@ -10,8 +10,8 @@ namespace Console
 
 		std::string GetStr() const override;
 	public:
-		IntField(int x, int y, const std::function<int()>& getValue, const std::function<void(int)>& setValue, bool xCentered = false, bool enableLeftRightArrow = true);
+		IntField(std::function<int(Screen)> getX, std::function<int(Screen)> getY, const std::function<int()>& getValue, const std::function<void(int)>& setValue, bool xCentered = false, bool enableLeftRightArrow = true);
 
-		void OnKeyPress(char key) override;
+		void OnKeyPress(Controller* controller, char key) override;
 	};
 }
