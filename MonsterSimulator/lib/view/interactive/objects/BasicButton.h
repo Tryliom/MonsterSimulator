@@ -16,10 +16,9 @@ namespace Console
 
 	public:
 		BasicButton(const std::string& str, int x, int y, const std::function<void()>& onClick, bool xCentered = false, bool yCentered = false);
-
-		void SetOnClick(std::function<void()> onClick) { _onClick = std::move(onClick); }
+		
 		void Draw(Screen screen, bool selected) override;
-		void OnKeyPress(const int key) override;
+		void OnKeyPress(int key) override;
 	};
 }
 
