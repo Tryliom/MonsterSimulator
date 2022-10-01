@@ -159,11 +159,23 @@ namespace Console
 		const HWND console = GetConsoleWindow();
 		RECT r;
 		GetWindowRect(console, &r);
-		MoveWindow(console, 0, 0, width, height, TRUE);
+		MoveWindow(console, r.left, r.top, width, height, TRUE);
 	}
 
 	void Screen::SetTitle(const std::string& title)
 	{
 		SetConsoleTitleA(title.c_str());
+	}
+
+	void Screen::CenterWindow()
+	{
+		const HWND console = GetConsoleWindow();
+		RECT r;
+		GetWindowRect(console, &r);
+		const int width = r.right - r.left;
+		const int height = r.bottom - r.top;
+		const int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+		const int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+		MoveWindow(console, (screenWidth - width) / 2, (screenHeight - height) / 2, width, height, TRUE);
 	}
 }

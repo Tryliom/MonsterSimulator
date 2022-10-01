@@ -7,7 +7,7 @@
 
 namespace Console
 {
-	int constexpr FPS = 60;
+	int constexpr FPS = 120;
 	bool constexpr LIMIT_FPS = true;
 
 	class View;

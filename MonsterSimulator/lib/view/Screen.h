@@ -68,6 +68,10 @@ namespace Console
 		 */
 		static void SetTitle(const std::string& title);
 		/**
+		 * \brief Center the window on the screen
+		 */
+		static void CenterWindow();
+		/**
 		 * \brief Set the cursor position for this frame
 		 * \param x The x position of the cursor
 		 * \param y The y position of the cursor
