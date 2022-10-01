@@ -18,6 +18,7 @@
     <ClCompile Include="lib\view\interactive\objects\BasicField.cpp" />
     <ClCompile Include="lib\view\interactive\objects\IntField.cpp" />
     <ClCompile Include="lib\view\interactive\objects\Selector.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\ImageButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
     <ClInclude Include="lib\view\interactive\objects\IntField.h" />
     <ClInclude Include="lib\view\interactive\objects\Selector.h" />
+    <ClInclude Include="lib\view\interactive\objects\ImageButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
