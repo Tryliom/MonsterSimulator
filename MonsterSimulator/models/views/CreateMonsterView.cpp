@@ -1,7 +1,9 @@
 #include "CreateMonsterView.h"
+
+#include "MenuView.h"
 #include "../utilities/StringUtility.h"
 
-CreateMonsterView::CreateMonsterView(const MainController* mainController, const bool left) : View(0, 6)
+CreateMonsterView::CreateMonsterView(const MainController* mainController, const bool left) : View()
 {
 	_left = left;
 	if (left)
@@ -12,66 +14,46 @@ CreateMonsterView::CreateMonsterView(const MainController* mainController, const
 	{
 		_otherMonster = mainController->GetLeftMonster();
 	}
+
+	std::vector<std::string> races;
+
+	races.reserve(RACES.size());
+	for (const Race* race: RACES)
+	{
+		races.emplace_back(StringUtility::Capitalize(race->GetName()));
+	}
+
+	setComponents({
+		new Console::Selector(GetPartialScreen(1), ReturnPosition(5), races, 
+		[this](const int index) {this->_raceSelected = index; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(11), [this]() {return _armor; }, [this](const int value) {_armor = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(13), [this]() {return _speed; }, [this](const int value) {_speed = value; }),
+		new Console::BasicButton("Create", GetMiddleScreen(), ReturnPosition(16), [this](Console::Controller* controller) {this->createMonster(controller); }, true)
+	});
 }
 
 void CreateMonsterView::Update(Console::Controller* controller, Console::Screen& screen)
 {
+	View::Update(controller, screen);
+
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
-
-	// Draw each field in order to create a monster
-	int xRace = screen.GetWidth() / 2;
-	int i = 0;
-	int y = 5;
-
-	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y});
-
-	for (const Race* race: RACES)
-	{
-		auto background = Console::Background::NONE;
-		auto foreground = Console::Foreground::NONE;
-		auto name = StringUtility::Capitalize(race->GetName());
-
-		if (i == _raceSelected)
-		{
-			name.insert(0, "<");
-			name += ">";
-			if (GetCurrentButton() == 0)
-			{
-				background = Console::Background::CYAN;
-				foreground = Console::Foreground::BLACK;
-			}
-			else
-			{
-				background = Console::Background::WHITE;
-				foreground = Console::Foreground::BLACK;
-			}
-		}
-
-		screen.Draw(Console::Text{ .Str = name, .X = xRace, .Y = y, .Background = background, .Foreground = foreground });
-		i++;
-		xRace += name.length() + 4;
-	}
-
-	y += 2;
+	
+	int y = 7;
 	// Draw Hp field
 	screen.Draw(Console::Text{ .Str = "Hp:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_hp) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 1, .ShowCursor = false});
 	y += 2;
 	// Draw Attack field
 	screen.Draw(Console::Text{ .Str = "Attack:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_attack) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 2, .ShowCursor = false });
 	y += 2;
 	// Draw Armor field
 	screen.Draw(Console::Text{ .Str = "Armor:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_armor) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 3, .ShowCursor = false });
 	y += 2;
 	// Draw Speed field
 	screen.Draw(Console::Text{ .Str = "Speed:", .X = screen.GetWidth() / 4, .Y = y });
-	screen.Draw(Console::Field{ .Str = "<" + std::to_string(_speed) + ">", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 4, .ShowCursor = false });
 	y += 3;
-	// Draw the confirm button
-	screen.Draw(Console::Button{ .Str = "Confirm", .X = screen.GetWidth() / 2, .Y = y, .Selected = GetCurrentButton() == 5, .XCentered = true });
 	// Draw the error message
 	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = y + 5, .XCentered = true, .Foreground = Console::Foreground::RED });
 
@@ -82,125 +64,45 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char key)
 {
 	_errorMessage.clear();
-	const int currentButton = GetCurrentButton();
 
-	if (currentButton == 0)
-	{
-		if (key == Console::KEY_LEFT)
-		{
-			_raceSelected--;
-		}
-		else if (key == Console::KEY_RIGHT)
-		{
-			_raceSelected++;
-		}
-	}
-	else if (currentButton > 0 && currentButton < 5)
-	{
-		if (currentButton == 1)
-		{
-			if (key == Console::KEY_LEFT)
-			{
-				if (_hp > 0)
-				{
-					_hp--;
-				}
-			}
-			else if (key == Console::KEY_RIGHT)
-			{
-				_hp++;
-			}
-		}
-		else if (currentButton == 2)
-		{
-			if (key == Console::KEY_LEFT)
-			{
-				if (_attack > 0)
-				{
-					_attack--;
-				}
-			}
-			else if (key == Console::KEY_RIGHT)
-			{
-				_attack++;
-			}
-		}
-		else if (currentButton == 3)
-		{
-			if (key == Console::KEY_LEFT)
-			{
-				if (_armor > 0)
-				{
-					_armor--;
-				}
-			}
-			else if (key == Console::KEY_RIGHT)
-			{
-				_armor++;
-			}
-		}
-		else if (currentButton == 4)
-		{
-			if (key == Console::KEY_LEFT)
-			{
-				if (_speed > 0)
-				{
-					_speed--;
-				}
-			}
-			else if (key == Console::KEY_RIGHT)
-			{
-				_speed++;
-			}
-		}
-	}
-
-	if (key == Console::KEY_DOWN)
+	if (key == Console::Key::Down)
 	{
 		IncrementCurrentButton();
 	}
-	else if (key == Console::KEY_UP)
+	else if (key == Console::Key::Up)
 	{
 		DecrementCurrentButton();
 	}
-	else if (key == Console::KEY_ENTER && currentButton == 5)
+
+	View::OnKeyPressed(controller, key);
+}
+
+void CreateMonsterView::createMonster(Console::Controller* controller)
+{
+	_race = RACES[_raceSelected];
+
+	if (_hp <= 0 || _attack <= 0 || _armor <= 0 || _speed <= 0)
 	{
-		if (_hp == 0 || _attack == 0 || _armor == 0 || _speed == 0)
+		_errorMessage = "All stats must be greater than 0";
+	}
+	else if (_otherMonster != nullptr && _otherMonster->GetRace().GetName() == _race->GetName())
+	{
+		_errorMessage = "The race of the monster can't be the same than the other";
+	}
+	else
+	{
+		const auto mainController = dynamic_cast<MainController*>(controller);
+		const auto monster = new Monster(*_race, _hp, _attack, _armor, _speed);
+
+		if (_left)
 		{
-			_errorMessage = "All stats must be greater than 0";
-		}
-		else if (_otherMonster != nullptr && _otherMonster->GetRace().GetName() == _race->GetName())
-		{
-			_errorMessage = "The race of the monster can't be the same than the other";
+			mainController->SetLeftMonster(monster);
 		}
 		else
 		{
-			const auto mainController = dynamic_cast<MainController*>(controller);
-			const auto monster = new Monster(*_race, _hp, _attack, _armor, _speed);
-
-			if (_left)
-			{
-				mainController->SetLeftMonster(monster);
-			}
-			else
-			{
-				mainController->SetRightMonster(monster);
-			}
-
-			mainController->GoBack();
+			mainController->SetRightMonster(monster);
 		}
+		mainController->ChangeView(new MenuView(dynamic_cast<MainController*>(controller)));
+		mainController->ClearStack();
 	}
-
-	if (_raceSelected >= static_cast<int>(RACES.size()) - 1)
-	{
-		_raceSelected = static_cast<int>(RACES.size()) - 1;
-	}
-	if (_raceSelected < 0)
-	{
-		_raceSelected = 0;
-	}
-
-	_race = RACES[_raceSelected];
-
-	View::OnKeyPressed(controller, key);
 }

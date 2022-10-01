@@ -1,6 +1,7 @@
 #include "MainController.h"
 #include "../views/MenuView.h"
 
+
 void MainController::update()
 {
 	Controller::update();
@@ -13,5 +14,5 @@ void MainController::onKeyPressed(const char key)
 
 MainController::MainController()
 {
-	ChangeView(new MenuView());
+	ChangeView(new MenuView(this));
 }

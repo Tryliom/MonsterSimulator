@@ -1,19 +1,11 @@
 #include "screen.h"
 
-#include <codecvt>
 #include <iostream>
 #include <thread>
 #include <windows.h>
 
 namespace Console
 {
-	// If true, a border will be drawn around the screen
-	bool constexpr BORDER = true;
-	// The character used to draw the columns for the border
-	std::string const BORDER_COLUMN = "|";
-	// The character used to draw the rows for the border
-	std::string const BORDER_ROW = "=";
-
 	void setCursorVisibility(const bool visibility)
 	{
 		const HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -159,85 +151,6 @@ namespace Console
 			}
 			// Draw the character at the specified position with the specified color if any
 			this->_screen[text.Y][text.X + i] = preColor + text.Str[i] + postColor;
-		}
-	}
-
-	void Screen::Draw(const Button& button)
-	{
-		auto background = Background::NONE;
-		auto foreground = Foreground::NONE;
-
-		int x = button.X;
-		if (button.XCentered)
-		{
-			x -= static_cast<int>(button.Str.length()) / 2;
-		}
-
-		int y = button.Y;
-		if (button.YCentered)
-		{
-			y -= 1;
-		}
-
-		// Draw a border around the button
-		std::string border;
-		for (int i = 0; i < static_cast<int>(button.Str.length()) + 2; i++)
-		{
-			border += BORDER_ROW;
-		}
-
-		// If the button is selected, change the background and foreground color
-		if (button.Selected)
-		{
-			background = Background::CYAN;
-			foreground = Foreground::BLACK;
-		}
-
-		// Draw the border and the text
-		this->Draw(Text{ .Str = border, .X = x, .Y = y, .Background = background, .Foreground = foreground });
-		this->Draw(Text{ .Str = BORDER_COLUMN + button.Str + BORDER_COLUMN, .X = x, .Y = y + 1, .Background = background, .Foreground = foreground });
-		this->Draw(Text{ .Str = border, .X = x, .Y = y + 2, .Background = background, .Foreground = foreground });
-	}
-
-	void Screen::Draw(const Field& field)
-	{
-		// Draw the field
-		if (field.Selected)
-		{
-			Draw(Text{ .Str = field.Str, .X = field.X, .Y = field.Y, .XCentered = field.XCentered, .Background = Background::CYAN, .Foreground = Foreground::BLACK });
-			// If selected, draw the cursor at the end of the field
-			if (field.ShowCursor)
-			{
-				_cursorX = field.X + static_cast<int>(field.Str.length());
-				_cursorY = field.Y;
-			}
-		}
-		else
-		{
-			Draw(Text{ .Str = field.Str, .X = field.X, .Y = field.Y, .XCentered = field.XCentered });
-		}
-	}
-
-	void Screen::Draw(const ImageDraw& imageDraw)
-	{
-		auto background = Background::NONE;
-		auto foreground = Foreground::NONE;
-
-		int x = imageDraw.X;
-		if (imageDraw.XCentered)
-		{
-			x -= imageDraw.image.GetWidth() / 2;
-		}
-
-		int y = imageDraw.Y;
-		if (imageDraw.YCentered)
-		{
-			y -= imageDraw.image.GetHeight() / 2;
-		}
-
-		for (const std::string& row: imageDraw.image.GetImage())
-		{
-			this->Draw(Text{ .Str = row, .X = x, .Y = y, .Background = background, .Foreground = foreground });
 		}
 	}
 

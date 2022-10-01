@@ -1,37 +1,18 @@
 #pragma once
+#include "Image.h"
+#include "../Constants.h"
 
 #include <string>
 #include <vector>
 
-#include "Image.h"
-
 namespace Console
 {
-	enum class Foreground
-	{
-		NONE,
-		BLACK = 30,
-		RED = 31,
-		GREEN = 32,
-		YELLOW = 33,
-		BLUE = 34,
-		MAGENTA = 35,
-		CYAN = 36,
-		WHITE = 37,
-	};
-
-	enum class Background
-	{
-		NONE,
-		BLACK = 40,
-		RED = 41,
-		GREEN = 42,
-		YELLOW = 43,
-		BLUE = 44,
-		MAGENTA = 45,
-		CYAN = 46,
-		WHITE = 47,
-	};
+	// If true, a border will be drawn around the screen
+	bool constexpr BORDER = true;
+	// The character used to draw the columns for the border
+	std::string const BORDER_COLUMN = "|";
+	// The character used to draw the rows for the border
+	std::string const BORDER_ROW = "=";
 
 	struct Text
 	{
@@ -39,38 +20,6 @@ namespace Console
 		int X{ 0 };
 		int Y{ 0 };
 		bool XCentered{ false };
-		Background Background{ Background::NONE };
-		Foreground Foreground{ Foreground::NONE };
-	};
-
-	struct Button
-	{
-		std::string Str{};
-		int X{ 0 };
-		int Y{ 0 };
-		bool Selected{ false };
-		bool XCentered{ false };
-		bool YCentered{ false };
-	};
-
-	struct Field
-	{
-		std::string Str{};
-		int X{ 0 };
-		int Y{ 0 };
-		bool Selected{ false };
-		bool XCentered{ false };
-		bool YCentered{ false };
-		bool ShowCursor{ true };
-	};
-
-	struct ImageDraw
-	{
-		Image image;
-		int X{ 0 };
-		int Y{ 0 };
-		bool XCentered{ false };
-		bool YCentered{ false };
 		Background Background{ Background::NONE };
 		Foreground Foreground{ Foreground::NONE };
 	};
@@ -108,21 +57,6 @@ namespace Console
 		 */
 		void Draw(Text text);
 		/**
-		 * \brief Draw a button on the screen
-		 * \param button The button to draw
-		 */
-		void Draw(const Button& button);
-		/**
-		 * \brief Draw a field on the screen
-		 * \param field The field to draw
-		 */
-		void Draw(const Field& field);
-		/**
-		 * \brief Draw an image on the screen
-		 * \param imageDraw The image to draw
-		 */
-		void Draw(const ImageDraw& imageDraw);
-		/**
 		 * \brief Set windows size
 		 * \param width The width of the window as pixel
 		 * \param height The height of the window as pixel
@@ -133,6 +67,12 @@ namespace Console
 		 * \param title The new title of the window
 		 */
 		static void SetTitle(const std::string& title);
+		/**
+		 * \brief Set the cursor position for this frame
+		 * \param x The x position of the cursor
+		 * \param y The y position of the cursor
+		 */
+		void SetCursor(const int x, const int y) { this->_cursorX = x; this->_cursorY = y; }
 	};
 }
 

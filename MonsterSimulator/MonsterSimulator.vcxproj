@@ -128,7 +128,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\view\interactive\objects\ImageButton.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\IntField.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\BasicField.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\BasicButton.cpp" />
     <ClCompile Include="lib\view\View.cpp" />
+    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
     <ClCompile Include="models\views\CreateMonsterView.cpp" />
     <ClCompile Include="lib\view\Image.cpp" />
     <ClCompile Include="lib\controller\Controller.cpp" />
@@ -140,8 +145,15 @@
     <ClCompile Include="MonsterSimulator.cpp" />
     <ClCompile Include="models\monster\Race.cpp" />
     <ClCompile Include="models\utilities\StringUtility.cpp" />
+    <ClCompile Include="lib\view\interactive\objects\Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\view\interactive\objects\ImageButton.h" />
+    <ClInclude Include="lib\view\interactive\objects\IntField.h" />
+    <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
+    <ClInclude Include="lib\view\interactive\objects\BasicButton.h" />
+    <ClInclude Include="lib\Constants.h" />
+    <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
     <ClInclude Include="models\views\CreateMonsterView.h" />
     <ClInclude Include="lib\view\Image.h" />
     <ClInclude Include="lib\controller\Controller.h" />
@@ -154,6 +166,7 @@
     <ClInclude Include="models\monster\Monster.h" />
     <ClInclude Include="models\monster\Race.h" />
     <ClInclude Include="models\utilities\StringUtility.h" />
+    <ClInclude Include="lib\view\interactive\objects\Selector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
