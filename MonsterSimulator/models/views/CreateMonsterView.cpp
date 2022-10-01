@@ -26,10 +26,10 @@ CreateMonsterView::CreateMonsterView(const MainController* mainController, const
 	setComponents({
 		new Console::Selector(GetPartialScreen(1), ReturnPosition(5), races, 
 		[this](const int index) {this->_raceSelected = index; }),
-		new Console::IntField(GetPartialScreen(1), ReturnPosition(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
-		new Console::IntField(GetPartialScreen(1), ReturnPosition(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
-		new Console::IntField(GetPartialScreen(1), ReturnPosition(11), [this]() {return _armor; }, [this](const int value) {_armor = value; }),
-		new Console::IntField(GetPartialScreen(1), ReturnPosition(13), [this]() {return _speed; }, [this](const int value) {_speed = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(11), [this]() {return _armor; }, [this](const int value) {_armor = value; }),
+		new Console::IntField(GetMiddleScreen(), ReturnPosition(13), [this]() {return _speed; }, [this](const int value) {_speed = value; }),
 		new Console::BasicButton("Create", GetMiddleScreen(), ReturnPosition(16), [this](Console::Controller* controller) {this->createMonster(controller); }, true)
 	});
 }
@@ -81,7 +81,7 @@ void CreateMonsterView::createMonster(Console::Controller* controller)
 {
 	_race = RACES[_raceSelected];
 
-	if (_hp == 0 || _attack == 0 || _armor == 0 || _speed == 0)
+	if (_hp <= 0 || _attack <= 0 || _armor <= 0 || _speed <= 0)
 	{
 		_errorMessage = "All stats must be greater than 0";
 	}

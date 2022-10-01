@@ -1,5 +1,5 @@
 #pragma once
-#include "screen.h"
+#include "Screen.h"
 #include "../controller/Controller.h"
 #include "interactive/InteractiveObject.h"
 

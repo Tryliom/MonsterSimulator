@@ -22,11 +22,6 @@ namespace Console
 		if (maxButtons == 0)
 			return;
 
-		if (_currentButton >= 0)
-		{
-			_components[_currentButton]->OnKeyPress(key);
-		}
-
 		if (_currentButton >= maxButtons)
 		{
 			_currentButton = maxButtons - 1;
@@ -34,6 +29,11 @@ namespace Console
 		if (_currentButton < 0)
 		{
 			_currentButton = 0;
+		}
+
+		if (_currentButton >= 0)
+		{
+			_components[_currentButton]->OnKeyPress(controller, key);
 		}
 	}
 }

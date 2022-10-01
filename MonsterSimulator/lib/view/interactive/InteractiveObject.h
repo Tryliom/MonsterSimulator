@@ -7,6 +7,8 @@
 
 namespace Console
 {
+	class Controller;
+
 	class InteractiveObject
 	{
 	protected:
@@ -21,7 +23,7 @@ namespace Console
 	public:
 		InteractiveObject(std::function<int(Screen)> getX, std::function<int(Screen)> getY, bool xCentered = false);
 
-		virtual void Draw(Screen screen, bool selected) = 0;
+		virtual void Draw(Screen& screen, bool selected) = 0;
 		virtual void OnKeyPress(Controller* controller, const char key) = 0;
 	};
 

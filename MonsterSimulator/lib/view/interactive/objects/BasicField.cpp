@@ -11,7 +11,7 @@ Console::BasicField::BasicField(const std::function<int(Screen)> getX, const std
 	_showCursor = showCursor;
 }
 
-void Console::BasicField::Draw(Screen screen, const bool selected)
+void Console::BasicField::Draw(Screen& screen, const bool selected)
 {
 	auto background = _background;
 	auto foreground = _foreground;
@@ -24,11 +24,11 @@ void Console::BasicField::Draw(Screen screen, const bool selected)
 		foreground = _selectedForeground;
 	}
 
-	screen.Draw(Text{ .Str = _str, .X = x, .Y = y, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+	screen.Draw(Text{ .Str = GetStr(), .X = x, .Y = y, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
 
 	if (_showCursor)
 	{
-		screen.SetCursor(x + static_cast<int>(_str.length()), y);
+		screen.SetCursor(x + static_cast<int>(GetStr().length()), y);
 	}
 }
 

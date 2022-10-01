@@ -4,7 +4,7 @@
 #include "../utilities/StringUtility.h"
 
 
-MenuView::MenuView(const MainController* mainController)
+MenuView::MenuView(const MainController* mainController) : View()
 {
 	const auto leftMonster = mainController->GetLeftMonster();
 	const auto rightMonster = mainController->GetRightMonster();
