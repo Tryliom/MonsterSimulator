@@ -1,9 +1,9 @@
 #pragma once
+#include "Image.h"
+#include "../Constants.h"
 
 #include <string>
 #include <vector>
-
-#include "Image.h"
 
 namespace Console
 {
@@ -13,32 +13,6 @@ namespace Console
 	std::string const BORDER_COLUMN = "|";
 	// The character used to draw the rows for the border
 	std::string const BORDER_ROW = "=";
-
-	enum class Foreground
-	{
-		NONE,
-		BLACK = 30,
-		RED = 31,
-		GREEN = 32,
-		YELLOW = 33,
-		BLUE = 34,
-		MAGENTA = 35,
-		CYAN = 36,
-		WHITE = 37,
-	};
-
-	enum class Background
-	{
-		NONE,
-		BLACK = 40,
-		RED = 41,
-		GREEN = 42,
-		YELLOW = 43,
-		BLUE = 44,
-		MAGENTA = 45,
-		CYAN = 46,
-		WHITE = 47,
-	};
 
 	struct Text
 	{

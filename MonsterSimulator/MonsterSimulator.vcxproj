@@ -128,15 +128,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< master
     <ClCompile Include="lib\view\View.cpp" />
-=======
     <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
->>>>>>> Start Interactive objects
-=======
-    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
->>>>>>> interactiveObjects
     <ClCompile Include="models\views\CreateMonsterView.cpp" />
     <ClCompile Include="lib\view\Image.cpp" />
     <ClCompile Include="lib\controller\Controller.cpp" />
@@ -150,6 +143,7 @@
     <ClCompile Include="models\utilities\StringUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\Constants.h" />
     <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
     <ClInclude Include="models\views\CreateMonsterView.h" />
     <ClInclude Include="lib\view\Image.h" />

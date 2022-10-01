@@ -45,18 +45,18 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Make various improvements | 4h | - |
 | Clean and comments all project | 2h | - |
 
-
-
-
 ## Interactive objects
 
 Some Interactive objects have function to set and get values used.
 
 | Milestone | Done |
 | --------- | ---- |
+| Create the basic button | X |
 | Implement a onKeyPressed on each interactive objects | - |
 | Create different type of fields (string, int) | - |
 | Create a selector like for the races | - |
 | Create an image button (button with an image) | - |
 | Add an option if you can increment int field with left/right arrow | - |
-|  | - |
+| Add a list of Interactive Objects in every view | - |
+| Add IO in the constructor of each view | - |
+| Trigger event on each IO if they are selected | - |

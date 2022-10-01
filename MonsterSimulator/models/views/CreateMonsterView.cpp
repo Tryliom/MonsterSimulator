@@ -86,11 +86,11 @@ void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char
 
 	if (currentButton == 0)
 	{
-		if (key == Console::KEY_LEFT)
+		if (key == Console::Key::Left)
 		{
 			_raceSelected--;
 		}
-		else if (key == Console::KEY_RIGHT)
+		else if (key == Console::Key::Right)
 		{
 			_raceSelected++;
 		}
@@ -99,71 +99,71 @@ void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char
 	{
 		if (currentButton == 1)
 		{
-			if (key == Console::KEY_LEFT)
+			if (key == Console::Key::Left)
 			{
 				if (_hp > 0)
 				{
 					_hp--;
 				}
 			}
-			else if (key == Console::KEY_RIGHT)
+			else if (key == Console::Key::Right)
 			{
 				_hp++;
 			}
 		}
 		else if (currentButton == 2)
 		{
-			if (key == Console::KEY_LEFT)
+			if (key == Console::Key::Left)
 			{
 				if (_attack > 0)
 				{
 					_attack--;
 				}
 			}
-			else if (key == Console::KEY_RIGHT)
+			else if (key == Console::Key::Right)
 			{
 				_attack++;
 			}
 		}
 		else if (currentButton == 3)
 		{
-			if (key == Console::KEY_LEFT)
+			if (key == Console::Key::Left)
 			{
 				if (_armor > 0)
 				{
 					_armor--;
 				}
 			}
-			else if (key == Console::KEY_RIGHT)
+			else if (key == Console::Key::Right)
 			{
 				_armor++;
 			}
 		}
 		else if (currentButton == 4)
 		{
-			if (key == Console::KEY_LEFT)
+			if (key == Console::Key::Left)
 			{
 				if (_speed > 0)
 				{
 					_speed--;
 				}
 			}
-			else if (key == Console::KEY_RIGHT)
+			else if (key == Console::Key::Right)
 			{
 				_speed++;
 			}
 		}
 	}
 
-	if (key == Console::KEY_DOWN)
+	if (key == Console::Key::Down)
 	{
 		IncrementCurrentButton();
 	}
-	else if (key == Console::KEY_UP)
+	else if (key == Console::Key::Up)
 	{
 		DecrementCurrentButton();
 	}
-	else if (key == Console::KEY_ENTER && currentButton == 5)
+	else if (key == Console::Key::Enter && currentButton == 5)
 	{
 		if (_hp == 0 || _attack == 0 || _armor == 0 || _speed == 0)
 		{

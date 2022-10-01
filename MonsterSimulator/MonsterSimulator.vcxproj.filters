@@ -1,126 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="lib\view\View.cpp" />
+    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
+    <ClCompile Include="models\views\CreateMonsterView.cpp" />
+    <ClCompile Include="lib\view\Image.cpp" />
+    <ClCompile Include="lib\controller\Controller.cpp" />
+    <ClCompile Include="lib\utilities\Utility.cpp" />
+    <ClCompile Include="lib\view\Screen.cpp" />
+    <ClCompile Include="models\views\MenuView.cpp" />
+    <ClCompile Include="models\controllers\MainController.cpp" />
+    <ClCompile Include="models\monster\Monster.cpp" />
+    <ClCompile Include="MonsterSimulator.cpp" />
+    <ClCompile Include="models\monster\Race.cpp" />
+    <ClCompile Include="models\utilities\StringUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MonsterSimulator.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\controller\Controller.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\utilities\Utility.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\view\Screen.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\controllers\MainController.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\view\Image.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\monster\Monster.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\monster\Race.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\views\MenuView.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\views\CreateMonsterView.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-<<<<<<< master
-    <ClCompile Include="lib\view\View.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="models\utilities\StringUtility.cpp">
-=======
-    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp">
->>>>>>> Start Interactive objects
-=======
-    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp">
->>>>>>> interactiveObjects
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
+    <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
+    <ClInclude Include="models\views\CreateMonsterView.h" />
+    <ClInclude Include="lib\view\Image.h" />
+    <ClInclude Include="lib\controller\Controller.h" />
+    <ClInclude Include="lib\ConsoleViewController.h" />
+    <ClInclude Include="lib\utilities\Utility.h" />
+    <ClInclude Include="lib\view\Screen.h" />
+    <ClInclude Include="lib\view\View.h" />
+    <ClInclude Include="models\views\MenuView.h" />
+    <ClInclude Include="models\controllers\MainController.h" />
+    <ClInclude Include="models\monster\Monster.h" />
+    <ClInclude Include="models\monster\Race.h" />
+    <ClInclude Include="models\utilities\StringUtility.h" />
+    <ClInclude Include="lib\Constants.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\ConsoleViewController.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\controller\Controller.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\utilities\Utility.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\view\Screen.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\view\View.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="models\controllers\MainController.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\view\Image.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="models\monster\Monster.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="models\monster\Race.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="models\views\MenuView.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="models\views\CreateMonsterView.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-<<<<<<< master
-    <ClInclude Include="models\utilities\StringUtility.h">
-=======
-    <ClInclude Include="lib\view\interactive\InteractiveObject.h">
->>>>>>> Start Interactive objects
-=======
-    <ClInclude Include="lib\view\interactive\InteractiveObject.h">
->>>>>>> interactiveObjects
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="assets\images\races\tribal.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </Text>
-    <Text Include="assets\images\races\elf.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </Text>
-    <Text Include="assets\images\races\minotour.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </Text>
-    <Text Include="assets\images\races\phantom.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </Text>
-    <Text Include="assets\images\races\dragon.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </Text>
+    <Text Include="assets\images\races\dragon.txt" />
+    <Text Include="assets\images\races\elf.txt" />
+    <Text Include="assets\images\races\minotour.txt" />
+    <Text Include="assets\images\races\phantom.txt" />
+    <Text Include="assets\images\races\tribal.txt" />
   </ItemGroup>
 </Project>

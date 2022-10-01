@@ -1,43 +1,31 @@
 #include "InteractiveObject.h"
 
-#include <utility>
-
 namespace Console {
-	InteractiveObject::InteractiveObject(std::string str, const int x, const int y, const bool xCentered, const Background background,
-									const Foreground foreground, const Background selectedBackground, const Foreground selectedForeground)
+	InteractiveObject::InteractiveObject(const int x, const int y, const bool xCentered)
 	{
-		_str = std::move(str);
 		_x = x;
 		_y = y;
 		_xCentered = xCentered;
-		_background = background;
-		_foreground = foreground;
-		_selectedBackground = selectedBackground;
-		_selectedForeground = selectedForeground;
 	}
 
-	void InteractiveObject::Draw(Screen screen)
+	BasicButton::BasicButton(const std::string& str, const int x, const int y, const std::function<void()>& onClick, const bool xCentered, const bool yCentered) :
+		InteractiveObject(x, y, xCentered)
 	{
-		if (this->_selected)
-		{
-			screen.Draw(Text{ .Str = _str, .X = _x, .Y = _y, .XCentered = _xCentered, .Background = _selectedBackground, .Foreground = _selectedForeground });
-		}
-		else
-		{
-			screen.Draw(Text{ .Str = _str, .X = _x, .Y = _y, .XCentered = _xCentered, .Background = _background, .Foreground = _foreground });
-		}
-	}
-
-	BasicButton::BasicButton(const std::string& str, const int x, const int y, const bool xCentered, const bool yCentered) :
-		InteractiveObject(str, x, y, xCentered, Background::NONE, Foreground::NONE, Background::CYAN, Foreground::BLACK)
-	{
+		_str = str;
 		_yCentered = yCentered;
+		_onClick = onClick;
 	}
 
-	void BasicButton::Draw(Screen screen)
+	void BasicButton::Draw(Screen screen, const bool selected)
 	{
 		auto background = _background;
 		auto foreground = _foreground;
+
+		if (selected)
+		{
+			background = _selectedBackground;
+			foreground = _selectedForeground;
+		}
 
 		int y = _y;
 		if (_yCentered)
@@ -49,18 +37,21 @@ namespace Console {
 		std::string border;
 		for (int i = 0; i < static_cast<int>(_str.length()) + 2; i++)
 		{
-			border += BORDER_ROW;
+			border += _rowBorder;
 		}
 
-		std::string text = BORDER_COLUMN + _str + BORDER_COLUMN;
+		std::string text = _columnBorder + _str + _columnBorder;
 
-		if (this->_selected)
+		screen.Draw(Text{ .Str = border, .X = _x, .Y = y, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+		screen.Draw(Text{ .Str = text, .X = _x, .Y = y + 1, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+		screen.Draw(Text{ .Str = border, .X = _x, .Y = y + 2, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
+	}
+
+	void BasicButton::OnKeyPress(const int key)
+	{
+		if (key == Key::Enter)
 		{
-			background = _selectedBackground;
-			foreground = _selectedForeground;
+			_onClick();
 		}
-		screen.Draw(Text{ .Str = border, .X = _x, .Y = y, .Background = background, .Foreground = foreground });
-		screen.Draw(Text{ .Str = text, .X = _x, .Y = y + 1, .XCentered = _xCentered, .Background = _background, .Foreground = _foreground });
-		screen.Draw(Text{ .Str = border, .X = _x, .Y = y + 2, .XCentered = _xCentered, .Background = _background, .Foreground = _foreground });
 	}
 }

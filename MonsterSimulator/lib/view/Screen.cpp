@@ -1,6 +1,5 @@
 #include "screen.h"
 
-#include <codecvt>
 #include <iostream>
 #include <thread>
 #include <windows.h>

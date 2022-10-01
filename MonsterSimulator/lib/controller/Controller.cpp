@@ -21,7 +21,7 @@ namespace Console
 		}
 	}
 
-	void Controller::onKeyPressed(char key)
+	void Controller::onKeyPressed(const char key)
 	{
 		// If the view is not null, call the view's onKeyPressed method
 		if (this->_view != nullptr)
@@ -30,7 +30,7 @@ namespace Console
 		}
 
 		// If the key is Escape, exit the program or go back to the last view
-		if (key == KEY_ESC)
+		if (key == Key::Escape)
 		{
 			if (_views.empty())
 			{
