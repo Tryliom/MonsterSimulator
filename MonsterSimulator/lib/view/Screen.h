@@ -50,7 +50,7 @@ namespace Console
 		Foreground Foreground{ Foreground::NONE };
 	};
 
-	struct Temp
+	struct Button
 	{
 		std::string Str{};
 		int X{ 0 };
@@ -118,7 +118,7 @@ namespace Console
 		 * \brief Draw a button on the screen
 		 * \param button The button to draw
 		 */
-		void Draw(const Temp& button);
+		void Draw(const Button& button);
 		/**
 		 * \brief Draw a field on the screen
 		 * \param field The field to draw

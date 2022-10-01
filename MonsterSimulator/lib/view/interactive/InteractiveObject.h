@@ -28,14 +28,14 @@ namespace Console
 		virtual void Draw(Screen screen);
 	};
 
-	struct Button : public InteractiveObject
+	struct BasicButton : public InteractiveObject
 	{
 	private:
 		bool _yCentered{ false };
 		std::function<void()> _onClick{};
 
 	public:
-		Button(const std::string& str, int x, int y, bool xCentered = false, bool yCentered = false);
+		BasicButton(const std::string& str, int x, int y, bool xCentered = false, bool yCentered = false);
 
 		void SetOnClick(std::function<void()> onClick) { _onClick = std::move(onClick); }
 		void Draw(Screen screen) override;

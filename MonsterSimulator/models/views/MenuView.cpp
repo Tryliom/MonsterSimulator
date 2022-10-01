@@ -25,6 +25,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
 	// Draw the menu buttons
 <<<<<<< master
+<<<<<<< master
 	screen.Draw(Console::Button{ .Str = leftField, .X = screen.GetWidth() / 4, .Y = 5, .Selected = GetCurrentButton() == 0, .XCentered = true });
 	screen.Draw(Console::Button{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = GetCurrentButton() == 1, .XCentered = true });
 	screen.Draw(Console::Button{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = GetCurrentButton() == 2, .XCentered = true });
@@ -33,6 +34,11 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	screen.Draw(Console::Temp{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = _currentButton == 1, .XCentered = true });
 	screen.Draw(Console::Temp{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = _currentButton == 2, .XCentered = true });
 >>>>>>> Start Interactive objects
+=======
+	screen.Draw(Console::Button{ .Str = leftField, .X = screen.GetWidth() / 4, .Y = 5, .Selected = _currentButton == 0, .XCentered = true });
+	screen.Draw(Console::Button{ .Str = rightField, .X = screen.GetWidth() * 3 / 4, .Y = 5, .Selected = _currentButton == 1, .XCentered = true });
+	screen.Draw(Console::Button{ .Str = "Start fight", .X = screen.GetWidth() / 2, .Y = 10, .Selected = _currentButton == 2, .XCentered = true });
+>>>>>>> Update interactive objects name
 
 	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
 
