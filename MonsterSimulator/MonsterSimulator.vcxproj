@@ -128,11 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
 <<<<<<< master
     <ClCompile Include="lib\view\View.cpp" />
 =======
     <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
 >>>>>>> Start Interactive objects
+=======
+    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
+>>>>>>> interactiveObjects
     <ClCompile Include="models\views\CreateMonsterView.cpp" />
     <ClCompile Include="lib\view\Image.cpp" />
     <ClCompile Include="lib\controller\Controller.cpp" />

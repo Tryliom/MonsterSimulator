@@ -45,6 +45,7 @@
     <ClCompile Include="models\views\CreateMonsterView.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< master
     <ClCompile Include="lib\view\View.cpp">
       <Filter>Fichiers sources</Filter>
@@ -53,6 +54,9 @@
 =======
     <ClCompile Include="lib\view\interactive\InteractiveObject.cpp">
 >>>>>>> Start Interactive objects
+=======
+    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp">
+>>>>>>> interactiveObjects
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,11 +94,15 @@
     <ClInclude Include="models\views\CreateMonsterView.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+<<<<<<< HEAD
 <<<<<<< master
     <ClInclude Include="models\utilities\StringUtility.h">
 =======
     <ClInclude Include="lib\view\interactive\InteractiveObject.h">
 >>>>>>> Start Interactive objects
+=======
+    <ClInclude Include="lib\view\interactive\InteractiveObject.h">
+>>>>>>> interactiveObjects
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
