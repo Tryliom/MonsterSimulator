@@ -28,13 +28,13 @@ namespace Console {
 		}
 	}
 
-	Button::Button(const std::string& str, const int x, const int y, const bool xCentered, const bool yCentered) :
+	BasicButton::BasicButton(const std::string& str, const int x, const int y, const bool xCentered, const bool yCentered) :
 		InteractiveObject(str, x, y, xCentered, Background::NONE, Foreground::NONE, Background::CYAN, Foreground::BLACK)
 	{
 		_yCentered = yCentered;
 	}
 
-	void Button::Draw(Screen screen)
+	void BasicButton::Draw(Screen screen)
 	{
 		auto background = _background;
 		auto foreground = _foreground;

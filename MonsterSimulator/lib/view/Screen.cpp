@@ -155,7 +155,7 @@ namespace Console
 		}
 	}
 
-	void Screen::Draw(const Temp& button)
+	void Screen::Draw(const Button& button)
 	{
 		auto background = Background::NONE;
 		auto foreground = Foreground::NONE;
