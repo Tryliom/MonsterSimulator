@@ -114,6 +114,12 @@ namespace Console
 		 * \param title The new title of the window
 		 */
 		static void SetTitle(const std::string& title);
+		/**
+		 * \brief Set the cursor position for this frame
+		 * \param x The x position of the cursor
+		 * \param y The y position of the cursor
+		 */
+		void SetCursor(const int x, const int y) { this->_cursorX = x; this->_cursorY = y; }
 	};
 }
 

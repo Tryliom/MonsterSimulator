@@ -41,7 +41,7 @@ namespace Console
 		screen.Draw(Text{ .Str = border, .X = _x, .Y = y + 2, .XCentered = _xCentered, .Background = background, .Foreground = foreground });
 	}
 
-	void BasicButton::OnKeyPress(const int key)
+	void BasicButton::OnKeyPress(const char key)
 	{
 		if (key == Key::Enter)
 		{

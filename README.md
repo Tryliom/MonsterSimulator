@@ -44,7 +44,7 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Display the result of the fight and return to menu | 30min | - |
 | Make various improvements | 4h | - |
 | Clean and comments all project | 2h | - |
-| Implement Interactive Objects | 6h | 1h +  |
+| Implement Interactive Objects | 6h | 1h + 14h00- |
 
 ## Interactive objects
 
@@ -54,6 +54,7 @@ Some Interactive objects have function to set and get values used.
 | --------- | ---- |
 | Create the basic button | X |
 | Implement a onKeyPressed on each interactive objects | - |
+| Create the BasicField that take a custom condition and some events | - |
 | Create different type of fields (string, int) | - |
 | Create a selector like for the races | - |
 | Create an image button (button with an image) | - |

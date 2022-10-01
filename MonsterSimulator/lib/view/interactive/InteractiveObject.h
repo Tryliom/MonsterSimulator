@@ -19,7 +19,7 @@ namespace Console
 		InteractiveObject(int x, int y, bool xCentered = false);
 
 		virtual void Draw(Screen screen, bool selected) = 0;
-		virtual void OnKeyPress(const int key) = 0;
+		virtual void OnKeyPress(const char key) = 0;
 	};
 
 
