@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/ConsoleViewController.h"
+#include "../../libs/ConsoleViewController/ConsoleViewController.h"
 #include "../monster/Monster.h"
 #include "../controllers/MainController.h"
 

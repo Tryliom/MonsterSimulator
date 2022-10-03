@@ -1,45 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="lib\view\View.cpp" />
-    <ClCompile Include="lib\view\interactive\InteractiveObject.cpp" />
     <ClCompile Include="models\views\CreateMonsterView.cpp" />
-    <ClCompile Include="lib\view\Image.cpp" />
-    <ClCompile Include="lib\controller\Controller.cpp" />
-    <ClCompile Include="lib\utilities\Utility.cpp" />
-    <ClCompile Include="lib\view\Screen.cpp" />
     <ClCompile Include="models\views\MenuView.cpp" />
     <ClCompile Include="models\controllers\MainController.cpp" />
     <ClCompile Include="models\monster\Monster.cpp" />
     <ClCompile Include="MonsterSimulator.cpp" />
     <ClCompile Include="models\monster\Race.cpp" />
     <ClCompile Include="models\utilities\StringUtility.cpp" />
-    <ClCompile Include="lib\view\interactive\objects\BasicButton.cpp" />
-    <ClCompile Include="lib\view\interactive\objects\BasicField.cpp" />
-    <ClCompile Include="lib\view\interactive\objects\IntField.cpp" />
-    <ClCompile Include="lib\view\interactive\objects\Selector.cpp" />
-    <ClCompile Include="lib\view\interactive\objects\ImageButton.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\utilities\Utility.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\BasicButton.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\InteractiveObject.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\Image.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\Screen.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\ImageButton.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\IntField.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\BasicField.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\View.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\controller\Controller.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\view\interactive\InteractiveObject.h" />
     <ClInclude Include="models\views\CreateMonsterView.h" />
-    <ClInclude Include="lib\view\Image.h" />
-    <ClInclude Include="lib\controller\Controller.h" />
-    <ClInclude Include="lib\ConsoleViewController.h" />
-    <ClInclude Include="lib\utilities\Utility.h" />
-    <ClInclude Include="lib\view\Screen.h" />
-    <ClInclude Include="lib\view\View.h" />
     <ClInclude Include="models\views\MenuView.h" />
     <ClInclude Include="models\controllers\MainController.h" />
     <ClInclude Include="models\monster\Monster.h" />
     <ClInclude Include="models\monster\Race.h" />
     <ClInclude Include="models\utilities\StringUtility.h" />
-    <ClInclude Include="lib\Constants.h" />
-    <ClInclude Include="lib\view\interactive\objects\BasicButton.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
-    <ClInclude Include="lib\view\interactive\objects\IntField.h" />
-    <ClInclude Include="lib\view\interactive\objects\Selector.h" />
     <ClInclude Include="lib\view\interactive\objects\ImageButton.h" />
+    <ClInclude Include="libs\ConsoleViewController\controller\Controller.h" />
+    <ClInclude Include="libs\ConsoleViewController\utilities\Utility.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\BasicButton.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\IntField.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\InteractiveObject.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\Image.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\Screen.h" />
+    <ClInclude Include="libs\ConsoleViewController\ConsoleViewController.h" />
+    <ClInclude Include="libs\ConsoleViewController\Constants.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\View.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\Selector.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\ImageButton.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\BasicField.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -47,5 +49,9 @@
     <Text Include="assets\images\races\minotour.txt" />
     <Text Include="assets\images\races\phantom.txt" />
     <Text Include="assets\images\races\tribal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libs\ConsoleViewController\LICENSE" />
+    <None Include="libs\ConsoleViewController\README.md" />
   </ItemGroup>
 </Project>

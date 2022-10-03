@@ -1,5 +1,5 @@
 #pragma once
-#include "../../lib/ConsoleViewController.h"
+#include "../../libs/ConsoleViewController/ConsoleViewController.h"
 #include "../controllers/MainController.h"
 
 class MenuView : public Console::View
