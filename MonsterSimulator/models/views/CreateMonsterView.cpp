@@ -24,13 +24,13 @@ CreateMonsterView::CreateMonsterView(const MainController* mainController, const
 	}
 
 	setComponents({
-		new Console::Selector(GetMiddleScreen(), ReturnPosition(5), races,
+		new Console::Selector(PositionX(0.5f), PositionY(5), races,
 		[this](const int index) {this->_raceSelected = index; }),
-		new Console::IntField(GetMiddleScreen(), ReturnPosition(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
-		new Console::IntField(GetMiddleScreen(), ReturnPosition(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
-		new Console::IntField(GetMiddleScreen(), ReturnPosition(11), [this]() {return _armor; }, [this](const int value) {_armor = value; }),
-		new Console::IntField(GetMiddleScreen(), ReturnPosition(13), [this]() {return _speed; }, [this](const int value) {_speed = value; }),
-		new Console::BasicButton("Create", GetMiddleScreen(), ReturnPosition(16), [this](Console::Controller* controller) {this->createMonster(controller); }, true)
+		new Console::IntField(PositionX(0.5f), PositionY(7), [this]() {return _hp; }, [this](const int value) {_hp = value; }),
+		new Console::IntField(PositionX(0.5f), PositionY(9), [this]() {return _attack; }, [this](const int value) {_attack = value; }),
+		new Console::IntField(PositionX(0.5f), PositionY(11), [this]() {return _armor; }, [this](const int value) {_armor = value; }),
+		new Console::IntField(PositionX(0.5f), PositionY(13), [this]() {return _speed; }, [this](const int value) {_speed = value; }),
+		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this](Console::Controller* controller) {this->createMonster(controller); }, true)
 	});
 }
 
@@ -40,7 +40,7 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
-	
+	screen.Draw(Console::Text{ .Str = "FPS" + std::to_string(controller->CurrentFPS), .X = 1, .Y = 1 });
 	int y = 5;
 	// Draw Race field
 	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y });

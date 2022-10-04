@@ -132,6 +132,7 @@
     <ClCompile Include="libs\ConsoleViewController\view\Image.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\InteractiveObject.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\BasicButton.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\view\interactive\Position.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\Screen.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\ImageButton.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\IntField.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\BasicField.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\ImageButton.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\IntField.h" />
+    <ClInclude Include="libs\ConsoleViewController\view\interactive\Position.h" />
     <ClInclude Include="libs\ConsoleViewController\view\Screen.h" />
     <ClInclude Include="lib\view\interactive\objects\ImageButton.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />

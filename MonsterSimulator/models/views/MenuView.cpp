@@ -11,16 +11,16 @@ MenuView::MenuView(const MainController* mainController) : View()
 
 	if (leftMonster == nullptr)
 	{
-		AddComponent(new Console::BasicButton("Create monster", GetPartialScreen(1), ReturnPosition(5), 
+		AddComponent(new Console::BasicButton("Create monster", PositionX(0.25f), PositionY(5),
 			[mainController](Console::Controller* controller) {controller->ChangeView(new CreateMonsterView(mainController, true)); }, true));
 	}
 	if (rightMonster == nullptr)
 	{
-		AddComponent(new Console::BasicButton("Create monster", GetPartialScreen(3), ReturnPosition(5),
+		AddComponent(new Console::BasicButton("Create monster", PositionX(0.75f), PositionY(5),
 			[mainController](Console::Controller* controller) {controller->ChangeView(new CreateMonsterView(mainController, false)); }, true));
 	}
 
-	AddComponent(new Console::BasicButton("Start fight", GetMiddleScreen(), ReturnPosition(10),
+	AddComponent(new Console::BasicButton("Start fight", PositionX(0.5f), PositionY(10),
 		[mainController, this](Console::Controller* controller)
 		{
 			if (mainController->CanStart())

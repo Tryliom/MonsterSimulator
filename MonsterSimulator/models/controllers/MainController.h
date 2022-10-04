@@ -8,10 +8,6 @@ private:
 	Monster* _leftMonster{ nullptr };
 	Monster* _rightMonster{ nullptr };
 
-protected:
-	void update() override;
-	void onKeyPressed(char key) override;
-
 public:
 	MainController();
 
