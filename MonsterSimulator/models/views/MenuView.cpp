@@ -38,7 +38,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);
 
-	const MainController* mainController = dynamic_cast<MainController*>(controller);
+	const MainController* mainController = static_cast<MainController*>(controller);
 	const auto leftMonster = mainController->GetLeftMonster();
 	const auto rightMonster = mainController->GetRightMonster();
 

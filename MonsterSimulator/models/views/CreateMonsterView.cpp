@@ -40,7 +40,6 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
-	screen.Draw(Console::Text{ .Str = "FPS" + std::to_string(controller->CurrentFPS), .X = 1, .Y = 1 });
 	int y = 5;
 	// Draw Race field
 	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y });
@@ -94,7 +93,7 @@ void CreateMonsterView::createMonster(Console::Controller* controller)
 	}
 	else
 	{
-		const auto mainController = dynamic_cast<MainController*>(controller);
+		const auto mainController = static_cast<MainController*>(controller);
 		const auto monster = new Monster(*_race, _hp, _attack, _armor, _speed);
 
 		if (_left)
@@ -105,7 +104,7 @@ void CreateMonsterView::createMonster(Console::Controller* controller)
 		{
 			mainController->SetRightMonster(monster);
 		}
-		mainController->ChangeView(new MenuView(dynamic_cast<MainController*>(controller)));
+		mainController->ChangeView(new MenuView(mainController));
 		mainController->ClearStack();
 	}
 }
