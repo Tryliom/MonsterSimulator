@@ -19,6 +19,7 @@ public:
 	int GetMaxHp() const { return _maxHp; }
 	int GetArmor() const { return _armor; }
 	int GetSpeed() const { return _speed; }
+	float GetHpPercent() const { return static_cast<float>(_hp) / _maxHp; }
 	void UpdateHp(const int hp) { _hp += hp; }
 	void FullHeal() { _hp = _maxHp; }
 
