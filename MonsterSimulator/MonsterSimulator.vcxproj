@@ -148,6 +148,7 @@
     <ClCompile Include="models\monster\Race.cpp" />
     <ClCompile Include="models\utilities\StringUtility.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
+    <ClCompile Include="models\views\VictoryView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\FightView.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="models\monster\Race.h" />
     <ClInclude Include="models\utilities\StringUtility.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\Selector.h" />
+    <ClInclude Include="models\views\VictoryView.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />

@@ -1,15 +1,14 @@
 #pragma once
 #include "../controllers/MainController.h"
 
-class FightView : public Console::View
+class VictoryView : public Console::View
 {
 private:
-	Monster* _leftMonster;
-	Monster* _rightMonster;
-
-	void startFightThread(MainController* mainController) const;
+	Monster* _winner;
+	int _rounds;
 public:
-	explicit FightView(MainController* mainController);
+	VictoryView(MainController* mainController, int rounds);
+
 	void Update(Console::Controller* controller, Console::Screen& screen) override;
 	void OnKeyPressed(Console::Controller* controller, char key) override;
 };

@@ -3,6 +3,8 @@
 
 #include <thread>
 
+#include "VictoryView.h"
+
 FightView::FightView(MainController* mainController)
 {
 	_leftMonster = mainController->GetLeftMonster();
@@ -11,16 +13,18 @@ FightView::FightView(MainController* mainController)
 	startFightThread(mainController);
 }
 
-void FightView::startFightThread(const MainController* mainController)
+void FightView::startFightThread(MainController* mainController) const
 {
-	bool isLeftTurn = mainController->IsLeftStart();
+	const bool isLeftTurn = mainController->IsLeftStart();
 	Monster* attacker = isLeftTurn ? _leftMonster : _rightMonster;
 	Monster* defender = isLeftTurn ? _rightMonster : _leftMonster;
 
 	std::thread thread([&]()
 		{
+			int rounds = 0;
 			while (mainController->CanFightContinue())
 			{
+				rounds++;
 				attacker->Attack(defender);
 				Utility::sleep(1000);
 				Monster* temp = attacker;
@@ -28,7 +32,8 @@ void FightView::startFightThread(const MainController* mainController)
 				defender = temp;
 			}
 
-			//ChangeView(new VictoryView(this));
+			mainController->ClearStack();
+			mainController->SetView(new VictoryView(mainController, rounds));
 		}
 	);
 	thread.detach();
@@ -38,8 +43,8 @@ void FightView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);
 
-	screen.Draw(Console::Text{ .Str = static_cast<std::string>(*_leftMonster), .X = screen.GetWidth() / 4, .Y = 10});
-	screen.Draw(Console::Text{ .Str = static_cast<std::string>(*_rightMonster), .X = screen.GetWidth() / 4 * 3, .Y = 10 });
+	screen.Draw(Console::Text{ .Str = static_cast<std::string>(*_leftMonster), .X = screen.GetWidth() / 4, .Y = 10, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = static_cast<std::string>(*_rightMonster), .X = screen.GetWidth() / 4 * 3, .Y = 10, .XCentered = true });
 }
 
 void FightView::OnKeyPressed(Console::Controller* controller, const char key)
