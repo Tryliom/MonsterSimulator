@@ -1,13 +1,13 @@
 #pragma once
 #include "../controllers/MainController.h"
 
-class MenuView : public Console::View
+class FightView : public Console::View
 {
 private:
-	std::string _errorMessage;
 
 public:
-	explicit MenuView(MainController* mainController);
+	explicit FightView(MainController* mainController);
+
 	void Update(Console::Controller* controller, Console::Screen& screen) override;
 	void OnKeyPressed(Console::Controller* controller, char key) override;
 };

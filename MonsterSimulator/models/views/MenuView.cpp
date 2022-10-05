@@ -1,10 +1,10 @@
 #include "MenuView.h"
 #include "CreateMonsterView.h"
-#include "../controllers/MainController.h"
+#include "FightView.h"
 #include "../utilities/StringUtility.h"
 
 
-MenuView::MenuView(const MainController* mainController) : View()
+MenuView::MenuView(MainController* mainController) : View()
 {
 	const auto leftMonster = mainController->GetLeftMonster();
 	const auto rightMonster = mainController->GetRightMonster();
@@ -25,7 +25,7 @@ MenuView::MenuView(const MainController* mainController) : View()
 		{
 			if (mainController->CanStart())
 			{
-				//controller->ChangeView(new FightView());
+				controller->ChangeView(new FightView(mainController));
 			}
 			else
 			{

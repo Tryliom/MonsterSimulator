@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="models\views\FightView.cpp" />
     <ClCompile Include="libs\ConsoleViewController\utilities\Utility.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\Image.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\InteractiveObject.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="models\views\FightView.h" />
     <ClInclude Include="libs\ConsoleViewController\ConsoleViewController.h" />
     <ClInclude Include="libs\ConsoleViewController\Constants.h" />
     <ClInclude Include="libs\ConsoleViewController\controller\Controller.h" />

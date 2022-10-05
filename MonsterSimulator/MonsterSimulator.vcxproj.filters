@@ -20,6 +20,7 @@
     <ClCompile Include="libs\ConsoleViewController\controller\Controller.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\Position.cpp" />
+    <ClCompile Include="models\views\FightView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\CreateMonsterView.h" />
@@ -44,6 +45,7 @@
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\ImageButton.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\BasicField.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\Position.h" />
+    <ClInclude Include="models\views\FightView.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />

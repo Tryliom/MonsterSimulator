@@ -1,5 +1,4 @@
 #include "CreateMonsterView.h"
-
 #include "MenuView.h"
 #include "../utilities/StringUtility.h"
 

@@ -1,6 +1,4 @@
 #pragma once
-#include "../../libs/ConsoleViewController/ConsoleViewController.h"
-#include "../monster/Monster.h"
 #include "../controllers/MainController.h"
 
 const std::vector<Race*> RACES = {
