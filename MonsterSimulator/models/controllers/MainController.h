@@ -7,7 +7,6 @@ class MainController : public Console::Controller
 private:
 	Monster* _leftMonster{ nullptr };
 	Monster* _rightMonster{ nullptr };
-
 public:
 	MainController();
 
@@ -15,6 +14,12 @@ public:
 	Monster* GetRightMonster() const { return _rightMonster; }
 	void SetLeftMonster(Monster* monster) { _leftMonster = monster; }
 	void SetRightMonster(Monster* monster) { _rightMonster = monster; }
-	bool CanStart() const { return _leftMonster != nullptr && _rightMonster != nullptr; }
+
+	void ResetMonsters();
+	bool CanStart() const;
+	bool HaveImpossibleStats() const;
+	void InitFight() const;
+	bool CanFightContinue() const;
+	bool IsLeftStart() const;
 };
 

@@ -21,4 +21,9 @@ void Monster::Attack(Monster* monster) const
 	monster->UpdateHp(damage);
 }
 
+Monster::operator std::string() const
+{
+	return _race.GetName() + " (" + std::to_string(_hp) + "/" + std::to_string(_maxHp) + "hp)";
+}
+
 

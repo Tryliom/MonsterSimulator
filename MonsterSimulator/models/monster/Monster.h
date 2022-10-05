@@ -10,7 +10,6 @@ private:
 	int _attack;
 	int _armor;
 	int _speed;
-
 public:
 	Monster(Race race, int hp, int attack, int armor, int speed);
 
@@ -21,8 +20,11 @@ public:
 	int GetArmor() const { return _armor; }
 	int GetSpeed() const { return _speed; }
 	void UpdateHp(const int hp) { _hp += hp; }
+	void FullHeal() { _hp = _maxHp; }
 
 	void Attack(Monster* monster) const;
 	bool IsDead() const { return _hp <= 0; }
+
+	explicit operator std::string() const;
 };
 
