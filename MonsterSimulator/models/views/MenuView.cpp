@@ -6,8 +6,15 @@
 
 MenuView::MenuView(MainController* mainController) : View()
 {
+	InitComponents(mainController);
+}
+
+void MenuView::InitComponents(MainController* mainController)
+{
 	const auto leftMonster = mainController->GetLeftMonster();
 	const auto rightMonster = mainController->GetRightMonster();
+
+	ClearComponents();
 
 	if (leftMonster == nullptr)
 	{
@@ -25,7 +32,12 @@ MenuView::MenuView(MainController* mainController) : View()
 		{
 			if (mainController->CanStart())
 			{
-				controller->ChangeView(new FightView(mainController));
+				controller->ClearStack();
+				controller->SetView(new FightView(mainController));
+			}
+			else if (mainController->HaveImpossibleStats())
+			{
+				_errorMessage = "The two monsters can't harm each other with their stats";
 			}
 			else
 			{
@@ -57,7 +69,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
 }
 
 void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
@@ -79,6 +91,13 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 	else if (key == Console::Key::Up)
 	{
 		SetCurrentButton(0);
+	}
+
+	if (key == 'r')
+	{
+		MainController* mainController = static_cast<MainController*>(controller);
+		mainController->ResetMonsters();
+		InitComponents(mainController);
 	}
 
 	View::OnKeyPressed(controller, key);

@@ -103,7 +103,7 @@ void CreateMonsterView::createMonster(Console::Controller* controller)
 		{
 			mainController->SetRightMonster(monster);
 		}
-		mainController->ChangeView(new MenuView(mainController));
 		mainController->ClearStack();
+		mainController->SetView(new MenuView(mainController));
 	}
 }
