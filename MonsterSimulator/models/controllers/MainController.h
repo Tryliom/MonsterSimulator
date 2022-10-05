@@ -17,6 +17,7 @@ public:
 
 	void ResetMonsters();
 	bool CanStart() const;
+	bool IsAllMonsterCreated() const;
 	bool HaveImpossibleStats() const;
 	void InitFight() const;
 	bool CanFightContinue() const;

@@ -20,7 +20,12 @@ void MainController::ResetMonsters()
 
 bool MainController::CanStart() const
 {
-	return _leftMonster != nullptr && _rightMonster != nullptr && !HaveImpossibleStats();
+	return IsAllMonsterCreated() && !HaveImpossibleStats();
+}
+
+bool MainController::IsAllMonsterCreated() const
+{
+	return _leftMonster != nullptr && _rightMonster != nullptr;
 }
 
 bool MainController::HaveImpossibleStats() const

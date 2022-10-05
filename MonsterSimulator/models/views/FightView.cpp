@@ -1,9 +1,8 @@
 #include "FightView.h"
 #include "../../libs/ConsoleViewController/ConsoleViewController.h"
+#include "VictoryView.h"
 
 #include <thread>
-
-#include "VictoryView.h"
 
 FightView::FightView(MainController* mainController)
 {

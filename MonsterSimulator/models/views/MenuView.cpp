@@ -35,13 +35,13 @@ void MenuView::InitComponents(MainController* mainController)
 				controller->ClearStack();
 				controller->SetView(new FightView(mainController));
 			}
+			else if (!mainController->IsAllMonsterCreated())
+			{
+				_errorMessage = "You need to create two monsters to start a fight";
+			}
 			else if (mainController->HaveImpossibleStats())
 			{
 				_errorMessage = "The two monsters can't harm each other with their stats";
-			}
-			else
-			{
-				_errorMessage = "You need to create two monsters to start a fight";
 			}
 		}, true));
 }
