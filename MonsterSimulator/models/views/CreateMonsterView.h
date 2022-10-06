@@ -15,10 +15,10 @@ private:
 	bool _left;
 	Monster* _otherMonster{ nullptr };
 	Race* _race{RACES[0]};
-	int _hp{0};
-	int _attack{0};
-	int _armor{0};
-	int _speed{0};
+	int _hp{100};
+	int _attack{10};
+	int _armor{1};
+	int _speed{1};
 	int _raceSelected{0};
 	std::string _errorMessage{};
 
