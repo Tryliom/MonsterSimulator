@@ -42,9 +42,9 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Implement Interactive Objects | 6h | 4h18 |
 | Create a view used to display the fight | 2h | 1h02 |
 | Display the result of the fight and return to menu | 30min | 23min |
-| Display animation in the fight | 4h | 2h10 |
+| Display animation in the fight | 4h | 4h51 |
 | Make various improvements | 4h | 25min |
-| Clean and comments all project | 4h | 20min |
+| Clean and comments all project | 4h | 21min |
 
 ## Interactive objects
 
