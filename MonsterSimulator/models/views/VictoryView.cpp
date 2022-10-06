@@ -22,7 +22,7 @@ void VictoryView::Update(Console::Controller* controller, Console::Screen& scree
 	View::Update(controller, screen);
 
 	screen.Draw(Console::Text{ .Str = "The fight has end in " + std::to_string(_rounds) + " rounds with " + static_cast<std::string>(*_winner) + " as winner !", 
-		.X = screen.GetWidth() / 2, .Y = 10, .XCentered = true });
+		.X = Console::Screen::WIDTH / 2, .Y = 10, .XCentered = true });
 }
 
 void VictoryView::OnKeyPressed(Console::Controller* controller, const char key)

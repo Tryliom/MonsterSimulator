@@ -4,21 +4,22 @@
 
 #include <thread>
 
-constexpr COLORREF BAR_COLOR = RGB(200, 50, 50);
-
 FightView::FightView(MainController* mainController)
 {
 	_leftMonster = mainController->GetLeftMonster();
 	_rightMonster = mainController->GetRightMonster();
+	_rounds = 0;
+
+	//TODO: Reverse doesn't work
 	_rightMonster->GetRace().GetSprite().Reverse();
-	_yLeftMonster = PositionY(- _leftMonster->GetRace().GetSprite().GetHeight() / 2, 0.75f);
-	_yRightMonster = PositionY(- _rightMonster->GetRace().GetSprite().GetHeight() / 2, 0.75f);
+	
+	Console::AudioManager::Play(BATTLE_MUSIC_PATH);
 
 	mainController->InitFight();
 	startFightThread(mainController);
 }
 
-void FightView::startFightThread(MainController* mainController) const
+void FightView::startFightThread(MainController* mainController)
 {
 	const bool isLeftTurn = mainController->IsLeftStart();
 	Monster* attacker = isLeftTurn ? _leftMonster : _rightMonster;
@@ -26,10 +27,9 @@ void FightView::startFightThread(MainController* mainController) const
 
 	std::thread thread([&]()
 		{
-			int rounds = 0;
 			while (mainController->CanFightContinue())
 			{
-				rounds++;
+				_rounds++;
 				attacker->Attack(defender);
 				Utility::sleep(1000);
 				Monster* temp = attacker;
@@ -37,31 +37,48 @@ void FightView::startFightThread(MainController* mainController) const
 				defender = temp;
 			}
 
+			Console::AudioManager::Stop();
 			mainController->ClearStack();
-			mainController->SetView(new VictoryView(mainController, rounds));
+			mainController->SetView(new VictoryView(mainController, _rounds));
 		}
 	);
 	thread.detach();
+}
+
+void FightView::drawMonster(Console::Screen& screen, const Monster* monster) const
+{
+	const bool isLeftMonster = monster->GetRace().GetName() == _leftMonster->GetRace().GetName();
+	
+	const int spriteHeight = monster->GetRace().GetSprite().GetHeight();
+	const int x = isLeftMonster ? (Console::Screen::WIDTH / 4) : (Console::Screen::WIDTH * 3 / 4);
+	const int y = PositionY(- spriteHeight / 2, 0.7f).GetValue();
+
+	screen.Draw(monster->GetRace().GetSprite(), x, y, true, true);
+	drawHpBar(screen, monster, x, y + spriteHeight / 2 + 2);
+}
+
+void FightView::drawHpBar(Console::Screen& screen, const Monster* monster, const int x, const int y)
+{
+	const int barWidth = Console::Screen::WIDTH_PIXEL / 3;
+	constexpr int barHeight = 20;
+	constexpr int barBorderWidth = 4;
+	const int currentBarWidth = static_cast<int>(static_cast<float>(barWidth) * monster->GetHpPercent());
+	const int yBar = y * Console::Screen::PIXEL_RATIO_Y;
+	const int xBar = x * Console::Screen::PIXEL_RATIO_X - barWidth / 2;
+
+	screen.DrawRect(xBar - barBorderWidth, yBar - barBorderWidth, barWidth + barBorderWidth * 2, barHeight + barBorderWidth * 2, BAR_BORDER_COLOR);
+	screen.DrawRect(xBar, yBar, barWidth, barHeight, BAR_BACK_COLOR);
+	screen.DrawRect(xBar, yBar, currentBarWidth, barHeight, BAR_CONTENT_COLOR);
 }
 
 void FightView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);
 
-	const float ratioPixel = static_cast<float>(Console::Screen::WIDTH_PIXEL) / Console::Screen::WIDTH;
-	const int xLeft = screen.GetWidth() / 4;
-	const int xRight = screen.GetWidth() * 3 / 4;
-	const int leftWidth = _leftMonster->GetRace().GetSprite().GetWidth();
-	const int rightWidth = _rightMonster->GetRace().GetSprite().GetWidth();
-	const int leftBarWidth = static_cast<int>(static_cast<float>(Console::Screen::WIDTH_PIXEL) * 0.3f * _leftMonster->GetHpPercent());
-	const int rightBarWidth = static_cast<int>(static_cast<float>(Console::Screen::WIDTH_PIXEL) * 0.3f * _rightMonster->GetHpPercent());
-	const int yBar = Console::Screen::HEIGHT_PIXEL * 3 / 4 + 20;
+	screen.Draw(Console::Text{ .Str = "Round " + std::to_string(_rounds), .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
 
-	screen.Draw(_leftMonster->GetRace().GetSprite(), xLeft, _yLeftMonster.GetValue(), true, true);
-	screen.Draw(_rightMonster->GetRace().GetSprite(), xRight, _yRightMonster.GetValue(), true, true);
-
-	screen.DrawRect((xLeft - leftWidth / 2) * ratioPixel, yBar, leftBarWidth, 20, BAR_COLOR);
-	screen.DrawRect((xRight - rightWidth / 2) * ratioPixel, yBar, rightBarWidth, 20, BAR_COLOR);
+	drawMonster(screen, _leftMonster);
+	drawMonster(screen, _rightMonster);
 }
 
 void FightView::OnKeyPressed(Console::Controller* controller, const char key)

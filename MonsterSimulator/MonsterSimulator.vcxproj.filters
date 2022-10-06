@@ -22,6 +22,7 @@
     <ClCompile Include="libs\ConsoleViewController\view\interactive\Position.cpp" />
     <ClCompile Include="models\views\FightView.cpp" />
     <ClCompile Include="models\views\VictoryView.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\controller\AudioManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\CreateMonsterView.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="libs\ConsoleViewController\view\interactive\Position.h" />
     <ClInclude Include="models\views\FightView.h" />
     <ClInclude Include="models\views\VictoryView.h" />
+    <ClInclude Include="libs\ConsoleViewController\controller\AudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -59,5 +61,8 @@
   <ItemGroup>
     <None Include="libs\ConsoleViewController\LICENSE" />
     <None Include="libs\ConsoleViewController\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\battle\cynthia.wav" />
   </ItemGroup>
 </Project>

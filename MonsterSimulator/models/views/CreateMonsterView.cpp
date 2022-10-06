@@ -38,28 +38,29 @@ void CreateMonsterView::Update(Console::Controller* controller, Console::Screen&
 	View::Update(controller, screen);
 
 	// Draw the title of the view
-	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
 	int y = 5;
 	// Draw Race field
-	screen.Draw(Console::Text{ .Str = "Race:", .X = screen.GetWidth() / 4, .Y = y });
+	screen.Draw(Console::Text{ .Str = "Race:", .X = Console::Screen::WIDTH / 4, .Y = y });
 	y += 2;
 	// Draw Hp field
-	screen.Draw(Console::Text{ .Str = "Hp:", .X = screen.GetWidth() / 4, .Y = y });
+	screen.Draw(Console::Text{ .Str = "Hp:", .X = Console::Screen::WIDTH / 4, .Y = y });
 	y += 2;
 	// Draw Attack field
-	screen.Draw(Console::Text{ .Str = "Attack:", .X = screen.GetWidth() / 4, .Y = y });
+	screen.Draw(Console::Text{ .Str = "Attack:", .X = Console::Screen::WIDTH / 4, .Y = y });
 	y += 2;
 	// Draw Armor field
-	screen.Draw(Console::Text{ .Str = "Armor:", .X = screen.GetWidth() / 4, .Y = y });
+	screen.Draw(Console::Text{ .Str = "Armor:", .X = Console::Screen::WIDTH / 4, .Y = y });
 	y += 2;
 	// Draw Speed field
-	screen.Draw(Console::Text{ .Str = "Speed:", .X = screen.GetWidth() / 4, .Y = y });
+	screen.Draw(Console::Text{ .Str = "Speed:", .X = Console::Screen::WIDTH / 4, .Y = y });
 	y += 3;
 	// Draw the error message
-	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = y + 5, .XCentered = true, .Foreground = Console::Foreground::RED });
+	screen.Draw(Console::Text{ .Str = _errorMessage, .X = Console::Screen::WIDTH / 2, .Y = y + 5, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Left & right: select/change numbers | Up & down: move | Confirm: Enter", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Exit: Esc | Left & right: select/change numbers | Up & down: move | Confirm: Enter", .X = Console::Screen::WIDTH / 2, 
+		.Y = Console::Screen::HEIGHT - 3, .XCentered = true });
 }
 
 void CreateMonsterView::OnKeyPressed(Console::Controller* controller, const char key)

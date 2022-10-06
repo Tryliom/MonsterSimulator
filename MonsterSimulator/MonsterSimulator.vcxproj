@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\ConsoleViewController\controller\AudioManager.cpp" />
     <ClCompile Include="models\views\FightView.cpp" />
     <ClCompile Include="libs\ConsoleViewController\utilities\Utility.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\Image.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="models\views\VictoryView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\ConsoleViewController\controller\AudioManager.h" />
     <ClInclude Include="models\views\FightView.h" />
     <ClInclude Include="libs\ConsoleViewController\ConsoleViewController.h" />
     <ClInclude Include="libs\ConsoleViewController\Constants.h" />
@@ -186,6 +188,9 @@
   <ItemGroup>
     <None Include="libs\ConsoleViewController\LICENSE" />
     <None Include="libs\ConsoleViewController\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\battle\cynthia.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

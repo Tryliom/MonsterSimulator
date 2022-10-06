@@ -56,20 +56,20 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 
 	if (leftMonster != nullptr)
 	{
-		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(leftMonster->GetRace().GetName()), .X = screen.GetWidth() / 4, .Y = 5, .XCentered = true });
+		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(leftMonster->GetRace().GetName()), .X = Console::Screen::WIDTH / 4, .Y = 5, .XCentered = true });
 	}
 	if (rightMonster != nullptr)
 	{
-		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(rightMonster->GetRace().GetName()), .X = screen.GetWidth() * 3 / 4, .Y = 5, .XCentered = true });
+		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(rightMonster->GetRace().GetName()), .X = Console::Screen::WIDTH * 3 / 4, .Y = 5, .XCentered = true });
 	}
 
 	// Draw the title of the view
-	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = screen.GetWidth() / 2, .Y = 2, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
 
-	screen.Draw(Console::Text{ .Str = _errorMessage, .X = screen.GetWidth() / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
+	screen.Draw(Console::Text{ .Str = _errorMessage, .X = Console::Screen::WIDTH / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = screen.GetWidth() / 2, .Y = screen.GetHeight() - 3, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = Console::Screen::WIDTH / 2, .Y = Console::Screen::WIDTH - 3, .XCentered = true });
 }
 
 void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
