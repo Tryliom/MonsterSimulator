@@ -33,18 +33,21 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 
 # Schedule
 
-| Milestone | Planned time | Actual time |
-| --- | --- | --- |
-| Create class for monsters | 1h | 53min |
-| Create a main controller | 5min | 5min |
-| Create a view for the main menu | 30min | 22min |
-| Create a view in order to create a monster | 1h | 3h03 |
-| Implement Interactive Objects | 6h | 4h18 |
-| Create a view used to display the fight | 2h | 1h02 |
-| Display the result of the fight and return to menu | 30min | 23min |
-| Display animation in the fight | 4h | 5h46 |
-| Make various improvements | 4h | 2h03 |
-| Clean and comments all project | 4h | 40min |
+| Milestone | Planned time | Actual time | Done |
+| --- | --- | --- | --- |
+| Create class for monsters | 1h | 53min | Yes |
+| Create a main controller | 5min | 5min | Yes |
+| Create a view for the main menu | 30min | 22min | Yes |
+| Create a view in order to create a monster | 1h | 3h03 | Yes |
+| Implement Interactive Objects | 6h | 4h18 | Yes |
+| Create a view used to display the fight | 2h | 1h02 | Yes |
+| Display the result of the fight and return to menu | 30min | 23min | Yes |
+| Display animation in the fight | 4h | 5h46 | Yes |
+| Make attack animation in the fight | 2h | - | No |
+| Add basic stats for every races | 20min | - | No |
+| Change monster creation to pass 1 monster to edit it | 1h | - | No |
+| Make various improvements | 4h | 2h03 | No |
+| Clean and comments all project | 4h | 40min | No |
 
 ## Interactive objects
 
