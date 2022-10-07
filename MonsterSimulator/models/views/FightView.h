@@ -9,9 +9,9 @@
 		RGB(180, 40, 40)
 	};
 	const std::vector BAR_CONTENT_DIFF_COLOR = {
-		RGB(175, 25, 25),
-		RGB(170, 20, 20),
-		RGB(165, 15, 15)
+		RGB(175, 40, 40),
+		RGB(170, 40, 40),
+		RGB(165, 40, 40)
 	};
 
 	constexpr COLORREF BAR_BACK_COLOR = RGB(100, 100, 100);
@@ -28,10 +28,11 @@ private:
 	Participant* _leftParticipant;
 	Participant* _rightParticipant;
 	int _rounds;
+	bool _canStart{ false };
 
 	void startFightThread(MainController* mainController);
 
-	static void drawMonster(Console::Screen& screen, Participant* participant);
+	void drawMonster(Console::Screen& screen, Participant* participant) const;
 	static void drawHpBar(Console::Screen& screen, Participant* participant);
 	static void drawBarWithGradient(Console::Screen& screen, int x, int y, int width, const std::vector<COLORREF>& colors);
 

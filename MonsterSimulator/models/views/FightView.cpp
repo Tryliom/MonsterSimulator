@@ -47,8 +47,13 @@ void FightView::startFightThread(MainController* mainController)
 
 	std::thread thread([&]()
 		{
-			// Wait to initialize the fight scene
+			// Wait for the view to not erase pixels
 			Utility::sleep(1000);
+
+			_canStart = true;
+
+			// Wait to get real fps we will get while drawing hp bars
+			Utility::sleep(2000);
 
 			while (mainController->CanFightContinue())
 			{
@@ -79,14 +84,18 @@ void FightView::startFightThread(MainController* mainController)
 	thread.detach();
 }
 
-void FightView::drawMonster(Console::Screen& screen, Participant* participant)
+void FightView::drawMonster(Console::Screen& screen, Participant* participant) const
 {
 	screen.Draw(
 		participant->GetSprite(), 
 		participant->GetX().GetValue(), participant->GetY().GetValue(), 
 		true, true
 	);
-	drawHpBar(screen, participant);
+
+	if (_canStart)
+	{
+		drawHpBar(screen, participant);
+	}
 }
 
 void FightView::drawHpBar(Console::Screen& screen, Participant* participant)
