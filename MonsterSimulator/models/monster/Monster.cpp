@@ -9,16 +9,21 @@ Monster::Monster(Race race, const int hp, const int attack, const int armor, con
 	_speed = speed;
 }
 
-void Monster::Attack(Monster* monster) const
+int Monster::Attack(const Monster* monster) const
 {
-	int damage = monster->GetArmor() - _attack;
+	int damage = _attack - monster->GetArmor();
 
-	if (damage > 0)
+	if (damage < 0)
 	{
 		damage = 0;
 	}
 
-	monster->UpdateHp(damage);
+	if (damage > monster->GetHp())
+	{
+		damage = monster->GetHp();
+	}
+
+	return damage;
 }
 
 Monster::operator std::string() const

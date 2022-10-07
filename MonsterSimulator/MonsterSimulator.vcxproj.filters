@@ -23,6 +23,8 @@
     <ClCompile Include="models\views\FightView.cpp" />
     <ClCompile Include="models\views\VictoryView.cpp" />
     <ClCompile Include="libs\ConsoleViewController\controller\AudioManager.cpp" />
+    <ClCompile Include="models\fight\Participant.cpp" />
+    <ClCompile Include="models\fight\Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\CreateMonsterView.h" />
@@ -50,6 +52,8 @@
     <ClInclude Include="models\views\FightView.h" />
     <ClInclude Include="models\views\VictoryView.h" />
     <ClInclude Include="libs\ConsoleViewController\controller\AudioManager.h" />
+    <ClInclude Include="models\fight\Participant.h" />
+    <ClInclude Include="models\fight\Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -63,6 +67,7 @@
     <None Include="libs\ConsoleViewController\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="assets\audio\battle\cynthia.wav" />
+    <Media Include="assets\audio\battle_theme.wav" />
+    <Media Include="assets\audio\main_theme.wav" />
   </ItemGroup>
 </Project>

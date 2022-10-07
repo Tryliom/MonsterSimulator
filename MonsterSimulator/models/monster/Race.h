@@ -23,7 +23,7 @@ public:
 
 	std::string GetName() const { return _name; }
 	RaceType GetRaceType() const { return _type; }
-	Console::Image GetSprite() { return _sprite; }
+	Console::Image& GetSprite() { return _sprite; }
 };
 
 class Dragon : public Race

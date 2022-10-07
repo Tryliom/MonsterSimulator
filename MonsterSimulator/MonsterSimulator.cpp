@@ -2,6 +2,7 @@
 
 int main()
 {
+	Console::Screen::EnableVirtualTerminalProcessing();
 	Console::Screen::SetWindowSize(1000, 700);
 	Console::Screen::SetTitle("Monster Simulator");
 	Console::Screen::CenterWindow();

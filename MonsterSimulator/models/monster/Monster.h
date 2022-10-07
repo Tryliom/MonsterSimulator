@@ -13,7 +13,7 @@ private:
 public:
 	Monster(Race race, int hp, int attack, int armor, int speed);
 
-	Race GetRace() const { return _race; }
+	Race& GetRace() { return _race; }
 	int GetHp() const { return _hp; }
 	int GetAttack() const { return _attack; }
 	int GetMaxHp() const { return _maxHp; }
@@ -23,7 +23,12 @@ public:
 	void UpdateHp(const int hp) { _hp += hp; }
 	void FullHeal() { _hp = _maxHp; }
 
-	void Attack(Monster* monster) const;
+	/**
+	 * \brief Attack the given monster
+	 * \param monster The monster to attack
+	 * \return The amount of damage done
+	 */
+	int Attack(const Monster* monster) const;
 	bool IsDead() const { return _hp <= 0; }
 
 	explicit operator std::string() const;

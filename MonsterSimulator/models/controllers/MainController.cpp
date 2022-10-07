@@ -3,12 +3,13 @@
 
 MainController::MainController()
 {
+	Console::AudioManager::Play(MAIN_THEME_PATH);
 	ChangeView(new MenuView(this));
 }
 
-int GetRandomNumber(int min, int max)
+int GetRandomNumber(const int min, const int max)
 {
-	srand(time(0));
+	srand(time(nullptr));
 	return rand() % (max - min + 1) + min;
 }
 

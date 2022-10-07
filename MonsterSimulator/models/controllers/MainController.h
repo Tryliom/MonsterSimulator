@@ -2,6 +2,9 @@
 #include "../../libs/ConsoleViewController/ConsoleViewController.h"
 #include "../monster/Monster.h"
 
+const std::string MAIN_THEME_PATH = "assets/audio/main_theme.wav";
+const std::string BATTLE_MUSIC_PATH = "assets/audio/battle_theme.wav";
+
 class MainController : public Console::Controller
 {
 private:

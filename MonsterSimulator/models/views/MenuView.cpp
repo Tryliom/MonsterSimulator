@@ -69,7 +69,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	screen.Draw(Console::Text{ .Str = _errorMessage, .X = Console::Screen::WIDTH / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = Console::Screen::WIDTH / 2, .Y = Console::Screen::WIDTH - 3, .XCentered = true });
+	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = Console::Screen::WIDTH / 2, .Y = Console::Screen::HEIGHT - 3, .XCentered = true });
 }
 
 void MenuView::OnKeyPressed(Console::Controller* controller, const char key)

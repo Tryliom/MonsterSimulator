@@ -6,13 +6,26 @@
 
 FightView::FightView(MainController* mainController)
 {
-	_leftParticipant = new Participant(mainController->GetLeftMonster());
-	_rightParticipant = new Participant(mainController->GetRightMonster());
+	Monster* leftMonster = mainController->GetLeftMonster();
+	Monster* rightMonster = mainController->GetRightMonster();
+
+	rightMonster->GetRace().GetSprite().Reverse();
+
+	_leftParticipant = new Participant(leftMonster, 
+		PositionX(0.25f), 
+		PositionY(- leftMonster->GetRace().GetSprite().GetHeight() / 2, 0.7f),
+		PositionX(0.25f - 1.0f / 3 / 2),
+		PositionY(2, 0.7f)
+	);
+	_rightParticipant = new Participant(rightMonster,
+		PositionX(0.75f),
+		PositionY(- rightMonster->GetRace().GetSprite().GetHeight() / 2, 0.7f),
+		PositionX(0.75f - 1.0f / 3 / 2),
+		PositionY(2, 0.7f)
+	);
 	_rounds = 0;
 
-	//TODO: Reverse doesn't work
-	_rightParticipant->Monster->GetRace().GetSprite().Reverse();
-	
+	Console::AudioManager::Stop();
 	Console::AudioManager::Play(BATTLE_MUSIC_PATH);
 
 	mainController->InitFight();
@@ -21,29 +34,44 @@ FightView::FightView(MainController* mainController)
 
 void FightView::startFightThread(MainController* mainController)
 {
-	const bool isLeftTurn = mainController->IsLeftStart();
-	Participant* attacker = isLeftTurn ? _leftParticipant : _rightParticipant;
-	Participant* defender = isLeftTurn ? _rightParticipant : _leftParticipant;
+	if (mainController->IsLeftStart())
+	{
+		_leftParticipant->SetAttacking(true);
+		_rightParticipant->SetAttacking(false);
+	}
+	else
+	{
+		_leftParticipant->SetAttacking(false);
+		_rightParticipant->SetAttacking(true);
+	}
 
 	std::thread thread([&]()
 		{
+			// Wait to initialize the fight scene
+			Utility::sleep(1000);
+
 			while (mainController->CanFightContinue())
 			{
 				_rounds++;
-				const int previousHp = defender->Monster->GetHp();
-				attacker->Monster->Attack(defender->Monster);
-				int diff = previousHp - defender->Monster->GetHp();
-				defender->HpDiff = Animation(diff, 30);
-				while (!defender->HpDiff.IsFinished())
-				{
-					Utility::sleep(1000);
-				}
-				Participant* temp = attacker;
-				attacker = defender;
-				defender = temp;
+
+				// Define attacker and defender based on who is attacking
+				Participant* attacker = getAttacker();
+				Participant* defender = getDefender();
+
+				attacker->PlayTurn(mainController, defender);
+				
+				// Wait until hp animation is finished
+				waitUntilAnimationsFinished();
+				Utility::sleep(500);
+
+				attacker->ToggleAttacking();
+				defender->ToggleAttacking();
 			}
 
+			Utility::sleep(1000);
+
 			Console::AudioManager::Stop();
+			Console::AudioManager::Play(MAIN_THEME_PATH);
 			mainController->ClearStack();
 			mainController->SetView(new VictoryView(mainController, _rounds));
 		}
@@ -53,45 +81,92 @@ void FightView::startFightThread(MainController* mainController)
 
 void FightView::drawMonster(Console::Screen& screen, Participant* participant)
 {
-	const bool isLeftMonster = participant->Monster == _leftParticipant->Monster;
-
-	// Define constants
-	const int spriteHeight = participant->Monster->GetRace().GetSprite().GetHeight();
-	const int x = isLeftMonster ? (Console::Screen::WIDTH / 4) : (Console::Screen::WIDTH * 3 / 4);
-	const int y = PositionY(- spriteHeight / 2, 0.7f).GetValue();
-
-	screen.Draw(participant->Monster->GetRace().GetSprite(), x, y, true, true);
-	drawHpBar(screen, participant, x, y + spriteHeight / 2 + 2);
+	screen.Draw(
+		participant->GetSprite(), 
+		participant->GetX().GetValue(), participant->GetY().GetValue(), 
+		true, true
+	);
+	drawHpBar(screen, participant);
 }
 
-void FightView::drawHpBar(Console::Screen& screen, Participant* participant, const int x, const int y)
+void FightView::drawHpBar(Console::Screen& screen, Participant* participant)
 {
 	// Define constants
 	const int barWidth = Console::Screen::WIDTH_PIXEL / 3;
-	constexpr int barHeight = 15;
-	constexpr int barBorderWidth = 4;
-	const int currentBarWidth = static_cast<int>(static_cast<float>(barWidth) * participant->Monster->GetHpPercent());
-	const int currentHpDiffWidth = static_cast<int>(static_cast<float>(barWidth) * static_cast<float>(participant->HpDiff.Value) / 100.0f);
-	const int yBar = y * Console::Screen::PIXEL_RATIO_Y;
-	const int xBar = x * Console::Screen::PIXEL_RATIO_X - barWidth / 2;
+	const int currentBarWidth = static_cast<int>(static_cast<float>(barWidth) * participant->GetMonster()->GetHpPercent());
+	const int yBar = participant->GetYBar().GetValue(true);
+	const int xBar = participant->GetXBar().GetValue(true);
 
 	// Draw the border of the bar
-	screen.DrawRect(xBar - barBorderWidth, yBar - barBorderWidth, barWidth + barBorderWidth * 2, barHeight + barBorderWidth * 2, BAR_BORDER_COLOR);
-	// Draw the background of the bar
-	screen.DrawRect(xBar, yBar, barWidth, barHeight, BAR_BACK_COLOR);
-	// Draw the content of the bar with a gradient of the main color
-	screen.DrawRect(xBar, yBar, currentBarWidth, barHeight, BAR_CONTENT_COLOR3);
-	screen.DrawRect(xBar, yBar, currentBarWidth, barHeight * 2 / 3, BAR_CONTENT_COLOR2);
-	screen.DrawRect(xBar, yBar, currentBarWidth, barHeight * 1 / 3, BAR_CONTENT_COLOR1);
+	screen.DrawRect(
+		xBar - HP_BAR_BORDER_WIDTH, yBar - HP_BAR_BORDER_WIDTH, 
+		barWidth + HP_BAR_BORDER_WIDTH * 2, HP_BAR_HEIGHT + HP_BAR_BORDER_WIDTH * 2, 
+		BAR_BORDER_COLOR
+	);
 
-	if (!participant->HpDiff.IsFinished())
+	// Draw the background of the bar
+	screen.DrawRect(xBar, yBar, barWidth, HP_BAR_HEIGHT, BAR_BACK_COLOR);
+
+	// Draw the content of the bar with a gradient of the main color
+	drawBarWithGradient(screen, xBar, yBar, currentBarWidth, BAR_CONTENT_COLOR);
+
+	if (!participant->GetHealthDifference().IsFinished())
 	{
-		const int width = static_cast<int>(static_cast<float>(currentHpDiffWidth) * 1.0f - participant->HpDiff.GetPercent());
+		const float currentHpDiffWidth = static_cast<float>(barWidth) * participant->GetHealthDifference().GetValue();
+		const int width = static_cast<int>(currentHpDiffWidth * (1.0f - participant->GetHealthDifference().GetPercent()));
+		const int xDiff = xBar + currentBarWidth;
+
 		// Draw the difference of the hp bar with a gradient of the diff color
-		screen.DrawRect(xBar + currentBarWidth, yBar, width, barHeight, BAR_CONTENT_DIFF_COLOR3);
-		screen.DrawRect(xBar + currentBarWidth, yBar, width, barHeight * 2 / 3, BAR_CONTENT_DIFF_COLOR2);
-		screen.DrawRect(xBar + currentBarWidth, yBar, width, barHeight * 1 / 3, BAR_CONTENT_DIFF_COLOR1);
+		drawBarWithGradient(screen, xDiff, yBar, width, BAR_CONTENT_DIFF_COLOR);
 	}
+}
+
+void FightView::drawBarWithGradient(Console::Screen& screen, const int x, const int y, const int width, const std::vector<COLORREF>& colors)
+{
+	screen.DrawRect(
+		x, y,
+		width, HP_BAR_GRADIENT_HEIGHT,
+		colors[0]
+	);
+	screen.DrawRect(
+		x, y + HP_BAR_GRADIENT_HEIGHT,
+		width, HP_BAR_GRADIENT_HEIGHT,
+		colors[1]
+	);
+	screen.DrawRect(
+		x, y + HP_BAR_GRADIENT_HEIGHT * 2,
+		width, HP_BAR_GRADIENT_HEIGHT,
+		colors[2]
+	);
+}
+
+bool FightView::isAnimationsFinished() const
+{
+	return _leftParticipant->IsAnimationFinished() && _rightParticipant->IsAnimationFinished();
+}
+
+void FightView::updateAnimations() const
+{
+	_leftParticipant->UpdateAnimations();
+	_rightParticipant->UpdateAnimations();
+}
+
+void FightView::waitUntilAnimationsFinished() const
+{
+	while (!isAnimationsFinished())
+	{
+		Utility::sleep(100);
+	}
+}
+
+Participant* FightView::getAttacker() const
+{
+	return _leftParticipant->IsAttacking() ? _leftParticipant : _rightParticipant;
+}
+
+Participant* FightView::getDefender() const
+{
+	return _leftParticipant->IsAttacking() ? _rightParticipant : _leftParticipant;
 }
 
 void FightView::Update(Console::Controller* controller, Console::Screen& screen)
@@ -105,14 +180,7 @@ void FightView::Update(Console::Controller* controller, Console::Screen& screen)
 	drawMonster(screen, _leftParticipant);
 	drawMonster(screen, _rightParticipant);
 
-	if (!_leftParticipant->HpDiff.IsFinished())
-	{
-		_leftParticipant->HpDiff.Update();
-	}
-	if (!_rightParticipant->HpDiff.IsFinished())
-	{
-		_rightParticipant->HpDiff.Update();
-	}
+	updateAnimations();
 }
 
 void FightView::OnKeyPressed(Console::Controller* controller, const char key)

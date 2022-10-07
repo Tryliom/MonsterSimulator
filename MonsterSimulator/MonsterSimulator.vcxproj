@@ -119,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="models\fight\Animation.cpp" />
     <ClCompile Include="libs\ConsoleViewController\controller\AudioManager.cpp" />
     <ClCompile Include="models\views\FightView.cpp" />
     <ClCompile Include="libs\ConsoleViewController\utilities\Utility.cpp" />
@@ -150,8 +152,10 @@
     <ClCompile Include="models\utilities\StringUtility.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
     <ClCompile Include="models\views\VictoryView.cpp" />
+    <ClCompile Include="models\fight\Participant.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="models\fight\Animation.h" />
     <ClInclude Include="libs\ConsoleViewController\controller\AudioManager.h" />
     <ClInclude Include="models\views\FightView.h" />
     <ClInclude Include="libs\ConsoleViewController\ConsoleViewController.h" />
@@ -177,6 +181,7 @@
     <ClInclude Include="models\utilities\StringUtility.h" />
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\Selector.h" />
     <ClInclude Include="models\views\VictoryView.h" />
+    <ClInclude Include="models\fight\Participant.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -190,7 +195,8 @@
     <None Include="libs\ConsoleViewController\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="assets\audio\battle\cynthia.wav" />
+    <Media Include="assets\audio\battle_theme.wav" />
+    <Media Include="assets\audio\main_theme.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
