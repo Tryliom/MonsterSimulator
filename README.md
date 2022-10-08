@@ -48,7 +48,6 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Display the result of the fight and return to menu | 30min | 23min | Yes |
 | Display animation in the fight | 4h | 5h46 | Yes |
 | Make attack animation in the fight | 2h | 28min | Yes |
-| Add basic stats for every races | 20min | - | No |
 | Change monster creation to pass 1 monster to edit it | 1h | - | No |
 | Make various improvements | 4h | 2h03 | No |
 | Clean and comments all project | 4h | 40min | No |
