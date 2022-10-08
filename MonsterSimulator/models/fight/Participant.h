@@ -17,10 +17,11 @@ private:
 	PositionY _y;
 	PositionX _xBar;
 	PositionY _yBar;
+	int _xCoefficient;
 
 public:
 	Participant() = default;
-	Participant(Monster* monster, const PositionX& x, const PositionY& y, const PositionX& xBar, const PositionY& yBar);
+	Participant(Monster* monster, bool isLeft);
 
 	Monster* GetMonster() const { return _monster; }
 	Console::Image& GetSprite() const { return _monster->GetRace().GetSprite(); }
@@ -43,7 +44,9 @@ public:
 	void UpdateAnimations();
 	bool IsAnimationFinished() const;
 
-	void PlayTurn(const MainController* mainController, Participant* opponent) const;
+	void PlayTurn(const MainController* mainController, Participant* opponent);
 	void ReceiveDamage(const int damage, const int fps);
+
+	int GetXOffset() const;
 };
 

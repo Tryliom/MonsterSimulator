@@ -3,6 +3,7 @@
 #include "VictoryView.h"
 
 #include <thread>
+#include <numbers>
 
 FightView::FightView(MainController* mainController)
 {
@@ -11,18 +12,8 @@ FightView::FightView(MainController* mainController)
 
 	rightMonster->GetRace().GetSprite().Reverse();
 
-	_leftParticipant = new Participant(leftMonster, 
-		PositionX(0.25f), 
-		PositionY(- leftMonster->GetRace().GetSprite().GetHeight() / 2, 0.7f),
-		PositionX(0.25f - 1.0f / 3 / 2),
-		PositionY(2, 0.7f)
-	);
-	_rightParticipant = new Participant(rightMonster,
-		PositionX(0.75f),
-		PositionY(- rightMonster->GetRace().GetSprite().GetHeight() / 2, 0.7f),
-		PositionX(0.75f - 1.0f / 3 / 2),
-		PositionY(2, 0.7f)
-	);
+	_leftParticipant = new Participant(leftMonster, true);
+	_rightParticipant = new Participant(rightMonster, false);
 	_rounds = 0;
 
 	Console::AudioManager::Stop();
@@ -84,9 +75,16 @@ void FightView::startFightThread(MainController* mainController)
 
 void FightView::drawMonster(Console::Screen& screen, Participant* participant)
 {
+	int xOffset = 0;
+
+	if (!participant->GetAttackAnimation().IsFinished())
+	{
+		xOffset = participant->GetXOffset();
+	}
+
 	screen.Draw(
 		participant->GetSprite(), 
-		participant->GetX().GetValue(), participant->GetY().GetValue(), 
+		participant->GetX().GetValue() + xOffset, participant->GetY().GetValue(), 
 		true, true
 	);
 	
