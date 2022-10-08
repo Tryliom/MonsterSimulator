@@ -7,10 +7,10 @@ VictoryView::VictoryView(MainController* mainController, const int rounds)
 	_winner = mainController->GetLeftMonster()->IsDead() ? mainController->GetRightMonster() : mainController->GetLeftMonster();
 	_rounds = rounds;
 
-	AddComponent(new Console::BasicButton("Back to menu", PositionX(0.5f), PositionY(0.5f), [](Console::Controller* controller)
+	addComponent(new Console::BasicButton("Back to menu", PositionX(0.5f), PositionY(0.5f), [](Console::Controller* controller)
 		{
 			MainController* mainController = static_cast<MainController*>(controller);
-			mainController->ResetMonsters();
+			mainController->FullHeal();
 			mainController->ClearStack();
 			mainController->SetView(new MenuView(mainController));
 		}, true)

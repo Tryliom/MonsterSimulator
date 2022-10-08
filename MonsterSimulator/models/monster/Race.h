@@ -19,6 +19,7 @@ private:
 	Console::Image _sprite;
 
 public:
+	Race() = default;
 	Race(RaceType type, const std::string& name, bool reverseSprite = false);
 
 	std::string GetName() const { return _name; }

@@ -142,7 +142,7 @@
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\IntField.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\BasicField.cpp" />
     <ClCompile Include="libs\ConsoleViewController\view\View.cpp" />
-    <ClCompile Include="models\views\CreateMonsterView.cpp" />
+    <ClCompile Include="models\views\MonsterEditorView.cpp" />
     <ClCompile Include="libs\ConsoleViewController\controller\Controller.cpp" />
     <ClCompile Include="models\views\MenuView.cpp" />
     <ClCompile Include="models\controllers\MainController.cpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="libs\ConsoleViewController\view\Screen.h" />
     <ClInclude Include="lib\view\interactive\objects\ImageButton.h" />
     <ClInclude Include="lib\view\interactive\objects\BasicField.h" />
-    <ClInclude Include="models\views\CreateMonsterView.h" />
+    <ClInclude Include="models\views\MonsterEditorView.h" />
     <ClInclude Include="libs\ConsoleViewController\view\View.h" />
     <ClInclude Include="models\views\MenuView.h" />
     <ClInclude Include="models\controllers\MainController.h" />

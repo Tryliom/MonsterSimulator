@@ -6,6 +6,7 @@ class MenuView : public Console::View
 private:
 	std::string _errorMessage;
 
+	static std::string getFieldName(Monster* monster);
 public:
 	explicit MenuView(MainController* mainController);
 

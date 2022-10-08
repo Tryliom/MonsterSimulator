@@ -1,5 +1,5 @@
 #include "MenuView.h"
-#include "CreateMonsterView.h"
+#include "MonsterEditorView.h"
 #include "FightView.h"
 #include "../utilities/StringUtility.h"
 
@@ -9,59 +9,63 @@ MenuView::MenuView(MainController* mainController) : View()
 	InitComponents(mainController);
 }
 
+std::string MenuView::getFieldName(Monster* monster)
+{
+	if (monster->GetRace().GetRaceType() == RaceType::NONE)
+	{
+		return "Create monster";
+	}
+
+	return "Edit the " + StringUtility::Capitalize(monster->GetRace().GetName());
+}
+
 void MenuView::InitComponents(MainController* mainController)
 {
-	const auto leftMonster = mainController->GetLeftMonster();
-	const auto rightMonster = mainController->GetRightMonster();
-
 	ClearComponents();
 
-	if (leftMonster == nullptr)
-	{
-		AddComponent(new Console::BasicButton("Create monster", PositionX(0.25f), PositionY(5),
-			[mainController](Console::Controller* controller) {controller->ChangeView(new CreateMonsterView(mainController, true)); }, true));
-	}
-	if (rightMonster == nullptr)
-	{
-		AddComponent(new Console::BasicButton("Create monster", PositionX(0.75f), PositionY(5),
-			[mainController](Console::Controller* controller) {controller->ChangeView(new CreateMonsterView(mainController, false)); }, true));
-	}
-
-	AddComponent(new Console::BasicButton("Start fight", PositionX(0.5f), PositionY(10),
+	setComponents({
+		new Console::BasicButton(
+			getFieldName(mainController->GetLeftMonster()), PositionX(0.25f), PositionY(5),
+			[mainController](Console::Controller* controller)
+			{
+				controller->ChangeView(new MonsterEditorView(mainController->GetLeftMonster()));
+			}, true
+		),
+		new Console::BasicButton(
+			getFieldName(mainController->GetRightMonster()), PositionX(0.75f), PositionY(5),
+			[mainController](Console::Controller* controller)
+			{
+				controller->ChangeView(new MonsterEditorView(mainController->GetRightMonster()));
+			}, true
+		),
+		new Console::BasicButton("Start fight", PositionX(0.5f), PositionY(10),
 		[mainController, this](Console::Controller* controller)
-		{
-			if (mainController->CanStart())
 			{
-				controller->ClearStack();
-				controller->SetView(new FightView(mainController));
-			}
-			else if (!mainController->IsAllMonsterCreated())
-			{
-				_errorMessage = "You need to create two monsters to start a fight";
-			}
-			else if (mainController->HaveImpossibleStats())
-			{
-				_errorMessage = "The two monsters can't harm each other with their stats";
-			}
-		}, true));
+				if (mainController->CanStart())
+				{
+					controller->ClearStack();
+					controller->SetView(new FightView(mainController));
+				}
+				else if (!mainController->HaveEachMonsterDifferentRaces())
+				{
+					_errorMessage = "You need to create two monsters to start a fight";
+				}
+				else if (!mainController->IsAllMonsterCreated())
+				{
+					_errorMessage = "You need to create two monsters to start a fight";
+				}
+				else if (mainController->HaveImpossibleStats())
+				{
+					_errorMessage = "The two monsters can't harm each other with their stats";
+				}
+			}, true
+		)
+	});
 }
 
 void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);
-
-	const MainController* mainController = static_cast<MainController*>(controller);
-	const auto leftMonster = mainController->GetLeftMonster();
-	const auto rightMonster = mainController->GetRightMonster();
-
-	if (leftMonster != nullptr)
-	{
-		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(leftMonster->GetRace().GetName()), .X = Console::Screen::WIDTH / 4, .Y = 5, .XCentered = true });
-	}
-	if (rightMonster != nullptr)
-	{
-		screen.Draw(Console::Text{ .Str = StringUtility::Capitalize(rightMonster->GetRace().GetName()), .X = Console::Screen::WIDTH * 3 / 4, .Y = 5, .XCentered = true });
-	}
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
@@ -95,7 +99,7 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 
 	if (key == 'r')
 	{
-		MainController* mainController = static_cast<MainController*>(controller);
+		auto* mainController = static_cast<MainController*>(controller);
 		mainController->ResetMonsters();
 		InitComponents(mainController);
 	}

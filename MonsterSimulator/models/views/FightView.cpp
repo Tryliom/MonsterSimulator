@@ -19,7 +19,7 @@ FightView::FightView(MainController* mainController)
 	Console::AudioManager::Stop();
 	Console::AudioManager::Play(BATTLE_MUSIC_PATH, true);
 
-	mainController->InitFight();
+	mainController->FullHeal();
 	startFightThread(mainController);
 }
 

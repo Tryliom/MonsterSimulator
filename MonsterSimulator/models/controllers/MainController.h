@@ -8,8 +8,8 @@ const std::string BATTLE_MUSIC_PATH = "assets/audio/battle_theme.wav";
 class MainController : public Console::Controller
 {
 private:
-	Monster* _leftMonster{ nullptr };
-	Monster* _rightMonster{ nullptr };
+	Monster* _leftMonster;
+	Monster* _rightMonster;
 public:
 	MainController();
 
@@ -20,9 +20,10 @@ public:
 
 	void ResetMonsters();
 	bool CanStart() const;
+	bool HaveEachMonsterDifferentRaces() const;
 	bool IsAllMonsterCreated() const;
 	bool HaveImpossibleStats() const;
-	void InitFight() const;
+	void FullHeal() const;
 	bool CanFightContinue() const;
 	bool IsLeftStart() const;
 };
