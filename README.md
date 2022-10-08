@@ -27,7 +27,11 @@ Before you start, create a schedule in the form of a table with 3 columns. On th
 
 You need [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
 
-## Visual Studio 2022
+# Clone it
+
+Use `git clone https://github.com/Tryliom/MonsterSimulator --recursive`
+
+# Developing
 
 Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 
