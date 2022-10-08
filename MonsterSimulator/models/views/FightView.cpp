@@ -26,7 +26,7 @@ FightView::FightView(MainController* mainController)
 	_rounds = 0;
 
 	Console::AudioManager::Stop();
-	Console::AudioManager::Play(BATTLE_MUSIC_PATH);
+	Console::AudioManager::Play(BATTLE_MUSIC_PATH, true);
 
 	mainController->InitFight();
 	startFightThread(mainController);
@@ -47,13 +47,11 @@ void FightView::startFightThread(MainController* mainController)
 
 	std::thread thread([&]()
 		{
-			// Wait for the view to not erase pixels
-			Utility::sleep(1000);
-
-			_canStart = true;
-
+			Console::Screen::PIXEL_CACHE = false;
 			// Wait to get real fps we will get while drawing hp bars
 			Utility::sleep(2000);
+
+			Console::Screen::PIXEL_CACHE = true;
 
 			while (mainController->CanFightContinue())
 			{
@@ -76,7 +74,7 @@ void FightView::startFightThread(MainController* mainController)
 			Utility::sleep(1000);
 
 			Console::AudioManager::Stop();
-			Console::AudioManager::Play(MAIN_THEME_PATH);
+			Console::AudioManager::Play(MAIN_THEME_PATH, true);
 			mainController->ClearStack();
 			mainController->SetView(new VictoryView(mainController, _rounds));
 		}
@@ -84,18 +82,15 @@ void FightView::startFightThread(MainController* mainController)
 	thread.detach();
 }
 
-void FightView::drawMonster(Console::Screen& screen, Participant* participant) const
+void FightView::drawMonster(Console::Screen& screen, Participant* participant)
 {
 	screen.Draw(
 		participant->GetSprite(), 
 		participant->GetX().GetValue(), participant->GetY().GetValue(), 
 		true, true
 	);
-
-	if (_canStart)
-	{
-		drawHpBar(screen, participant);
-	}
+	
+	drawHpBar(screen, participant);
 }
 
 void FightView::drawHpBar(Console::Screen& screen, Participant* participant)

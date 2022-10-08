@@ -28,11 +28,10 @@ private:
 	Participant* _leftParticipant;
 	Participant* _rightParticipant;
 	int _rounds;
-	bool _canStart{ false };
 
 	void startFightThread(MainController* mainController);
 
-	void drawMonster(Console::Screen& screen, Participant* participant) const;
+	static void drawMonster(Console::Screen& screen, Participant* participant);
 	static void drawHpBar(Console::Screen& screen, Participant* participant);
 	static void drawBarWithGradient(Console::Screen& screen, int x, int y, int width, const std::vector<COLORREF>& colors);
 

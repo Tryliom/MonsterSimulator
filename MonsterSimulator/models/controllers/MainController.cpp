@@ -3,7 +3,7 @@
 
 MainController::MainController()
 {
-	Console::AudioManager::Play(MAIN_THEME_PATH);
+	Console::AudioManager::Play(MAIN_THEME_PATH, true);
 	ChangeView(new MenuView(this));
 }
 
