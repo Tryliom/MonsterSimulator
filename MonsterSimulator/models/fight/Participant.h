@@ -44,7 +44,7 @@ public:
 	void UpdateAnimations();
 	bool IsAnimationFinished() const;
 
-	void PlayTurn(const MainController* mainController, Participant* opponent);
+	void PlayTurn(MainController* mainController, Participant* opponent);
 	void ReceiveDamage(const int damage, const int fps);
 
 	int GetXOffset() const;

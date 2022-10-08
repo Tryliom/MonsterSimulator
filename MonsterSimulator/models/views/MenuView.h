@@ -11,6 +11,8 @@ public:
 	explicit MenuView(MainController* mainController);
 
 	void InitComponents(MainController* mainController);
+
+	void OnOpenView(Console::Controller* controller) override;
 	void Update(Console::Controller* controller, Console::Screen& screen) override;
 	void OnKeyPressed(Console::Controller* controller, char key) override;
 };

@@ -63,6 +63,11 @@ void MenuView::InitComponents(MainController* mainController)
 	});
 }
 
+void MenuView::OnOpenView(Console::Controller* controller)
+{
+	InitComponents(static_cast<MainController*>(controller));
+}
+
 void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);

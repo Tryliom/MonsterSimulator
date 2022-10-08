@@ -26,7 +26,7 @@ bool Participant::IsAnimationFinished() const
 	return _healthDifference.IsFinished() && _attackAnimation.IsFinished();
 }
 
-void Participant::PlayTurn(const MainController* mainController, Participant* opponent)
+void Participant::PlayTurn(MainController* mainController, Participant* opponent)
 {
 	// Choose to attack
 	_attackAnimation = Animation(
@@ -36,9 +36,13 @@ void Participant::PlayTurn(const MainController* mainController, Participant* op
 
 	Utility::sleep(250);
 
-	const int damageDealt = _monster->Attack(opponent->GetMonster());
+	mainController->AddToQueue([&]()
+	{
+		const int damageDealt = _monster->Attack(opponent->GetMonster());
 
-	opponent->ReceiveDamage(damageDealt, mainController->CurrentFPS);
+		opponent->ReceiveDamage(damageDealt, mainController->CurrentFPS);
+	});
+	
 }
 
 void Participant::ReceiveDamage(const int damage, const int fps)
