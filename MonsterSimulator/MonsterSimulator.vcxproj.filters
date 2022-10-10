@@ -25,6 +25,7 @@
     <ClCompile Include="libs\ConsoleViewController\controller\AudioManager.cpp" />
     <ClCompile Include="models\fight\Participant.cpp" />
     <ClCompile Include="models\fight\Animation.cpp" />
+    <ClCompile Include="models\utilities\RenderUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\MonsterEditorView.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="libs\ConsoleViewController\controller\AudioManager.h" />
     <ClInclude Include="models\fight\Participant.h" />
     <ClInclude Include="models\fight\Animation.h" />
+    <ClInclude Include="models\utilities\RenderUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -61,6 +63,7 @@
     <Text Include="assets\images\races\minotour.txt" />
     <Text Include="assets\images\races\phantom.txt" />
     <Text Include="assets\images\races\tribal.txt" />
+    <Text Include="assets\images\races\arceus.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libs\ConsoleViewController\LICENSE" />
@@ -69,5 +72,6 @@
   <ItemGroup>
     <Media Include="assets\audio\battle_theme.wav" />
     <Media Include="assets\audio\main_theme.wav" />
+    <Media Include="assets\audio\special_battle_theme.wav" />
   </ItemGroup>
 </Project>

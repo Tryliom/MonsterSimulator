@@ -11,6 +11,6 @@ void Animation::Update()
 {
 	if (!IsFinished())
 	{
-		_currentDuration++;
+		_currentDuration += 50;
 	}
 }

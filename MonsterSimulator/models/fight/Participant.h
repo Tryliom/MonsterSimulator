@@ -41,11 +41,13 @@ public:
 	PositionX& GetXBar() { return _xBar; }
 	PositionY& GetYBar() { return _yBar; }
 
+	int GetXCoefficient() const { return _xCoefficient; }
+
 	void UpdateAnimations();
 	bool IsAnimationFinished() const;
 
 	void PlayTurn(MainController* mainController, Participant* opponent);
-	void ReceiveDamage(const int damage, const int fps);
+	void ReceiveDamage(const int damage);
 
 	int GetXOffset() const;
 };

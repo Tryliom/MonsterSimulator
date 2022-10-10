@@ -6,7 +6,8 @@ const std::vector<Race*> RACES = {
 	new Elf(),
 	new Minotour(),
 	new Phantom(),
-	new Tribal()
+	new Tribal(),
+	new Arceus()
 };
 
 class MonsterEditorView: public Console::View

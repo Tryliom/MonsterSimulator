@@ -31,21 +31,23 @@ void Participant::PlayTurn(MainController* mainController, Participant* opponent
 	// Choose to attack
 	_attackAnimation = Animation(
 		10.0f,
-		mainController->CurrentFPS / 2
+		500
 	);
 
-	Utility::sleep(250);
+	// Wait for the attack animation to finish
+	Utility::sleep(550);
 
+	// Deal damage and start the health difference animation in the same time
 	mainController->AddToQueue([&]()
 	{
 		const int damageDealt = _monster->Attack(opponent->GetMonster());
 
-		opponent->ReceiveDamage(damageDealt, mainController->CurrentFPS);
+		opponent->ReceiveDamage(damageDealt);
 	});
 	
 }
 
-void Participant::ReceiveDamage(const int damage, const int fps)
+void Participant::ReceiveDamage(const int damage)
 {
 	_monster->UpdateHp(- damage);
 
@@ -53,7 +55,7 @@ void Participant::ReceiveDamage(const int damage, const int fps)
 	{
 		_healthDifference = Animation(
 			static_cast<float>(damage) / static_cast<float>(_monster->GetMaxHp()),
-			fps
+			700
 		);
 	}
 }

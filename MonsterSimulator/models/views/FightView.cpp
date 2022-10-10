@@ -1,6 +1,7 @@
 #include "FightView.h"
 #include "../../libs/ConsoleViewController/ConsoleViewController.h"
 #include "VictoryView.h"
+#include "../utilities/RenderUtility.h"
 
 #include <thread>
 #include <numbers>
@@ -17,7 +18,14 @@ FightView::FightView(MainController* mainController)
 	_rounds = 0;
 
 	Console::AudioManager::Stop();
-	Console::AudioManager::Play(BATTLE_MUSIC_PATH, true);
+	if (leftMonster->GetRace().GetRaceType() == RaceType::ARCEUS || rightMonster->GetRace().GetRaceType() == RaceType::ARCEUS)
+	{
+		Console::AudioManager::Play(SPECIAL_BATTLE_MUSIC_PATH, true);
+	}
+	else
+	{
+		Console::AudioManager::Play(BATTLE_MUSIC_PATH, true);
+	}
 
 	mainController->FullHeal();
 	startFightThread(mainController);
@@ -39,7 +47,7 @@ void FightView::startFightThread(MainController* mainController)
 	std::thread thread([&]()
 		{
 			Console::Screen::PIXEL_CACHE = false;
-			// Wait to get real fps we will get while drawing hp bars
+			// Wait for the hp bar to get correctly drawn
 			Utility::sleep(2000);
 
 			Console::Screen::PIXEL_CACHE = true;
@@ -56,7 +64,9 @@ void FightView::startFightThread(MainController* mainController)
 				
 				// Wait until hp animation is finished
 				waitUntilAnimationsFinished();
-				Utility::sleep(500);
+
+				// Wait 1.5sec before the next turn
+				Utility::sleep(1500);
 
 				attacker->ToggleAttacking();
 				defender->ToggleAttacking();
@@ -64,8 +74,11 @@ void FightView::startFightThread(MainController* mainController)
 
 			Utility::sleep(1000);
 
+			_rightParticipant->GetMonster()->GetRace().GetSprite().Reverse();
+
 			Console::AudioManager::Stop();
 			Console::AudioManager::Play(MAIN_THEME_PATH, true);
+
 			mainController->ClearStack();
 			mainController->SetView(new VictoryView(mainController, _rounds));
 		}
@@ -73,91 +86,16 @@ void FightView::startFightThread(MainController* mainController)
 	thread.detach();
 }
 
-void FightView::drawMonster(Console::Screen& screen, Participant* participant)
-{
-	int xOffset = 0;
-
-	if (!participant->GetAttackAnimation().IsFinished())
-	{
-		xOffset = participant->GetXOffset();
-	}
-
-	screen.Draw(
-		participant->GetSprite(), 
-		participant->GetX().GetValue() + xOffset, participant->GetY().GetValue(), 
-		true, true
-	);
-	
-	drawHpBar(screen, participant);
-}
-
-void FightView::drawHpBar(Console::Screen& screen, Participant* participant)
-{
-	// Define constants
-	const int barWidth = Console::Screen::WIDTH_PIXEL / 3;
-	const int currentBarWidth = static_cast<int>(static_cast<float>(barWidth) * participant->GetMonster()->GetHpPercent());
-	const int yBar = participant->GetYBar().GetValue(true);
-	const int xBar = participant->GetXBar().GetValue(true);
-
-	// Draw the border of the bar
-	screen.DrawRect(
-		xBar - HP_BAR_BORDER_WIDTH, yBar - HP_BAR_BORDER_WIDTH, 
-		barWidth + HP_BAR_BORDER_WIDTH * 2, HP_BAR_HEIGHT + HP_BAR_BORDER_WIDTH * 2, 
-		BAR_BORDER_COLOR
-	);
-
-	// Draw the background of the bar
-	screen.DrawRect(xBar, yBar, barWidth, HP_BAR_HEIGHT, BAR_BACK_COLOR);
-
-	// Draw the content of the bar with a gradient of the main color
-	drawBarWithGradient(screen, xBar, yBar, currentBarWidth, BAR_CONTENT_COLOR);
-
-	if (!participant->GetHealthDifference().IsFinished())
-	{
-		const float currentHpDiffWidth = static_cast<float>(barWidth) * participant->GetHealthDifference().GetValue();
-		const int width = static_cast<int>(currentHpDiffWidth * (1.0f - participant->GetHealthDifference().GetPercent()));
-		const int xDiff = xBar + currentBarWidth;
-
-		// Draw the difference of the hp bar with a gradient of the diff color
-		drawBarWithGradient(screen, xDiff, yBar, width, BAR_CONTENT_DIFF_COLOR);
-	}
-}
-
-void FightView::drawBarWithGradient(Console::Screen& screen, const int x, const int y, const int width, const std::vector<COLORREF>& colors)
-{
-	screen.DrawRect(
-		x, y,
-		width, HP_BAR_GRADIENT_HEIGHT,
-		colors[0]
-	);
-	screen.DrawRect(
-		x, y + HP_BAR_GRADIENT_HEIGHT,
-		width, HP_BAR_GRADIENT_HEIGHT,
-		colors[1]
-	);
-	screen.DrawRect(
-		x, y + HP_BAR_GRADIENT_HEIGHT * 2,
-		width, HP_BAR_GRADIENT_HEIGHT,
-		colors[2]
-	);
-}
-
 bool FightView::isAnimationsFinished() const
 {
 	return _leftParticipant->IsAnimationFinished() && _rightParticipant->IsAnimationFinished();
-}
-
-void FightView::updateAnimations() const
-{
-	_leftParticipant->UpdateAnimations();
-	_rightParticipant->UpdateAnimations();
 }
 
 void FightView::waitUntilAnimationsFinished() const
 {
 	while (!isAnimationsFinished())
 	{
-		Utility::sleep(100);
+		Utility::sleep(50);
 	}
 }
 
@@ -175,17 +113,21 @@ void FightView::Update(Console::Controller* controller, Console::Screen& screen)
 {
 	View::Update(controller, screen);
 
-	screen.Draw(Console::Text{ .Str = "FPS: " + std::to_string(controller->CurrentFPS), .X = 1, .Y = 1 });
+	screen.Draw(Console::Text{ .Str = "FPS: " + std::to_string(Console::Controller::FPS), .X = 1, .Y = 1 });
 
 	screen.Draw(Console::Text{ .Str = "Round " + std::to_string(_rounds), .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
 
-	drawMonster(screen, _leftParticipant);
-	drawMonster(screen, _rightParticipant);
-
-	updateAnimations();
+	RenderUtility::DrawMonster(screen, _leftParticipant);
+	RenderUtility::DrawMonster(screen, _rightParticipant);
 }
 
 void FightView::OnKeyPressed(Console::Controller* controller, const char key)
 {
 	View::OnKeyPressed(controller, key);
+}
+
+void FightView::OnTick(Console::Controller* controller)
+{
+	_leftParticipant->UpdateAnimations();
+	_rightParticipant->UpdateAnimations();
 }

@@ -49,11 +49,10 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Display animation in the fight | 4h | 5h46 | Yes |
 | Make attack animation in the fight | 2h | 28min | Yes |
 | Change monster creation to pass 1 monster to edit it | 1h | 1h10 | Yes |
-| Add animation of lost hp number | 1h | - | No |
-| Add a onTick function to not be frame dependent | 2h | - | No |
+| Add a onTick function to not be frame dependent | 2h | 1h15 | Yes |
 | Fix issue with VS view | 1h | - | No |
-| Make various improvements | 4h | 2h13 | No |
-| Clean and comments all project | 4h | 40min | No |
+| Make various improvements | 4h | 3h10 | No |
+| Clean and comments all project | 4h | 1h02 | No |
 
 ## Interactive objects
 

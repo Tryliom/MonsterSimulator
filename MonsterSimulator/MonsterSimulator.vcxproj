@@ -153,6 +153,7 @@
     <ClCompile Include="libs\ConsoleViewController\view\interactive\objects\Selector.cpp" />
     <ClCompile Include="models\views\VictoryView.cpp" />
     <ClCompile Include="models\fight\Participant.cpp" />
+    <ClCompile Include="models\utilities\RenderUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\fight\Animation.h" />
@@ -182,8 +183,10 @@
     <ClInclude Include="libs\ConsoleViewController\view\interactive\objects\Selector.h" />
     <ClInclude Include="models\views\VictoryView.h" />
     <ClInclude Include="models\fight\Participant.h" />
+    <ClInclude Include="models\utilities\RenderUtility.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="assets\images\races\arceus.txt" />
     <Text Include="assets\images\races\dragon.txt" />
     <Text Include="assets\images\races\elf.txt" />
     <Text Include="assets\images\races\minotour.txt" />
@@ -197,6 +200,7 @@
   <ItemGroup>
     <Media Include="assets\audio\battle_theme.wav" />
     <Media Include="assets\audio\main_theme.wav" />
+    <Media Include="assets\audio\special_battle_theme.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

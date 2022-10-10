@@ -8,7 +8,8 @@ enum class RaceType
 	ELF,
 	MINOTOUR,
 	PHANTOM,
-	TRIBAL
+	TRIBAL,
+	ARCEUS
 };
 
 class Race
@@ -55,4 +56,10 @@ class Tribal : public Race
 {
 public:
 	Tribal() : Race(RaceType::TRIBAL, "tribal") {}
+};
+
+class Arceus : public Race
+{
+public:
+	Arceus() : Race(RaceType::ARCEUS, "arceus", true) {}
 };
