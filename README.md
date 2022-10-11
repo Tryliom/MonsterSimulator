@@ -50,7 +50,14 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Add a onTick function to not be frame dependent | 2h | 1h15 | Yes |
 | Fix issue with VS view | 1h | 10min | No |
 | Make various improvements | 4h | 3h10 | No |
-| Clean and comments all project | 4h | 1h02 | No |
+| Clean and comments all project | 4h | 2h31 | No |
+
+## TODO
+
+1. Replace some instance of mainController and controller by an uniquePtr.
+2. Place _getch as a thread (stock the key in a attribute, and clear it when the key is used).
+3. Move refresh and onTick at the place of _getch.
+4. Remove useless methods.
 
 ## Interactive objects
 

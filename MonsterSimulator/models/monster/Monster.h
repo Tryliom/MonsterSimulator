@@ -10,6 +10,7 @@ private:
 	int _attack{ 20 };
 	int _armor{ 5 };
 	int _speed{ 10 };
+
 public:
 	Monster() = default;
 	Monster(Race race, int hp, int attack, int armor, int speed);
@@ -28,17 +29,18 @@ public:
 	void SetArmor(const int armor) { if (armor > 0) _armor = armor; }
 	void SetSpeed(const int speed) { if (speed > 0) _speed = speed; }
 
-	float GetHpPercent() const { return static_cast<float>(_hp) / _maxHp; }
+	float GetHpPercent() const { return static_cast<float>(_hp) / static_cast<float>(_maxHp); }
 	void UpdateHp(const int hp) { _hp += hp; }
 	void FullHeal() { _hp = _maxHp; }
 
 	/**
-	 * \brief Attack the given monster
+	 * \brief Attack the given monster, calculate the outcome and return the damage dealt.
 	 * \param monster The monster to attack
 	 * \return The amount of damage done
 	 */
 	int Attack(const Monster* monster) const;
-	bool IsDead() const { return _hp <= 0; }
+
+	bool IsDead() { return _hp <= 0; }
 
 	explicit operator std::string() const;
 };

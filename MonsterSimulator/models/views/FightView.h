@@ -21,6 +21,6 @@ public:
 
 	void Update(Console::Controller* controller, Console::Screen& screen) override;
 	void OnKeyPressed(Console::Controller* controller, char key) override;
-	void OnTick(Console::Controller* controller) override;
+	void OnTick(Console::Controller* controller, int deltaTime) override;
 };
 

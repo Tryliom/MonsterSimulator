@@ -26,25 +26,25 @@ void MenuView::InitComponents(MainController* mainController)
 	setComponents({
 		new Console::BasicButton(
 			getFieldName(mainController->GetLeftMonster()), PositionX(0.25f), PositionY(5),
-			[mainController](Console::Controller* controller)
+			[mainController]()
 			{
-				controller->ChangeView(new MonsterEditorView(mainController->GetLeftMonster()));
+				mainController->ChangeView(new MonsterEditorView(mainController, mainController->GetLeftMonster()));
 			}, true
 		),
 		new Console::BasicButton(
 			getFieldName(mainController->GetRightMonster()), PositionX(0.75f), PositionY(5),
-			[mainController](Console::Controller* controller)
+			[mainController]()
 			{
-				controller->ChangeView(new MonsterEditorView(mainController->GetRightMonster()));
+				mainController->ChangeView(new MonsterEditorView(mainController, mainController->GetRightMonster()));
 			}, true
 		),
 		new Console::BasicButton("Start fight", PositionX(0.5f), PositionY(10),
-		[mainController, this](Console::Controller* controller)
+		[mainController, this]()
 			{
-				if (mainController->CanStart())
+				if (mainController->CanFightBegin())
 				{
-					controller->ClearStack();
-					controller->SetView(new FightView(mainController));
+					mainController->ClearStack();
+					mainController->SetView(new FightView(mainController));
 				}
 				else if (!mainController->HaveEachMonsterDifferentRaces())
 				{

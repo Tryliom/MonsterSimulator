@@ -6,7 +6,7 @@ enum class RaceType
 	NONE,
 	DRAGON,
 	ELF,
-	MINOTOUR,
+	MINOTAUR,
 	PHANTOM,
 	TRIBAL,
 	ARCEUS
@@ -40,10 +40,10 @@ public:
 	Elf() : Race(RaceType::ELF, "elf", true) {}
 };
 
-class Minotour : public Race
+class Minotaur : public Race
 {
 public:
-	Minotour() : Race(RaceType::MINOTOUR, "minotour") {}
+	Minotaur() : Race(RaceType::MINOTAUR, "minotaur") {}
 };
 
 class Phantom : public Race

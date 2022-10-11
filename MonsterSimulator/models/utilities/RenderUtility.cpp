@@ -8,7 +8,7 @@ namespace RenderUtility
 
 		if (!participant->GetAttackAnimation().IsFinished())
 		{
-			xOffset = participant->GetXOffset();
+			xOffset = participant->CalculateAttackXOffset();
 		}
 
 		if (!participant->GetHealthDifference().IsFinished())

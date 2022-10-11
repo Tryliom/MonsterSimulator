@@ -189,7 +189,7 @@
     <Text Include="assets\images\races\arceus.txt" />
     <Text Include="assets\images\races\dragon.txt" />
     <Text Include="assets\images\races\elf.txt" />
-    <Text Include="assets\images\races\minotour.txt" />
+    <Text Include="assets\images\races\minotaur.txt" />
     <Text Include="assets\images\races\phantom.txt" />
     <Text Include="assets\images\races\tribal.txt" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include "MenuView.h"
 #include "../utilities/StringUtility.h"
 
-MonsterEditorView::MonsterEditorView(Monster* monster) : View()
+MonsterEditorView::MonsterEditorView(MainController* mainController, Monster* monster) : View()
 {
 	_monster = monster;
 
@@ -49,7 +49,7 @@ MonsterEditorView::MonsterEditorView(Monster* monster) : View()
 			[this]() {return _monster->GetSpeed(); }, 
 			[this](const int value) {_monster->SetSpeed(value); }
 		),
-		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this](Console::Controller* controller) {this->createMonster(controller); }, true)
+		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this, mainController]() {this->createMonster(mainController); }, true)
 	});
 }
 

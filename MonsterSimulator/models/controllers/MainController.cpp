@@ -5,7 +5,9 @@ MainController::MainController()
 {
 	_leftMonster = new Monster();
 	_rightMonster = new Monster();
+
 	Console::AudioManager::Play(MAIN_THEME_PATH, true);
+
 	ChangeView(new MenuView(this));
 }
 
@@ -21,9 +23,14 @@ void MainController::ResetMonsters()
 	_rightMonster = new Monster();
 }
 
-bool MainController::CanStart() const
+bool MainController::CanFightBegin() const
 {
 	return HaveEachMonsterDifferentRaces() && IsAllMonsterCreated() && !HaveImpossibleStats();
+}
+
+bool MainController::CanFightContinue()
+{
+	return !_leftMonster->IsDead() && !_rightMonster->IsDead();
 }
 
 bool MainController::HaveEachMonsterDifferentRaces() const
@@ -45,11 +52,6 @@ void MainController::FullHeal() const
 {
 	_leftMonster->FullHeal();
 	_rightMonster->FullHeal();
-}
-
-bool MainController::CanFightContinue() const
-{
-	return !_leftMonster->IsDead() && !_rightMonster->IsDead();
 }
 
 bool MainController::IsLeftStart() const

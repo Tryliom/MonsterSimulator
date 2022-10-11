@@ -1,18 +1,19 @@
 #pragma once
+
 class Animation
 {
 private:
 	float _value;
-	// The duration of the animation in ms
+	// The duration of the animation in nanoseconds
 	int _currentDuration;
-	// The max duration of the animation in ms
+	// The max duration of the animation in nanoseconds
 	int _duration;
 
 public:
 	/**
 	 * \brief Create a new animation
 	 * \param value The value needed to animate (as needed by the animation)
-	 * \param duration The max duration of the animation in ms
+	 * \param duration The max duration of the animation in milliseconds
 	 */
 	Animation(const float value, const int duration);
 
@@ -30,7 +31,8 @@ public:
 
 	/**
 	 * \brief Update the animation by one tick
+	 * \param deltaTime The time since the last update in nanoseconds
 	 */
-	void Update();
+	void Update(int deltaTime);
 };
 

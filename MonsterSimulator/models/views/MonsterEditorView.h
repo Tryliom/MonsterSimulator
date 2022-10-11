@@ -4,7 +4,7 @@
 const std::vector<Race*> RACES = {
 	new Dragon(),
 	new Elf(),
-	new Minotour(),
+	new Minotaur(),
 	new Phantom(),
 	new Tribal(),
 	new Arceus()
@@ -19,7 +19,7 @@ private:
 
 	void createMonster(Console::Controller* controller);
 public:
-	explicit MonsterEditorView(Monster* monster);
+	explicit MonsterEditorView(MainController* mainController, Monster* monster);
 
 	void OnKeyPressed(Console::Controller* controller, char key) override;
 	void Update(Console::Controller* controller, Console::Screen& screen) override;

@@ -126,8 +126,8 @@ void FightView::OnKeyPressed(Console::Controller* controller, const char key)
 	View::OnKeyPressed(controller, key);
 }
 
-void FightView::OnTick(Console::Controller* controller)
+void FightView::OnTick(Console::Controller* controller, const int deltaTime)
 {
-	_leftParticipant->UpdateAnimations();
-	_rightParticipant->UpdateAnimations();
+	_leftParticipant->UpdateAnimations(deltaTime);
+	_rightParticipant->UpdateAnimations(deltaTime);
 }
