@@ -1,6 +1,7 @@
 #pragma once
 #include "../controllers/MainController.h"
 
+// Used to display the winner of the fight
 class VictoryView : public Console::View
 {
 private:

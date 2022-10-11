@@ -10,6 +10,7 @@ const std::vector<Race*> RACES = {
 	new Arceus()
 };
 
+// Used to create/edit a monster
 class MonsterEditorView: public Console::View
 {
 private:

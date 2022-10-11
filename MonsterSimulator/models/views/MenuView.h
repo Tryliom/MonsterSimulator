@@ -1,6 +1,7 @@
 #pragma once
 #include "../controllers/MainController.h"
 
+// Used to display the main menu with the two monsters creator and the fight button
 class MenuView : public Console::View
 {
 private:

@@ -3,7 +3,6 @@
 #include "FightView.h"
 #include "../utilities/StringUtility.h"
 
-
 MenuView::MenuView(MainController* mainController) : View()
 {
 	InitComponents(mainController);
@@ -73,12 +72,25 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	View::Update(controller, screen);
 
 	// Draw the title of the view
-	screen.Draw(Console::Text{ .Str = "Monster Simulator", .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
+	screen.Draw(Console::Text{ 
+		.Str = "Monster Simulator",
+		.X = Console::Screen::WIDTH / 2, .Y = 2,
+		.XCentered = true
+	});
 
-	screen.Draw(Console::Text{ .Str = _errorMessage, .X = Console::Screen::WIDTH / 2, .Y = 15, .XCentered = true, .Foreground = Console::Foreground::RED });
+	// Draw the error message if there is one
+	screen.Draw(Console::Text{ 
+		.Str = _errorMessage,
+		.X = Console::Screen::WIDTH / 2, .Y = 15,
+		.XCentered = true, .Foreground = Console::Foreground::RED
+	});
 
 	// Display controls for the user
-	screen.Draw(Console::Text{ .Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r", .X = Console::Screen::WIDTH / 2, .Y = Console::Screen::HEIGHT - 3, .XCentered = true });
+	screen.Draw(Console::Text{ 
+		.Str = "Exit: Esc | Arrows: move | Confirm: Enter | Reset: r",
+		.X = Console::Screen::WIDTH / 2, .Y = Console::Screen::HEIGHT - 3,
+		.XCentered = true
+	});
 }
 
 void MenuView::OnKeyPressed(Console::Controller* controller, const char key)

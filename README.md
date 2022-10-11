@@ -50,7 +50,7 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Add a onTick function to not be frame dependent | 2h | 1h15 | Yes |
 | Fix issue with VS view | 1h | 10min | No |
 | Make various improvements | 4h | 3h10 | No |
-| Clean and comments all project | 4h | 2h31 | No |
+| Clean and comments all project | 4h | 3h44 | No |
 
 ## TODO
 

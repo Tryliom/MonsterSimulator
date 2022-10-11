@@ -93,10 +93,7 @@ bool FightView::isAnimationsFinished() const
 
 void FightView::waitUntilAnimationsFinished() const
 {
-	while (!isAnimationsFinished())
-	{
-		Utility::sleep(50);
-	}
+	while (!isAnimationsFinished()) {}
 }
 
 Participant* FightView::getAttacker() const

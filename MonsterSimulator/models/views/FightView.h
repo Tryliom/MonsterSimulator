@@ -2,6 +2,7 @@
 #include "../controllers/MainController.h"
 #include "../fight/Participant.h"
 
+// Used to display a fight between two monsters
 class FightView : public Console::View
 {
 private:

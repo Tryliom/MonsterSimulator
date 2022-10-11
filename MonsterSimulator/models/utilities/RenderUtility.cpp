@@ -6,11 +6,13 @@ namespace RenderUtility
 	{
 		int xOffset = 0;
 
+		// Make the sprite going forth and back when attacking
 		if (!participant->GetAttackAnimation().IsFinished())
 		{
 			xOffset = participant->CalculateAttackXOffset();
 		}
 
+		// Add a shaking animation if he gets hit
 		if (!participant->GetHealthDifference().IsFinished())
 		{
 			xOffset += (Console::Controller::TICK % 6) - 3;
