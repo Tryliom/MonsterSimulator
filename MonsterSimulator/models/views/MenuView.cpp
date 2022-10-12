@@ -5,7 +5,8 @@
 
 MenuView::MenuView(MainController* mainController) : View()
 {
-	InitComponents(mainController);
+	_mainController = mainController;
+	InitComponents();
 }
 
 std::string MenuView::getFieldName(Monster* monster)
@@ -18,42 +19,42 @@ std::string MenuView::getFieldName(Monster* monster)
 	return "Edit the " + StringUtility::Capitalize(monster->GetRace().GetName());
 }
 
-void MenuView::InitComponents(MainController* mainController)
+void MenuView::InitComponents()
 {
 	ClearComponents();
 
 	setComponents({
 		new Console::BasicButton(
-			getFieldName(mainController->GetLeftMonster()), PositionX(0.25f), PositionY(5),
-			[mainController]()
+			getFieldName(_mainController->GetLeftMonster()), PositionX(0.25f), PositionY(5),
+			[this]()
 			{
-				mainController->ChangeView(new MonsterEditorView(mainController, mainController->GetLeftMonster()));
+				_mainController->ChangeView(new MonsterEditorView(_mainController, _mainController->GetLeftMonster()));
 			}, true
 		),
 		new Console::BasicButton(
-			getFieldName(mainController->GetRightMonster()), PositionX(0.75f), PositionY(5),
-			[mainController]()
+			getFieldName(_mainController->GetRightMonster()), PositionX(0.75f), PositionY(5),
+			[this]()
 			{
-				mainController->ChangeView(new MonsterEditorView(mainController, mainController->GetRightMonster()));
+				_mainController->ChangeView(new MonsterEditorView(_mainController, _mainController->GetRightMonster()));
 			}, true
 		),
 		new Console::BasicButton("Start fight", PositionX(0.5f), PositionY(10),
-		[mainController, this]()
+		[this]()
 			{
-				if (mainController->CanFightBegin())
+				if (_mainController->CanFightBegin())
 				{
-					mainController->ClearStack();
-					mainController->SetView(new FightView(mainController));
+					_mainController->ClearStack();
+					_mainController->SetView(new FightView(_mainController));
 				}
-				else if (!mainController->HaveEachMonsterDifferentRaces())
-				{
-					_errorMessage = "You need to create two monsters to start a fight";
-				}
-				else if (!mainController->IsAllMonsterCreated())
+				else if (!_mainController->HaveEachMonsterDifferentRaces())
 				{
 					_errorMessage = "You need to create two monsters to start a fight";
 				}
-				else if (mainController->HaveImpossibleStats())
+				else if (!_mainController->IsAllMonsterCreated())
+				{
+					_errorMessage = "You need to create two monsters to start a fight";
+				}
+				else if (_mainController->HaveImpossibleStats())
 				{
 					_errorMessage = "The two monsters can't harm each other with their stats";
 				}
@@ -62,14 +63,14 @@ void MenuView::InitComponents(MainController* mainController)
 	});
 }
 
-void MenuView::OnOpenView(Console::Controller* controller)
+void MenuView::OnOpenView()
 {
-	InitComponents(static_cast<MainController*>(controller));
+	InitComponents();
 }
 
-void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
+void MenuView::Update(Console::Screen& screen)
 {
-	View::Update(controller, screen);
+	View::Update(screen);
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ 
@@ -93,7 +94,7 @@ void MenuView::Update(Console::Controller* controller, Console::Screen& screen)
 	});
 }
 
-void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
+void MenuView::OnKeyPressed(const char key)
 {
 	_errorMessage.clear();
 
@@ -116,10 +117,9 @@ void MenuView::OnKeyPressed(Console::Controller* controller, const char key)
 
 	if (key == 'r')
 	{
-		auto* mainController = static_cast<MainController*>(controller);
-		mainController->ResetMonsters();
-		InitComponents(mainController);
+		_mainController->ResetMonsters();
+		InitComponents();
 	}
 
-	View::OnKeyPressed(controller, key);
+	View::OnKeyPressed(key);
 }

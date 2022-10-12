@@ -16,15 +16,15 @@ VictoryView::VictoryView(MainController* mainController, const int rounds)
 	);
 }
 
-void VictoryView::Update(Console::Controller* controller, Console::Screen& screen)
+void VictoryView::Update(Console::Screen& screen)
 {
-	View::Update(controller, screen);
+	View::Update(screen);
 
 	screen.Draw(Console::Text{ .Str = "The fight has end in " + std::to_string(_rounds) + " rounds with " + static_cast<std::string>(*_winner) + " as winner !", 
 		.X = Console::Screen::WIDTH / 2, .Y = 10, .XCentered = true });
 }
 
-void VictoryView::OnKeyPressed(Console::Controller* controller, const char key)
+void VictoryView::OnKeyPressed(const char key)
 {
-	View::OnKeyPressed(controller, key);
+	View::OnKeyPressed(key);
 }

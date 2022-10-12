@@ -106,9 +106,9 @@ Participant* FightView::getDefender() const
 	return _leftParticipant->IsAttacking() ? _rightParticipant : _leftParticipant;
 }
 
-void FightView::Update(Console::Controller* controller, Console::Screen& screen)
+void FightView::Update(Console::Screen& screen)
 {
-	View::Update(controller, screen);
+	View::Update(screen);
 
 	screen.Draw(Console::Text{ .Str = "FPS: " + std::to_string(Console::Controller::FPS), .X = 1, .Y = 1 });
 
@@ -118,12 +118,12 @@ void FightView::Update(Console::Controller* controller, Console::Screen& screen)
 	RenderUtility::DrawMonster(screen, _rightParticipant);
 }
 
-void FightView::OnKeyPressed(Console::Controller* controller, const char key)
+void FightView::OnKeyPressed(const char key)
 {
-	View::OnKeyPressed(controller, key);
+	View::OnKeyPressed(key);
 }
 
-void FightView::OnTick(Console::Controller* controller, const int deltaTime)
+void FightView::OnTick(const int deltaTime)
 {
 	_leftParticipant->UpdateAnimations(deltaTime);
 	_rightParticipant->UpdateAnimations(deltaTime);

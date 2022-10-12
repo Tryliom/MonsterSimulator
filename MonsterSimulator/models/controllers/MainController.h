@@ -43,7 +43,7 @@ public:
 	 * \brief Check if the monsters are not dead
 	 * \return true if the fight can continue, false otherwise
 	 */
-	bool CanFightContinue();
+	bool CanFightContinue() const;
 	bool HaveEachMonsterDifferentRaces() const;
 	bool IsAllMonsterCreated() const;
 	/**

@@ -54,10 +54,9 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 
 ## TODO
 
-1. Replace some instance of mainController and controller by an uniquePtr.
-2. Place _getch as a thread (stock the key in a attribute, and clear it when the key is used).
-3. Move refresh and onTick at the place of _getch.
-4. Remove useless methods.
+- Place _getch as a thread (stock the key in a attribute, and clear it when the key is used).
+- Move refresh and onTick at the place of _getch.
+- Remove useless methods.
 
 ## Interactive objects
 

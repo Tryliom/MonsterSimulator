@@ -5,6 +5,7 @@
 MonsterEditorView::MonsterEditorView(MainController* mainController, Monster* monster) : View()
 {
 	_monster = monster;
+	_mainController = mainController;
 
 	if (monster->GetRace().GetRaceType() == RaceType::NONE)
 	{
@@ -49,13 +50,13 @@ MonsterEditorView::MonsterEditorView(MainController* mainController, Monster* mo
 			[this]() {return _monster->GetSpeed(); }, 
 			[this](const int value) {_monster->SetSpeed(value); }
 		),
-		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this, mainController]() {this->createMonster(mainController); }, true)
+		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this]() {this->createMonster(); }, true)
 	});
 }
 
-void MonsterEditorView::Update(Console::Controller* controller, Console::Screen& screen)
+void MonsterEditorView::Update(Console::Screen& screen)
 {
-	View::Update(controller, screen);
+	View::Update(screen);
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ .Str = "Monster Creator", .X = Console::Screen::WIDTH / 2, .Y = 2, .XCentered = true });
@@ -85,7 +86,7 @@ void MonsterEditorView::Update(Console::Controller* controller, Console::Screen&
 	});
 }
 
-void MonsterEditorView::OnKeyPressed(Console::Controller* controller, const char key)
+void MonsterEditorView::OnKeyPressed(const char key)
 {
 	_errorMessage.clear();
 
@@ -98,10 +99,10 @@ void MonsterEditorView::OnKeyPressed(Console::Controller* controller, const char
 		DecrementCurrentButton();
 	}
 
-	View::OnKeyPressed(controller, key);
+	View::OnKeyPressed(key);
 }
 
-void MonsterEditorView::createMonster(Console::Controller* controller)
+void MonsterEditorView::createMonster()
 {
 	if (_monster->GetHp() <= 0 || _monster->GetAttack() <= 0 || _monster->GetArmor() <= 0 || _monster->GetSpeed() <= 0)
 	{
@@ -109,8 +110,7 @@ void MonsterEditorView::createMonster(Console::Controller* controller)
 	}
 	else
 	{
-		const auto mainController = static_cast<MainController*>(controller);
-		mainController->ClearStack();
-		mainController->SetView(new MenuView(mainController));
+		_mainController->ClearStack();
+		_mainController->SetView(new MenuView(_mainController));
 	}
 }

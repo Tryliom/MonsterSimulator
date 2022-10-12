@@ -13,7 +13,7 @@ MainController::MainController()
 
 int GetRandomNumber(const int min, const int max)
 {
-	srand(time(nullptr));
+	srand(static_cast<unsigned>(time(nullptr)));
 	return rand() % (max - min + 1) + min;
 }
 
@@ -28,7 +28,7 @@ bool MainController::CanFightBegin() const
 	return HaveEachMonsterDifferentRaces() && IsAllMonsterCreated() && !HaveImpossibleStats();
 }
 
-bool MainController::CanFightContinue()
+bool MainController::CanFightContinue() const
 {
 	return !_leftMonster->IsDead() && !_rightMonster->IsDead();
 }

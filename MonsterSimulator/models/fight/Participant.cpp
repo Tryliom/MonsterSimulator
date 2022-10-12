@@ -66,5 +66,5 @@ void Participant::ReceiveDamage(const int damage)
 
 int Participant::CalculateAttackXOffset() const
 {
-	return sin(_attackAnimation.GetPercent() * std::numbers::pi) * _attackAnimation.GetValue() * _xCoefficient;
+	return static_cast<int>(sin(_attackAnimation.GetPercent() * std::numbers::pi) * _attackAnimation.GetValue() * _xCoefficient);
 }

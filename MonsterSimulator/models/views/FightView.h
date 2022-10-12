@@ -20,8 +20,8 @@ private:
 public:
 	explicit FightView(MainController* mainController);
 
-	void Update(Console::Controller* controller, Console::Screen& screen) override;
-	void OnKeyPressed(Console::Controller* controller, char key) override;
-	void OnTick(Console::Controller* controller, int deltaTime) override;
+	void Update(Console::Screen& screen) override;
+	void OnKeyPressed(char key) override;
+	void OnTick(int deltaTime) override;
 };
 

@@ -10,7 +10,7 @@ private:
 public:
 	VictoryView(MainController* mainController, int rounds);
 
-	void Update(Console::Controller* controller, Console::Screen& screen) override;
-	void OnKeyPressed(Console::Controller* controller, char key) override;
+	void Update(Console::Screen& screen) override;
+	void OnKeyPressed(char key) override;
 };
 

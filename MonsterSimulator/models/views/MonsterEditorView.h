@@ -15,14 +15,15 @@ class MonsterEditorView: public Console::View
 {
 private:
 	Monster* _monster;
+	MainController* _mainController;
 
 	std::string _errorMessage{};
 
-	void createMonster(Console::Controller* controller);
+	void createMonster();
 public:
 	explicit MonsterEditorView(MainController* mainController, Monster* monster);
 
-	void OnKeyPressed(Console::Controller* controller, char key) override;
-	void Update(Console::Controller* controller, Console::Screen& screen) override;
+	void OnKeyPressed(char key) override;
+	void Update(Console::Screen& screen) override;
 };
 

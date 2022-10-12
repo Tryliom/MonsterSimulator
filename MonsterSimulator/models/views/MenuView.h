@@ -6,15 +6,16 @@ class MenuView : public Console::View
 {
 private:
 	std::string _errorMessage;
+	MainController* _mainController;
 
 	static std::string getFieldName(Monster* monster);
 public:
 	explicit MenuView(MainController* mainController);
 
-	void InitComponents(MainController* mainController);
+	void InitComponents();
 
-	void OnOpenView(Console::Controller* controller) override;
-	void Update(Console::Controller* controller, Console::Screen& screen) override;
-	void OnKeyPressed(Console::Controller* controller, char key) override;
+	void OnOpenView() override;
+	void Update(Console::Screen& screen) override;
+	void OnKeyPressed(char key) override;
 };
 
