@@ -6,23 +6,7 @@
 MenuView::MenuView(MainController* mainController) : View()
 {
 	_mainController = mainController;
-	InitComponents();
-}
-
-std::string MenuView::getFieldName(Monster* monster)
-{
-	if (monster->GetRace().GetRaceType() == RaceType::NONE)
-	{
-		return "Create monster";
-	}
-
-	return "Edit the " + StringUtility::Capitalize(monster->GetRace().GetName());
-}
-
-void MenuView::InitComponents()
-{
-	ClearComponents();
-
+	
 	setComponents({
 		new Console::BasicButton(
 			getFieldName(_mainController->GetLeftMonster()), PositionX(0.25f), PositionY(5),
@@ -63,14 +47,23 @@ void MenuView::InitComponents()
 	});
 }
 
-void MenuView::OnOpenView()
+std::string MenuView::getFieldName(Monster* monster)
 {
-	InitComponents();
+	if (monster->GetRace().GetRaceType() == RaceType::NONE)
+	{
+		return "Create monster";
+	}
+
+	return "Edit the " + StringUtility::Capitalize(monster->GetRace().GetName());
 }
 
 void MenuView::Update(Console::Screen& screen)
 {
 	View::Update(screen);
+
+	// Update current button according to the monsters
+	GetComponent<Console::BasicButton>(0)->SetText(getFieldName(_mainController->GetLeftMonster()));
+	GetComponent<Console::BasicButton>(1)->SetText(getFieldName(_mainController->GetRightMonster()));
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ 
@@ -118,7 +111,6 @@ void MenuView::OnKeyPressed(const char key)
 	if (key == 'r')
 	{
 		_mainController->ResetMonsters();
-		InitComponents();
 	}
 
 	View::OnKeyPressed(key);
