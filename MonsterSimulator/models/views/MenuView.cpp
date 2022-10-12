@@ -62,8 +62,8 @@ void MenuView::Update(Console::Screen& screen)
 	View::Update(screen);
 
 	// Update current button according to the monsters
-	GetComponent<Console::BasicButton>(0)->SetText(getFieldName(_mainController->GetLeftMonster()));
-	GetComponent<Console::BasicButton>(1)->SetText(getFieldName(_mainController->GetRightMonster()));
+	getComponent<Console::BasicButton>(0)->SetText(getFieldName(_mainController->GetLeftMonster()));
+	getComponent<Console::BasicButton>(1)->SetText(getFieldName(_mainController->GetRightMonster()));
 
 	// Draw the title of the view
 	screen.Draw(Console::Text{ 
@@ -93,19 +93,19 @@ void MenuView::OnKeyPressed(const char key)
 
 	if (key == Console::Key::Left)
 	{
-		DecrementCurrentButton();
+		decrementCurrentButton();
 	}
 	else if (key == Console::Key::Right)
 	{
-		IncrementCurrentButton();
+		incrementCurrentButton();
 	}
 	else if (key == Console::Key::Down)
 	{
-		SetCurrentButton(GetMaxButton() - 1);
+		setCurrentButton(getMaxButton() - 1);
 	}
 	else if (key == Console::Key::Up)
 	{
-		SetCurrentButton(0);
+		setCurrentButton(0);
 	}
 
 	if (key == 'r')

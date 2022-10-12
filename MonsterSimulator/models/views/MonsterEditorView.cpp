@@ -92,11 +92,11 @@ void MonsterEditorView::OnKeyPressed(const char key)
 
 	if (key == Console::Key::Down)
 	{
-		IncrementCurrentButton();
+		incrementCurrentButton();
 	}
 	else if (key == Console::Key::Up)
 	{
-		DecrementCurrentButton();
+		decrementCurrentButton();
 	}
 
 	View::OnKeyPressed(key);
