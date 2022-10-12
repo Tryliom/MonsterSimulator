@@ -29,26 +29,26 @@ MonsterEditorView::MonsterEditorView(MainController* mainController, Monster* mo
 
 	setComponents({
 		new Console::Selector(PositionX(0.5f), PositionY(5), races,
-		[this](const int index) {_monster->SetRace(*RACES[index]); }, defaultSelectedRace),
+		[monster](const int index) {monster->SetRace(*RACES[index]); }, defaultSelectedRace),
 		new Console::IntField(
 			PositionX(0.5f), PositionY(7), 
-		[this]() {return _monster->GetHp(); }, 
-		[this](const int value) {_monster->SetHp(value); }
+		[monster]() {return monster->GetHp(); },
+		[monster](const int value) {monster->SetHp(value); }
 		),
 		new Console::IntField(
 			PositionX(0.5f), PositionY(9), 
-			[this]() {return _monster->GetAttack(); }, 
-			[this](const int value) {_monster->SetAttack(value); }
+			[monster]() {return monster->GetAttack(); },
+			[monster](const int value) {monster->SetAttack(value); }
 		),
 		new Console::IntField(
 			PositionX(0.5f), PositionY(11), 
-			[this]() {return _monster->GetArmor(); }, 
-			[this](const int value) {_monster->SetArmor(value); }
+			[monster]() {return monster->GetArmor(); },
+			[monster](const int value) {monster->SetArmor(value); }
 		),
 		new Console::IntField(
 			PositionX(0.5f), PositionY(13), 
-			[this]() {return _monster->GetSpeed(); }, 
-			[this](const int value) {_monster->SetSpeed(value); }
+			[monster]() {return monster->GetSpeed(); },
+			[monster](const int value) {monster->SetSpeed(value); }
 		),
 		new Console::BasicButton("Create", PositionX(0.5f), PositionY(16), [this]() {this->createMonster(); }, true)
 	});

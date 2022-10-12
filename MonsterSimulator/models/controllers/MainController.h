@@ -17,8 +17,8 @@ private:
 public:
 	MainController();
 
-	Monster* GetLeftMonster() const { return _leftMonster; }
-	Monster* GetRightMonster() const { return _rightMonster; }
+	[[nodiscard]] Monster* GetLeftMonster() const { return _leftMonster; }
+	[[nodiscard]] Monster* GetRightMonster() const { return _rightMonster; }
 
 	/**
 	 * \brief Delete the current monsters and create new ones empty
@@ -28,25 +28,25 @@ public:
 	 * \brief Heal the monsters to full health
 	 */
 	void FullHeal() const;
-	bool IsLeftStart() const;
+	[[nodiscard]] bool IsLeftStart() const;
 
 	/**
 	 * \brief Check if the monsters are not of the same race, if they are created and if they have not impossible stats
 	 * (both attack and armor are too low to make damage to each other)
 	 * \return true if the fight can begin, false otherwise
 	 */
-	bool CanFightBegin() const;
+	[[nodiscard]] bool CanFightBegin() const;
 	/**
 	 * \brief Check if the monsters are not dead
 	 * \return true if the fight can continue, false otherwise
 	 */
-	bool CanFightContinue() const;
-	bool HaveEachMonsterDifferentRaces() const;
-	bool IsAllMonsterCreated() const;
+	[[nodiscard]] bool CanFightContinue() const;
+	[[nodiscard]] bool HaveEachMonsterDifferentRaces() const;
+	[[nodiscard]] bool IsAllMonsterCreated() const;
 	/**
 	 * \brief Check if the monsters have too low stats to make damage to each other
 	 * \return true if the monsters have impossible stats, false otherwise
 	 */
-	bool HaveImpossibleStats() const;
+	[[nodiscard]] bool HaveImpossibleStats() const;
 };
 
