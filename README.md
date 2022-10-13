@@ -49,14 +49,8 @@ Start by opening [MonsterSimulator](./MonsterSimulator.sln).
 | Change monster creation to pass 1 monster to edit it | 1h | 1h10 | Yes |
 | Add a onTick function to not be frame dependent | 2h | 1h15 | Yes |
 | Fix issue with VS view | 1h | 10min | No |
-| Make various improvements | 4h | 3h10 | No |
-| Clean and comments all project | 4h | 3h44 | No |
-
-## TODO
-
-- Place _getch as a thread (stock the key in a attribute, and clear it when the key is used).
-- Move refresh and onTick at the place of _getch.
-- Remove useless methods.
+| Make various improvements | 4h | 3h10 | Yes |
+| Clean and comments all project | 4h | 3h44 | Yes |
 
 ## Interactive objects
 
