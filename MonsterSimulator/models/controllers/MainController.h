@@ -14,6 +14,7 @@ private:
 	Monster* _leftMonster;
 	// The monster at the right side of the screen
 	Monster* _rightMonster;
+
 public:
 	MainController();
 

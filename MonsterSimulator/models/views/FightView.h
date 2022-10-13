@@ -10,7 +10,7 @@ private:
 	Participant* _rightParticipant;
 	int _rounds;
 
-	void startFightThread(MainController* mainController);
+	void startFight(MainController* mainController);
 
 	bool isAnimationsFinished() const;
 	void waitUntilAnimationsFinished() const;

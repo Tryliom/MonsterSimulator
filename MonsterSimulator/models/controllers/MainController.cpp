@@ -11,12 +11,6 @@ MainController::MainController()
 	ChangeView(new MenuView(this));
 }
 
-int GetRandomNumber(const int min, const int max)
-{
-	srand(static_cast<unsigned>(time(nullptr)));
-	return rand() % (max - min + 1) + min;
-}
-
 void MainController::ResetMonsters()
 {
 	_leftMonster = new Monster();
@@ -66,5 +60,5 @@ bool MainController::IsLeftStart() const
 		return false;
 	}
 	
-	return GetRandomNumber(0, 50) % 2 == 0;
+	return Random::GetInt() == 0;
 }

@@ -26,6 +26,7 @@
     <ClCompile Include="models\fight\Participant.cpp" />
     <ClCompile Include="models\fight\Animation.cpp" />
     <ClCompile Include="models\utilities\RenderUtility.cpp" />
+    <ClCompile Include="libs\ConsoleViewController\utilities\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="models\views\MonsterEditorView.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="models\fight\Participant.h" />
     <ClInclude Include="models\fight\Animation.h" />
     <ClInclude Include="models\utilities\RenderUtility.h" />
+    <ClInclude Include="libs\ConsoleViewController\utilities\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\images\races\dragon.txt" />
@@ -64,10 +66,6 @@
     <Text Include="assets\images\races\phantom.txt" />
     <Text Include="assets\images\races\tribal.txt" />
     <Text Include="assets\images\races\arceus.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="libs\ConsoleViewController\LICENSE" />
-    <None Include="libs\ConsoleViewController\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\battle_theme.wav" />

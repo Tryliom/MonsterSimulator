@@ -28,10 +28,10 @@ FightView::FightView(MainController* mainController)
 	}
 
 	mainController->FullHeal();
-	startFightThread(mainController);
+	startFight(mainController);
 }
 
-void FightView::startFightThread(MainController* mainController)
+void FightView::startFight(MainController* mainController)
 {
 	if (mainController->IsLeftStart())
 	{
@@ -44,46 +44,50 @@ void FightView::startFightThread(MainController* mainController)
 		_rightParticipant->SetAttacking(true);
 	}
 
-	std::thread thread([&]()
+	mainController->AddToQueue([&]()
 		{
-			Console::Screen::PIXEL_CACHE = false;
-			// Wait for the hp bar to get correctly drawn
-			Utility::sleep(2000);
+			std::thread fightThread([&]()
+				{
+					Console::Screen::PIXEL_CACHE = false;
+					// Wait for the hp bar to get correctly drawn
+					Utility::sleep(2000);
 
-			Console::Screen::PIXEL_CACHE = true;
+					Console::Screen::PIXEL_CACHE = true;
 
-			while (mainController->CanFightContinue())
-			{
-				_rounds++;
+					while (mainController->CanFightContinue())
+					{
+						_rounds++;
 
-				// Define attacker and defender based on who is attacking
-				Participant* attacker = getAttacker();
-				Participant* defender = getDefender();
+						// Define attacker and defender based on who is attacking
+						Participant* attacker = getAttacker();
+						Participant* defender = getDefender();
 
-				attacker->PlayTurn(mainController, defender);
-				
-				// Wait until hp animation is finished
-				waitUntilAnimationsFinished();
+						attacker->PlayTurn(mainController, defender);
 
-				// Wait 1.5sec before the next turn
-				Utility::sleep(1500);
+						// Wait until hp animation is finished
+						waitUntilAnimationsFinished();
 
-				attacker->ToggleAttacking();
-				defender->ToggleAttacking();
-			}
+						// Wait 1.5sec before the next turn
+						Utility::sleep(1500);
 
-			Utility::sleep(1000);
+						attacker->ToggleAttacking();
+						defender->ToggleAttacking();
+					}
 
-			_rightParticipant->GetMonster()->GetRace().GetSprite().Reverse();
+					Utility::sleep(1000);
 
-			Console::AudioManager::Stop();
-			Console::AudioManager::Play(MAIN_THEME_PATH, true);
+					_rightParticipant->GetMonster()->GetRace().GetSprite().Reverse();
 
-			mainController->ClearStack();
-			mainController->SetView(new VictoryView(mainController, _rounds));
+					Console::AudioManager::Stop();
+					Console::AudioManager::Play(MAIN_THEME_PATH, true);
+
+					mainController->ClearStack();
+					mainController->SetView(new VictoryView(mainController, _rounds));
+				}
+			);
+			fightThread.detach();
 		}
 	);
-	thread.detach();
 }
 
 bool FightView::isAnimationsFinished() const

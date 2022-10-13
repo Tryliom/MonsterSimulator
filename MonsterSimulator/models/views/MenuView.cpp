@@ -61,6 +61,8 @@ void MenuView::Update(Console::Screen& screen)
 {
 	View::Update(screen);
 
+	screen.Draw(Console::Text{ .Str = "FPS: " + std::to_string(Console::Controller::FPS), .X = 1, .Y = 1 });
+
 	// Update current button according to the monsters
 	getComponent<Console::BasicButton>(0)->SetText(getFieldName(_mainController->GetLeftMonster()));
 	getComponent<Console::BasicButton>(1)->SetText(getFieldName(_mainController->GetRightMonster()));

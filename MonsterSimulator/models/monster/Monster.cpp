@@ -18,6 +18,12 @@ int Monster::Attack(const Monster* monster) const
 		damage = 0;
 	}
 
+	// Critical hit
+	if (Random::GetFloat() < 0.15f)
+	{
+		damage *= 2;
+	}
+
 	if (damage > monster->GetHp())
 	{
 		damage = monster->GetHp();
